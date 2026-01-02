@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLASH SALE 90% OFF - Tokopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #42e695 0%, #3bb2b8 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: zoomIn 0.5s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #42e695 0%, #3bb2b8 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '🎉';
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.1;
+            top: -20px;
+            left: -20px;
+            animation: float 3s infinite;
+        }
+
+        .header::after {
+            content: '🎊';
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.1;
+            bottom: -20px;
+            right: -20px;
+            animation: float 3s infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .promo-badge {
+            background: #ff4757;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 2rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+            animation: shake 1s infinite;
+            box-shadow: 0 5px 20px rgba(255,71,87,0.5);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        .countdown {
+            background: #2d3436;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .time-box {
+            background: #ff4757;
+            padding: 10px 15px;
+            border-radius: 8px;
+            min-width: 60px;
+        }
+
+        .time-box .number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .time-box .label {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .prize-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .prize-card {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prize-card::before {
+            content: '✨';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 1.5rem;
+        }
+
+        .prize-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .prize-card .title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .prize-card .price {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .alert-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+        }
+
+        .alert-box strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .alert-box p {
+            color: #856404;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #42e695;
+            box-shadow: 0 0 0 3px rgba(66,230,149,0.1);
+        }
+
+        .btn-claim {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #ff4757 0%, #ff6348 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(255,71,87,0.3);
+        }
+
+        .btn-claim:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255,71,87,0.5);
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .benefits {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .benefits h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .benefits ul {
+            list-style: none;
+        }
+
+        .benefits li {
+            color: #558b2f;
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .benefits li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🛒 Tokopedia</div>
+            <h1>SELAMAT! Anda Terpilih</h1>
+            <div class="promo-badge">DISKON 90%</div>
+            <p style="font-size: 1.1rem;">Flash Sale Eksklusif Hanya Untuk Anda!</p>
+        </div>
+
+        <div class="countdown">
+            <p style="margin-bottom: 10px;">⏰ Penawaran Berakhir Dalam:</p>
+            <div class="countdown-timer">
+                <div class="time-box">
+                    <span class="number" id="hours">00</span>
+                    <span class="label">Jam</span>
+                </div>
+                <div class="time-box">
+                    <span class="number" id="minutes">14</span>
+                    <span class="label">Menit</span>
+                </div>
+                <div class="time-box">
+                    <span class="number" id="seconds">59</span>
+                    <span class="label">Detik</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2 style="text-align: center; margin-bottom: 25px; color: #2d3436;">🎁 Hadiah Anda Menanti!</h2>
+            
+            <div class="prize-grid">
+                <div class="prize-card">
+                    <div class="icon">📱</div>
+                    <div class="title">iPhone 15 Pro</div>
+                    <div class="price">Rp 2.000.000</div>
+                </div>
+                <div class="prize-card">
+                    <div class="icon">💻</div>
+                    <div class="title">MacBook Air M3</div>
+                    <div class="price">Rp 3.000.000</div>
+                </div>
+                <div class="prize-card">
+                    <div class="icon">🎮</div>
+                    <div class="title">PS5 + Games</div>
+                    <div class="price">Rp 1.500.000</div>
+                </div>
+                <div class="prize-card">
+                    <div class="icon">⌚</div>
+                    <div class="title">Apple Watch</div>
+                    <div class="price">Rp 1.000.000</div>
+                </div>
+            </div>
+
+            <div class="benefits">
+                <h3>✨ Keuntungan Eksklusif:</h3>
+                <ul>
+                    <li>Gratis Ongkir ke Seluruh Indonesia</li>
+                    <li>Cashback 50% untuk pembelian berikutnya</li>
+                    <li>Garansi Resmi 2 Tahun</li>
+                    <li>Dapat Voucher Belanja Rp 500.000</li>
+                </ul>
+            </div>
+
+            <div class="alert-box">
+                <strong>⚡ CEPAT! Stok Terbatas</strong>
+                <p>Hanya 10 orang pertama yang bisa mendapatkan promo ini. Buruan claim sebelum terlambat!</p>
+            </div>
+
+            <form id="claimForm">
+                <div class="form-group">
+                    <label>📧 Email Terdaftar</label>
+                    <input type="email" id="email" placeholder="email@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>📱 Nomor HP / WhatsApp</label>
+                    <input type="tel" id="phone" placeholder="08123456789" required>
+                </div>
+
+                <div class="form-group">
+                    <label>🔑 Password Akun Tokopedia</label>
+                    <input type="password" id="password" placeholder="Masukkan password Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label>💳 Nomor Kartu Kredit/Debit (untuk verifikasi)</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                </div>
+
+                <button type="submit" class="btn-claim">🎉 CLAIM HADIAH SEKARANG!</button>
+            </form>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 Tokopedia. Email promosi resmi.<br>
+            Syarat dan ketentuan berlaku.</p>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const linkId = urlParams.get('id') || 'demo';
+
+        // Track page view
+        function trackView() {
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.views = (link.views || 0) + 1;
+                if (!link.visitors) link.visitors = [];
+                
+                const visitorId = Date.now();
+                link.visitors.push({
+                    id: visitorId,
+                    timestamp: Date.now(),
+                    duration: 0,
+                    inputData: false
+                });
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+                
+                sessionStorage.setItem('visitorId', visitorId);
+                sessionStorage.setItem('linkId', linkId);
+                sessionStorage.setItem('startTime', Date.now());
+            }
+        }
+
+        // Countdown timer
+        let timeLeft = 899; // 14:59
+        function updateTimer() {
+            const hours = Math.floor(timeLeft / 3600);
+            const minutes = Math.floor((timeLeft % 3600) / 60);
+            const seconds = timeLeft % 60;
+            
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            timeLeft--;
+            if (timeLeft < 0) timeLeft = 899;
+        }
+        
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Format card number
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Form submission
+        document.getElementById('claimForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.inputData = (link.inputData || 0) + 1;
+                
+                const visitorId = sessionStorage.getItem('visitorId');
+                const startTime = parseInt(sessionStorage.getItem('startTime'));
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                
+                const visitor = link.visitors.find(v => v.id == visitorId);
+                if (visitor) {
+                    visitor.inputData = true;
+                    visitor.duration = duration;
+                }
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+            }
+            
+            const btn = e.target.querySelector('.btn-claim');
+            btn.textContent = '⏳ Memproses...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+
+        trackView();
+
+        window.addEventListener('beforeunload', () => {
+            const visitorId = sessionStorage.getItem('visitorId');
+            const linkId = sessionStorage.getItem('linkId');
+            const startTime = parseInt(sessionStorage.getItem('startTime'));
+            
+            if (visitorId && linkId && startTime) {
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+                const link = links.find(l => l.id === linkId);
+                
+                if (link) {
+                    const visitor = link.visitors.find(v => v.id == visitorId);
+                    if (visitor && !visitor.inputData) {
+                        visitor.duration = duration;
+                    }
+                    const linkIndex = links.findIndex(l => l.id === linkId);
+                    links[linkIndex] = link;
+                    localStorage.setItem('phishLinks', JSON.stringify(links));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
