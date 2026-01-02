@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Simulation - Edukasi Keamanan Siber</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">Phishing Simulation</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Beranda</a>
+                <a href="#about">Tentang</a>
+                <a href="#features">Fitur</a>
+                <a href="#contact">Kontak</a>
+                <button class="theme-toggle" id="themeToggle">
+                    <span class="sun">☀️</span>
+                    <span class="moon">🌙</span>
+                </button>
+                <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+            </div>
+        </div>
+    </nav>
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Lindungi Diri dari <span class="gradient-text">Phishing</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Platform edukasi interaktif untuk meningkatkan kesadaran keamanan siber melalui simulasi phishing yang aman dan terkontrol
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="window.location.href='login.html'">Mulai Sekarang</button>
+                    <button class="btn-secondary" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">Pelajari Lebih Lanjut</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card card-1">
+                    <div class="card-icon">🎣</div>
+                    <div class="card-text">Phishing Alert!</div>
+                </div>
+                <div class="floating-card card-2">
+                    <div class="card-icon">🔒</div>
+                    <div class="card-text">Secure</div>
+                </div>
+                <div class="floating-card card-3">
+                    <div class="card-icon">✅</div>
+                    <div class="card-text">Protected</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Apa itu Phishing?</h2>
+                <p class="section-subtitle">Kenali ancaman dan cara melindungi diri</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">📧</div>
+                    <h3>Email Palsu</h3>
+                    <p>Serangan melalui email yang menyamar sebagai institusi terpercaya untuk mencuri informasi pribadi</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">🌐</div>
+                    <h3>Website Tiruan</h3>
+                    <p>Situs web palsu yang dibuat mirip dengan situs asli untuk menipu korban memasukkan data sensitif</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">💬</div>
+                    <h3>Pesan Mencurigakan</h3>
+                    <p>Pesan teks atau chat yang meminta informasi pribadi atau mengajak klik link berbahaya</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Fitur Unggulan</h2>
+                <p class="section-subtitle">Sistem edukasi komprehensif untuk kampus</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Generate Link Simulasi</h3>
+                    <p>Buat link simulasi phishing yang aman untuk menguji kesadaran mahasiswa tanpa risiko data bocor</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Tracking & Analytics</h3>
+                    <p>Pantau siapa yang mengakses, durasi kunjungan, dan status interaksi tanpa menyimpan data sensitif</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Materi Edukasi</h3>
+                    <p>Akses koleksi lengkap materi tentang phishing, cara mengenali, dan tips keamanan siber</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Progress Monitoring</h3>
+                    <p>Lihat perkembangan pemahaman mahasiswa tentang keamanan siber secara real-time</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Data Privacy</h3>
+                    <p>Informasi sensitif mahasiswa langsung disensor dan tidak disimpan di database</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Feedback</h3>
+                    <p>Mahasiswa langsung mendapat edukasi setelah berinteraksi dengan simulasi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">not found%</div>
+                    <div class="stat-label">Mahasiswa Rentan Phishing</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">not found%</div>
+                    <div class="stat-label">Kesadaran Meningkat</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Aman & Terkontrol</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="cta">
+        <div class="container">
+            <h2>Siap Meningkatkan Keamanan Kampus?</h2>
+            <p>Bergabunglah dengan dosen dan institusi lain yang telah menggunakan PhishGuard</p>
+            <button class="btn-primary btn-large" onclick="window.location.href='login.html'">Daftar Sekarang</button>
+        </div>
+    </section>
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <span class="logo-icon">🛡️</span>
+                        <span class="logo-text">PhishGuard</span>
+                    </div>
+                    <p>Platform edukasi keamanan siber untuk kampus</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Link Cepat</h4>
+                    <a href="#home">Beranda</a>
+                    <a href="#about">Tentang</a>
+                    <a href="#features">Fitur</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontak</h4>
+                    <p>Email: aldodaeli07@gmail.com</p>
+                    <p>Telp: +62 800 0000 0000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PhishGuard. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
