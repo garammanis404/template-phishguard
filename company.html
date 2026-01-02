@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Sistem - IT Department</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Calibri', 'Arial', sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .email-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #d0d7de;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+
+        .email-header {
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+            padding: 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .header-text h1 {
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+
+        .header-text p {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .priority-banner {
+            background: #ff4444;
+            color: white;
+            padding: 12px 30px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .email-meta {
+            background: #f6f8fa;
+            padding: 20px 30px;
+            border-bottom: 1px solid #d0d7de;
+        }
+
+        .meta-row {
+            display: flex;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .meta-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .meta-label {
+            font-weight: bold;
+            min-width: 100px;
+            color: #57606a;
+        }
+
+        .meta-value {
+            color: #24292f;
+        }
+
+        .email-body {
+            padding: 35px;
+            line-height: 1.8;
+            color: #24292f;
+        }
+
+        .greeting {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .content-section {
+            margin-bottom: 25px;
+        }
+
+        .content-section h2 {
+            color: #0078d4;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #0078d4;
+        }
+
+        .warning-box {
+            background: #fff4ce;
+            border: 2px solid #f9c513;
+            border-radius: 8px;
+            padding: 18px;
+            margin: 20px 0;
+            display: flex;
+            gap: 12px;
+        }
+
+        .warning-box .icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .warning-box .text {
+            flex: 1;
+        }
+
+        .warning-box strong {
+            display: block;
+            color: #975a16;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .warning-box p {
+            color: #975a16;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .info-list {
+            background: #e1f5fe;
+            border-left: 4px solid #0288d1;
+            padding: 18px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .info-list h3 {
+            color: #01579b;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+
+        .info-list ul {
+            margin-left: 20px;
+            color: #01579b;
+        }
+
+        .info-list li {
+            margin-bottom: 8px;
+        }
+
+        .update-form {
+            background: #f6f8fa;
+            border: 2px solid #d0d7de;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 25px 0;
+        }
+
+        .update-form h3 {
+            color: #24292f;
+            margin-bottom: 20px;
+            font-size: 1.15rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #24292f;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #d0d7de;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Consolas', monospace;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #0078d4;
+            box-shadow: 0 0 0 3px rgba(0,120,212,0.1);
+        }
+
+        .form-group .help {
+            font-size: 0.85rem;
+            color: #57606a;
+            margin-top: 6px;
+        }
+
+        .deadline-box {
+            background: #ffebee;
+            border: 2px solid #ef5350;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .deadline-box strong {
+            display: block;
+            color: #c62828;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .deadline-box .time {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .btn-update {
+            width: 100%;
+            padding: 16px;
+            background: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 12px rgba(0,120,212,0.3);
+        }
+
+        .btn-update:hover {
+            background: #005a9e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,120,212,0.5);
+        }
+
+        .signature {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #d0d7de;
+        }
+
+        .signature p {
+            margin-bottom: 5px;
+        }
+
+        .signature .name {
+            font-weight: bold;
+            color: #0078d4;
+        }
+
+        .email-footer {
+            background: #24292f;
+            color: #8b949e;
+            padding: 25px 30px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .email-footer p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .email-footer .confidential {
+            background: #1c2128;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border: 1px solid #373e47;
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #d4edda;
+            color: #155724;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <div class="company-logo">💼</div>
+            <div class="header-text">
+                <h1>PT. TechCorp Indonesia</h1>
+                <p>Information Technology Department</p>
+            </div>
+        </div>
+
+        <div class="priority-banner">
+            🚨 PRIORITAS TINGGI - ACTION REQUIRED
+        </div>
+
+        <div class="email-meta">
+            <div class="meta-row">
+                <span class="meta-label">Dari:</span>
+                <span class="meta-value">IT Security Team &lt;security@techcorp.co.id&gt;</span>
+            </div>
+            <div class="meta-row">
+                <span class="meta-label">Kepada:</span>
+                <span class="meta-value">All Employees</span>
+            </div>
+            <div class="meta-row">
+                <span class="meta-label">Tanggal:</span>
+                <span class="meta-value" id="emailDate"></span>
+            </div>
+            <div class="meta-row">
+                <span class="meta-label">Subjek:</span>
+                <span class="meta-value">URGENT: Mandatory System Security Update</span>
+            </div>
+        </div>
+
+        <div class="email-body">
+            <div class="security-badge">
+                🔐 Secure Email - Authenticated
+            </div>
+
+            <div class="greeting">
+                Kepada Seluruh Karyawan PT. TechCorp Indonesia,
+            </div>
+
+            <div class="content-section">
+                <p>Dalam rangka meningkatkan keamanan sistem dan melindungi data perusahaan dari ancaman cyber, IT Department akan melakukan <strong>update sistem keamanan secara menyeluruh</strong> pada infrastruktur jaringan perusahaan.</p>
+            </div>
+
+            <div class="warning-box">
+                <div class="icon">⚠️</div>
+                <div class="text">
+                    <strong>PERINGATAN KEAMANAN</strong>
+                    <p>Kami mendeteksi beberapa percobaan akses tidak sah ke sistem perusahaan minggu lalu. Update ini WAJIB dilakukan oleh semua karyawan untuk memastikan akun Anda tetap aman dan tidak dikompromikan.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>📋 Detail Update Sistem</h2>
+                <div class="info-list">
+                    <h3>Yang akan diupdate:</h3>
+                    <ul>
+                        <li>Active Directory Authentication System</li>
+                        <li>Email Security Gateway</li>
+                        <li>VPN Access Protocol (v3.0)</li>
+                        <li>Multi-Factor Authentication (MFA)</li>
+                        <li>Password Encryption Standard</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="deadline-box">
+                <strong>⏰ DEADLINE UPDATE:</strong>
+                <div class="time" id="countdown">23:59 Hari Ini</div>
+                <p style="color: #c62828; margin-top: 8px;">Akun yang tidak diupdate akan otomatis <strong>SUSPENDED</strong></p>
+            </div>
+
+            <div class="content-section">
+                <h2>🔧 Proses Update</h2>
+                <p>Untuk menyelesaikan update sistem, Anda perlu melakukan verifikasi kredensial akun perusahaan Anda. Proses ini hanya memakan waktu 2-3 menit.</p>
+            </div>
+
+            <form id="updateForm" class="update-form">
+                <h3>🔐 Verifikasi Kredensial Akun</h3>
+                
+                <div class="form-group">
+                    <label>Employee ID</label>
+                    <input type="text" id="employeeId" placeholder="Contoh: EMP2024-001" required>
+                    <div class="help">ID karyawan Anda (terdapat di badge)</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Perusahaan</label>
+                    <input type="email" id="companyEmail" placeholder="nama@techcorp.co.id" required>
+                    <div class="help">Gunakan email dengan domain @techcorp.co.id</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Username Windows/Domain</label>
+                    <input type="text" id="username" placeholder="username.anda" required>
+                    <div class="help">Username yang Anda gunakan untuk login ke komputer kantor</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password Saat Ini</label>
+                    <input type="password" id="currentPassword" placeholder="Masukkan password Anda" required>
+                    <div class="help">Password untuk login sistem perusahaan</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Nomor HP Terdaftar</label>
+                    <input type="tel" id="phoneNumber" placeholder="08xxxxxxxxxx" required>
+                    <div class="help">Untuk verifikasi OTP</div>
+                </div>
+
+                <div class="form-group">
+                    <label>PIN VPN (6 digit)</label>
+                    <input type="password" id="vpnPin" placeholder="******" maxlength="6" required>
+                    <div class="help">PIN untuk akses VPN perusahaan</div>
+                </div>
+
+                <button type="submit" class="btn-update">
+                    ✓ VERIFIKASI & UPDATE SISTEM
+                </button>
+            </form>
+
+            <div class="info-list">
+                <h3>ℹ️ Informasi Penting:</h3>
+                <ul>
+                    <li>Proses update akan memakan waktu maksimal 3 menit</li>
+                    <li>Anda akan menerima email konfirmasi setelah update berhasil</li>
+                    <li>Jika mengalami kendala, hubungi IT Helpdesk: ext. 1234</li>
+                    <li>Update hanya perlu dilakukan 1 kali</li>
+                </ul>
+            </div>
+
+            <div class="signature">
+                <p class="name">IT Security Team</p>
+                <p>PT. TechCorp Indonesia</p>
+                <p>Information Technology Department</p>
+                <p style="margin-top: 10px;">
+                    📞 Internal: ext. 1234<br>
+                    📧 Email: security@techcorp.co.id
+                </p>
+            </div>
+        </div>
+
+        <div class="email-footer">
+            <p><strong>PT. TECHCORP INDONESIA</strong></p>
+            <p>Menara TechCorp, Jl. Sudirman No. 123, Jakarta 12345</p>
+            <p>☎ +62 21 1234 5678 | 🌐 www.techcorp.co.id</p>
+            
+            <div class="confidential">
+                <strong>⚠️ CONFIDENTIAL NOTICE</strong>
+                <p style="margin-top: 8px;">
+                    This email and any attachments are confidential and intended solely for the use of the individual or entity to whom they are addressed. If you have received this email in error, please notify the sender immediately and delete this email from your system.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set email date
+        const today = new Date();
+        const dateStr = today.toLocaleDateString('id-ID', { 
+            weekday: 'long',
+            day: 'numeric', 
+            month: 'long', 
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        document.getElementById('emailDate').textContent = dateStr;
+
+        // Update countdown
+        function updateCountdown() {
+            const now = new Date();
+            const endOfDay = new Date();
+            endOfDay.setHours(23, 59, 59, 999);
+            
+            const diff = endOfDay - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('countdown').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} lagi`;
+        }
+        
+        setInterval(updateCountdown, 60000);
+        updateCountdown();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const linkId = urlParams.get('id') || 'demo';
+
+        function trackView() {
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.views = (link.views || 0) + 1;
+                if (!link.visitors) link.visitors = [];
+                
+                const visitorId = Date.now();
+                link.visitors.push({
+                    id: visitorId,
+                    timestamp: Date.now(),
+                    duration: 0,
+                    inputData: false
+                });
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+                
+                sessionStorage.setItem('visitorId', visitorId);
+                sessionStorage.setItem('linkId', linkId);
+                sessionStorage.setItem('startTime', Date.now());
+            }
+        }
+
+        // VPN PIN validation
+        document.getElementById('vpnPin').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Form submission
+        document.getElementById('updateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('companyEmail').value;
+            if (!email.endsWith('@techcorp.co.id')) {
+                alert('Gunakan email perusahaan dengan domain @techcorp.co.id');
+                return;
+            }
+            
+            const vpnPin = document.getElementById('vpnPin').value;
+            if (vpnPin.length !== 6) {
+                alert('PIN VPN harus 6 digit!');
+                return;
+            }
+            
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.inputData = (link.inputData || 0) + 1;
+                
+                const visitorId = sessionStorage.getItem('visitorId');
+                const startTime = parseInt(sessionStorage.getItem('startTime'));
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                
+                const visitor = link.visitors.find(v => v.id == visitorId);
+                if (visitor) {
+                    visitor.inputData = true;
+                    visitor.duration = duration;
+                }
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+            }
+            
+            const btn = e.target.querySelector('.btn-update');
+            btn.textContent = '⏳ Memverifikasi & Mengupdate...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2500);
+        });
+
+        trackView();
+
+        window.addEventListener('beforeunload', () => {
+            const visitorId = sessionStorage.getItem('visitorId');
+            const linkId = sessionStorage.getItem('linkId');
+            const startTime = parseInt(sessionStorage.getItem('startTime'));
+            
+            if (visitorId && linkId && startTime) {
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+                const link = links.find(l => l.id === linkId);
+                
+                if (link) {
+                    const visitor = link.visitors.find(v => v.id == visitorId);
+                    if (visitor && !visitor.inputData) {
+                        visitor.duration = duration;
+                    }
+                    const linkIndex = links.findIndex(l => l.id === linkId);
+                    links[linkIndex] = link;
+                    localStorage.setItem('phishLinks', JSON.stringify(links));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
