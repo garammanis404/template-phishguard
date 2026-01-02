@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi Akun BCA - Keamanan Akun Anda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            max-width: 500px;
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .header {
+            background: #0066cc;
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+        }
+
+        .warning-box strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .warning-box p {
+            color: #856404;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .info-text {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #0052a3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,102,204,0.3);
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer p {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .timer {
+            background: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .secure-badge .icon {
+            font-size: 2rem;
+        }
+
+        .secure-badge .text {
+            flex: 1;
+        }
+
+        .secure-badge .text strong {
+            display: block;
+            color: #2e7d32;
+            margin-bottom: 3px;
+        }
+
+        .secure-badge .text p {
+            font-size: 0.85rem;
+            color: #558b2f;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">BCA</div>
+            <h1>Verifikasi Keamanan Akun</h1>
+        </div>
+
+        <div class="content">
+            <div class="timer" id="timer">⏰ Waktu tersisa: 15:00</div>
+
+            <div class="warning-box">
+                <strong>⚠️ PERINGATAN KEAMANAN</strong>
+                <p>Kami mendeteksi aktivitas mencurigakan pada akun Anda. Untuk keamanan, mohon verifikasi identitas Anda dalam 15 menit atau akun akan diblokir sementara.</p>
+            </div>
+
+            <div class="secure-badge">
+                <div class="icon">🔒</div>
+                <div class="text">
+                    <strong>Koneksi Aman</strong>
+                    <p>Data Anda dilindungi dengan enkripsi 256-bit</p>
+                </div>
+            </div>
+
+            <div class="info-text">
+                <p>Silakan masukkan informasi akun Anda untuk verifikasi identitas:</p>
+            </div>
+
+            <form id="phishingForm">
+                <div class="form-group">
+                    <label>User ID / Email</label>
+                    <input type="text" id="userId" placeholder="Masukkan User ID atau Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Masukkan Password Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Nomor Kartu ATM (16 digit)</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                </div>
+
+                <div class="form-group">
+                    <label>PIN ATM (6 digit)</label>
+                    <input type="password" id="pin" placeholder="******" maxlength="6" required>
+                </div>
+
+                <button type="submit" class="btn-submit">✓ Verifikasi Sekarang</button>
+            </form>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 Bank Central Asia. Semua hak dilindungi.<br>
+            Email ini dikirim untuk keamanan akun Anda.</p>
+        </div>
+    </div>
+
+    <script>
+        // Get link ID from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const linkId = urlParams.get('id') || 'demo';
+
+        // Track page view
+        function trackView() {
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.views = (link.views || 0) + 1;
+                
+                if (!link.visitors) link.visitors = [];
+                
+                const visitorId = Date.now();
+                const visitor = {
+                    id: visitorId,
+                    timestamp: Date.now(),
+                    duration: 0,
+                    inputData: false
+                };
+                
+                link.visitors.push(visitor);
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+                
+                // Store visitor ID for duration tracking
+                sessionStorage.setItem('visitorId', visitorId);
+                sessionStorage.setItem('linkId', linkId);
+                sessionStorage.setItem('startTime', Date.now());
+            }
+        }
+
+        // Timer countdown
+        let timeLeft = 900; // 15 minutes
+        const timerElement = document.getElementById('timer');
+        
+        setInterval(() => {
+            timeLeft--;
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = `⏰ Waktu tersisa: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft <= 0) {
+                timeLeft = 900;
+            }
+        }, 1000);
+
+        // Format card number
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Form submission
+        document.getElementById('phishingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Track input data
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.inputData = (link.inputData || 0) + 1;
+                
+                // Update visitor data
+                const visitorId = sessionStorage.getItem('visitorId');
+                const startTime = parseInt(sessionStorage.getItem('startTime'));
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                
+                const visitor = link.visitors.find(v => v.id == visitorId);
+                if (visitor) {
+                    visitor.inputData = true;
+                    visitor.duration = duration;
+                }
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+            }
+            
+            // Show loading
+            const btn = e.target.querySelector('.btn-submit');
+            btn.textContent = '⏳ Memverifikasi...';
+            btn.disabled = true;
+            
+            // Redirect to education page after 2 seconds
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+
+        // Track page view on load
+        trackView();
+
+        // Update duration on page unload
+        window.addEventListener('beforeunload', () => {
+            const visitorId = sessionStorage.getItem('visitorId');
+            const linkId = sessionStorage.getItem('linkId');
+            const startTime = parseInt(sessionStorage.getItem('startTime'));
+            
+            if (visitorId && linkId && startTime) {
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                
+                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+                const link = links.find(l => l.id === linkId);
+                
+                if (link) {
+                    const visitor = link.visitors.find(v => v.id == visitorId);
+                    if (visitor && !visitor.inputData) {
+                        visitor.duration = duration;
+                    }
+                    
+                    const linkIndex = links.findIndex(l => l.id === linkId);
+                    links[linkIndex] = link;
+                    localStorage.setItem('phishLinks', JSON.stringify(links));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
