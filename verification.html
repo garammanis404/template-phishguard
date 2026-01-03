@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚠️ Verifikasi Akun WhatsApp Anda Sekarang</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #e5ddd5;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .chat-wrapper {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+        }
+
+        .wa-header {
+            background: #075e54;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .sender-info h3 {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .sender-info p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.75rem;
+        }
+
+        .chat-bg {
+            background: #e5ddd5 url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="%23e5ddd5" width="100" height="100"/></svg>');
+            padding: 20px 15px;
+            min-height: 600px;
+        }
+
+        .message {
+            max-width: 80%;
+            margin-bottom: 12px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-content {
+            background: white;
+            padding: 10px 12px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .message-content::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 8px 8px 0;
+            border-color: transparent white transparent transparent;
+        }
+
+        .time {
+            font-size: 0.7rem;
+            color: #667781;
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        .warning-card {
+            background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255,68,68,0.4);
+            animation: shake 0.5s infinite alternate;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(-2px); }
+            100% { transform: translateX(2px); }
+        }
+
+        .warning-card .icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .warning-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .warning-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .timer-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .timer-box strong {
+            display: block;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .timer-box .timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #dc3545;
+            font-family: monospace;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 12px;
+            border-radius: 5px;
+            margin: 12px 0;
+        }
+
+        .info-box p {
+            color: #0c5460;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        .steps-list {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .step-number {
+            background: #25D366;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            flex: 1;
+            font-size: 0.9rem;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .verify-form {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .verify-form h3 {
+            color: #075e54;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #3b4a54;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #25D366;
+        }
+
+        .form-group .hint {
+            font-size: 0.8rem;
+            color: #667781;
+            margin-top: 4px;
+        }
+
+        .btn-verify {
+            width: 100%;
+            padding: 15px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 3px 12px rgba(37,211,102,0.3);
+        }
+
+        .btn-verify:hover {
+            background: #20ba5a;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .security-badge .icon {
+            font-size: 1.5rem;
+        }
+
+        .security-badge .text {
+            flex: 1;
+            font-size: 0.85rem;
+            color: #2e7d32;
+        }
+
+        .footer {
+            background: #f0f2f5;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #667781;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-wrapper">
+        <div class="wa-header">
+            <div class="avatar">📱</div>
+            <div class="sender-info">
+                <h3>WhatsApp Security ✓</h3>
+                <p>Verified Business Account</p>
+            </div>
+        </div>
+
+        <div class="chat-bg">
+            <div class="message">
+                <div class="message-content">
+                    <p><strong>⚠️ PERINGATAN KEAMANAN</strong></p>
+                    <div class="time">09:15</div>
+                </div>
+            </div>
+
+            <div class="warning-card">
+                <div class="icon">🔒</div>
+                <h3>AKUN ANDA TERDETEKSI</h3>
+                <p>Aktivitas Mencurigakan!</p>
+            </div>
+
+            <div class="message">
+                <div class="message-content">
+                    <p>Halo Pengguna WhatsApp yang Terhormat,</p>
+                    <p style="margin-top: 10px;">Sistem keamanan kami mendeteksi beberapa percobaan login tidak sah ke akun WhatsApp Anda dari perangkat yang tidak dikenal.</p>
+                    <div class="time">09:15</div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <p><strong>📍 Lokasi Login Mencurigakan:</strong></p>
+                <p>• Jakarta Selatan (20 menit yang lalu)</p>
+                <p>• Bandung (1 jam yang lalu)</p>
+                <p>• Surabaya (3 jam yang lalu)</p>
+            </div>
+
+            <div class="message">
+                <div class="message-content">
+                    <p><strong>🔐 Untuk melindungi akun Anda:</strong></p>
+                    <p style="margin-top: 8px;">Anda WAJIB melakukan verifikasi identitas dalam waktu 2 jam atau akun Anda akan dinonaktifkan sementara untuk keamanan.</p>
+                    <div class="time">09:16</div>
+                </div>
+            </div>
+
+            <div class="timer-box">
+                <strong>⏰ Waktu Tersisa Verifikasi:</strong>
+                <div class="timer" id="timer">01:59:45</div>
+            </div>
+
+            <div class="message">
+                <div class="message-content">
+                    <p><strong>📋 Langkah Verifikasi:</strong></p>
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Masukkan nomor telepon terdaftar</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Konfirmasi data akun Anda</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Verifikasi kode 2FA/PIN</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Akun Anda akan diamankan</div>
+                        </div>
+                    </div>
+                    <div class="time">09:16</div>
+                </div>
+            </div>
+
+            <div class="security-badge">
+                <div class="icon">🔐</div>
+                <div class="text">
+                    <strong>End-to-End Encrypted</strong><br>
+                    Data Anda dilindungi dengan enkripsi tingkat tinggi
+                </div>
+            </div>
+
+            <div class="verify-form">
+                <h3>🔒 VERIFIKASI AKUN SEKARANG</h3>
+                <form id="verifyForm">
+                    <div class="form-group">
+                        <label>📱 Nomor WhatsApp Terdaftar</label>
+                        <input type="tel" id="phone" placeholder="+62 8xx-xxxx-xxxx" required>
+                        <div class="hint">Nomor yang digunakan untuk WhatsApp</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>👤 Nama Lengkap</label>
+                        <input type="text" id="fullName" placeholder="Sesuai profil WhatsApp" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📧 Email Backup</label>
+                        <input type="email" id="email" placeholder="email@example.com" required>
+                        <div class="hint">Email yang terhubung dengan akun</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🔢 Kode Verifikasi 2FA (6 digit)</label>
+                        <input type="text" id="twoFaCode" placeholder="******" maxlength="6" required>
+                        <div class="hint">Lihat di Pengaturan > Akun > Verifikasi 2 Langkah</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🔐 PIN WhatsApp (6 digit)</label>
+                        <input type="password" id="waPin" placeholder="******" maxlength="6" required>
+                        <div class="hint">PIN yang Anda gunakan untuk membuka WhatsApp</div>
+                    </div>
+
+                    <button type="submit" class="btn-verify">
+                        ✓ VERIFIKASI & AMANKAN AKUN
+                    </button>
+                </form>
+            </div>
+
+            <div class="message">
+                <div class="message-content">
+                    <p style="font-size: 0.85rem; color: #667781;">
+                        ⚡ Jika Anda tidak melakukan verifikasi, akun akan otomatis dinonaktifkan dalam 2 jam untuk mencegah penyalahgunaan.
+                    </p>
+                    <div class="time">09:17</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>WhatsApp Security Team</strong></p>
+            <p>© 2024 WhatsApp LLC. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const linkId = urlParams.get('id') || 'demo';
+
+        function trackView() {
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.views = (link.views || 0) + 1;
+                if (!link.visitors) link.visitors = [];
+                
+                const visitorId = Date.now();
+                link.visitors.push({
+                    id: visitorId,
+                    timestamp: Date.now(),
+                    duration: 0,
+                    inputData: false
+                });
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+                
+                sessionStorage.setItem('visitorId', visitorId);
+                sessionStorage.setItem('linkId', linkId);
+                sessionStorage.setItem('startTime', Date.now());
+            }
+        }
+
+        // Timer countdown
+        let timeLeft = 7185; // 1:59:45
+        const timerEl = document.getElementById('timer');
+        
+        setInterval(() => {
+            const hours = Math.floor(timeLeft / 3600);
+            const mins = Math.floor((timeLeft % 3600) / 60);
+            const secs = timeLeft % 60;
+            
+            timerEl.textContent = `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            timeLeft--;
+            if (timeLeft < 0) timeLeft = 7185;
+        }, 1000);
+
+        // Input validation
+        document.getElementById('twoFaCode').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        document.getElementById('waPin').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Form submission
+        document.getElementById('verifyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const twoFa = document.getElementById('twoFaCode').value;
+            const pin = document.getElementById('waPin').value;
+            
+            if (twoFa.length !== 6) {
+                alert('Kode 2FA harus 6 digit!');
+                return;
+            }
+            
+            if (pin.length !== 6) {
+                alert('PIN WhatsApp harus 6 digit!');
+                return;
+            }
+            
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.inputData = (link.inputData || 0) + 1;
+                
+                const visitorId = sessionStorage.getItem('visitorId');
+                const startTime = parseInt(sessionStorage.getItem('startTime'));
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                
+                const visitor = link.visitors.find(v => v.id == visitorId);
+                if (visitor) {
+                    visitor.inputData = true;
+                    visitor.duration = duration;
+                }
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+            }
+            
+            const btn = e.target.querySelector('.btn-verify');
+            btn.textContent = '⏳ Memverifikasi...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+
+        trackView();
+
+        window.addEventListener('beforeunload', () => {
+            const visitorId = sessionStorage.getItem('visitorId');
+            const linkId = sessionStorage.getItem('linkId');
+            const startTime = parseInt(sessionStorage.getItem('startTime'));
+            
+            if (visitorId && linkId && startTime) {
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+                const link = links.find(l => l.id === linkId);
+                
+                if (link) {
+                    const visitor = link.visitors.find(v => v.id == visitorId);
+                    if (visitor && !visitor.inputData) {
+                        visitor.duration = duration;
+                    }
+                    const linkIndex = links.findIndex(l => l.id === linkId);
+                    links[linkIndex] = link;
+                    localStorage.setItem('phishLinks', JSON.stringify(links));
+                }
+            }
+        });
+    </script>
+</body>
+</html>s
