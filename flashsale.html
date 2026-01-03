@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ FLASH SALE 99% OFF - Hanya Hari Ini!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #ece5dd;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .wa-mockup {
+            max-width: 420px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .wa-topbar {
+            background: #075e54;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-info h3 {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .contact-info p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.75rem;
+        }
+
+        .chat-container {
+            background: #e5ddd5;
+            padding: 15px;
+            min-height: 550px;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.03) 10px, rgba(255,255,255,.03) 20px);
+        }
+
+        .message {
+            background: white;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            max-width: 85%;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .message::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 8px 8px 0;
+            border-color: transparent white transparent transparent;
+        }
+
+        .timestamp {
+            font-size: 0.7rem;
+            color: #999;
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        .flash-banner {
+            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 12px 0;
+            animation: flashPulse 1.5s infinite;
+        }
+
+        @keyframes flashPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .flash-banner .icon {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .flash-banner h2 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .flash-banner .discount {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffeb3b;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .product-card .emoji {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+
+        .product-card .name {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .product-card .price-before {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.75rem;
+        }
+
+        .product-card .price-now {
+            color: #ee0979;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+
+        .countdown-bar {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            margin: 12px 0;
+        }
+
+        .countdown-bar strong {
+            display: block;
+            color: #e65100;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .timer-display {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .timer-box {
+            background: #ff5722;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            min-width: 55px;
+        }
+
+        .timer-box .num {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .timer-box .lab {
+            font-size: 0.7rem;
+        }
+
+        .benefits {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+        }
+
+        .benefits .item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: #2e7d32;
+        }
+
+        .benefits .item:last-child {
+            margin-bottom: 0;
+        }
+
+        .claim-section {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        .claim-section h3 {
+            text-align: center;
+            color: #ee0979;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .form-field {
+            margin-bottom: 12px;
+        }
+
+        .form-field label {
+            display: block;
+            color: #555;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-field input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-field input:focus {
+            outline: none;
+            border-color: #ee0979;
+        }
+
+        .btn-shop {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 12px;
+            box-shadow: 0 4px 15px rgba(238,9,121,0.4);
+        }
+
+        .btn-shop:hover {
+            transform: translateY(-2px);
+        }
+
+        .warning-note {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.8rem;
+            color: #c62828;
+        }
+
+        .footer-info {
+            text-align: center;
+            padding: 12px;
+            background: #f5f5f5;
+            font-size: 0.75rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="wa-mockup">
+        <div class="wa-topbar">
+            <div class="profile-pic">🛍️</div>
+            <div class="contact-info">
+                <h3>Flash Sale Official ✓</h3>
+                <p>Verified Seller • Online</p>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div class="message">
+                <p><strong>🎊 FLASH SALE SPEKTAKULER!</strong></p>
+                <div class="timestamp">08:00</div>
+            </div>
+
+            <div class="flash-banner">
+                <div class="icon">⚡</div>
+                <h2>DISKON GILA!</h2>
+                <div class="discount">99% OFF</div>
+                <p style="color: white; font-size: 1rem; margin-top: 10px;">
+                    <strong>Hanya Hari Ini!</strong>
+                </p>
+            </div>
+
+            <div class="message">
+                <p style="margin-bottom: 8px;">Selamat pagi! 🌟</p>
+                <p>Anda telah terpilih sebagai customer VIP untuk mendapatkan akses eksklusif ke MEGA FLASH SALE kami!</p>
+                <div class="timestamp">08:01</div>
+            </div>
+
+            <div class="countdown-bar">
+                <strong>⏰ PROMO BERAKHIR DALAM:</strong>
+                <div class="timer-display">
+                    <div class="timer-box">
+                        <span class="num" id="hrs">12</span>
+                        <span class="lab">Jam</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="num" id="mins">00</span>
+                        <span class="lab">Menit</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="num" id="secs">00</span>
+                        <span class="lab">Detik</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message">
+                <p><strong>🔥 PRODUK PILIHAN:</strong></p>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="emoji">📱</div>
+                        <div class="name">iPhone 15 Pro</div>
+                        <div class="price-before">Rp 20.000.000</div>
+                        <div class="price-now">Rp 199.000</div>
+                    </div>
+                    <div class="product-card">
+                        <div class="emoji">💻</div>
+                        <div class="name">MacBook Pro</div>
+                        <div class="price-before">Rp 30.000.000</div>
+                        <div class="price-now">Rp 299.000</div>
+                    </div>
+                    <div class="product-card">
+                        <div class="emoji">⌚</div>
+                        <div class="name">Apple Watch</div>
+                        <div class="price-before">Rp 8.000.000</div>
+                        <div class="price-now">Rp 79.000</div>
+                    </div>
+                    <div class="product-card">
+                        <div class="emoji">🎮</div>
+                        <div class="name">PS5 Console</div>
+                        <div class="price-before">Rp 9.000.000</div>
+                        <div class="price-now">Rp 89.000</div>
+                    </div>
+                </div>
+                <div class="timestamp">08:02</div>
+            </div>
+
+            <div class="benefits">
+                <div class="item">
+                    <span>✓</span>
+                    <span>GRATIS Ongkir ke Seluruh Indonesia</span>
+                </div>
+                <div class="item">
+                    <span>✓</span>
+                    <span>Garansi Resmi 1 Tahun</span>
+                </div>
+                <div class="item">
+                    <span>✓</span>
+                    <span>Cashback 50% di Pembelian Kedua</span>
+                </div>
+                <div class="item">
+                    <span>✓</span>
+                    <span>Gratis Asuransi Pengiriman</span>
+                </div>
+            </div>
+
+            <div class="message">
+                <p><strong>⚡ CARA ORDER:</strong></p>
+                <p style="margin-top: 8px; font-size: 0.9rem; line-height: 1.6;">
+                    1. Isi form dibawah<br>
+                    2. Pilih produk yang diinginkan<br>
+                    3. Lakukan pembayaran via transfer<br>
+                    4. Produk dikirim hari ini juga!
+                </p>
+                <div class="timestamp">08:02</div>
+            </div>
+
+            <div class="warning-note">
+                <strong>⚠️ PENTING!</strong><br>
+                Stok sangat terbatas! Hanya 50 unit tersedia. Sudah 38 orang order. Buruan sebelum kehabisan!
+            </div>
+
+            <div class="claim-section">
+                <h3>🛒 FORM PEMESANAN FLASH SALE</h3>
+                <form id="orderForm">
+                    <div class="form-field">
+                        <label>📱 Nomor WhatsApp</label>
+                        <input type="tel" id="phone" placeholder="08xxxxxxxxxx" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label>👤 Nama Lengkap</label>
+                        <input type="text" id="fullName" placeholder="Nama penerima" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label>📧 Email</label>
+                        <input type="email" id="email" placeholder="email@example.com" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label>📍 Alamat Lengkap</label>
+                        <input type="text" id="address" placeholder="Alamat pengiriman" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label>💳 Nomor Kartu Pembayaran</label>
+                        <input type="text" id="cardNumber" placeholder="16 digit nomor kartu" maxlength="19" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label>🔐 CVV / PIN Kartu</label>
+                        <input type="password" id="cvv" placeholder="3 digit CVV" maxlength="3" required>
+                    </div>
+
+                    <button type="submit" class="btn-shop">
+                        ⚡ CHECKOUT & BAYAR SEKARANG
+                    </button>
+                </form>
+            </div>
+
+            <div class="message" style="margin-top: 12px;">
+                <p style="font-size: 0.8rem; color: #666; line-height: 1.5;">
+                    💬 Customer Service 24/7: 0800-FLASHSALE<br>
+                    🌐 Website: www.flashsale-official.com<br>
+                    ✉️ Email: support@flashsale.com
+                </p>
+                <div class="timestamp">08:03</div>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <p><strong>Flash Sale Official</strong> • Verified Seller</p>
+            <p>Trusted by 1.5M+ Happy Customers</p>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const linkId = urlParams.get('id') || 'demo';
+
+        function trackView() {
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.views = (link.views || 0) + 1;
+                if (!link.visitors) link.visitors = [];
+                
+                const visitorId = Date.now();
+                link.visitors.push({
+                    id: visitorId,
+                    timestamp: Date.now(),
+                    duration: 0,
+                    inputData: false
+                });
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+                
+                sessionStorage.setItem('visitorId', visitorId);
+                sessionStorage.setItem('linkId', linkId);
+                sessionStorage.setItem('startTime', Date.now());
+            }
+        }
+
+        // Countdown
+        let time = 43200; // 12 hours
+        setInterval(() => {
+            const h = Math.floor(time / 3600);
+            const m = Math.floor((time % 3600) / 60);
+            const s = time % 60;
+            
+            document.getElementById('hrs').textContent = h.toString().padStart(2, '0');
+            document.getElementById('mins').textContent = m.toString().padStart(2, '0');
+            document.getElementById('secs').textContent = s.toString().padStart(2, '0');
+            
+            time--;
+            if (time < 0) time = 43200;
+        }, 1000);
+
+        // Card formatting
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let val = e.target.value.replace(/\s/g, '');
+            let formatted = val.match(/.{1,4}/g)?.join(' ') || val;
+            e.target.value = formatted;
+        });
+
+        // CVV validation
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Form submission
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const card = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            const cvv = document.getElementById('cvv').value;
+            
+            if (card.length < 13) {
+                alert('Nomor kartu tidak valid!');
+                return;
+            }
+            
+            if (cvv.length !== 3) {
+                alert('CVV harus 3 digit!');
+                return;
+            }
+            
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.inputData = (link.inputData || 0) + 1;
+                
+                const visitorId = sessionStorage.getItem('visitorId');
+                const startTime = parseInt(sessionStorage.getItem('startTime'));
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                
+                const visitor = link.visitors.find(v => v.id == visitorId);
+                if (visitor) {
+                    visitor.inputData = true;
+                    visitor.duration = duration;
+                }
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+            }
+            
+            const btn = e.target.querySelector('.btn-shop');
+            btn.textContent = '⏳ Memproses Pembayaran...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+
+        trackView();
+
+        window.addEventListener('beforeunload', () => {
+            const visitorId = sessionStorage.getItem('visitorId');
+            const linkId = sessionStorage.getItem('linkId');
+            const startTime = parseInt(sessionStorage.getItem('startTime'));
+            
+            if (visitorId && linkId && startTime) {
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+                const link = links.find(l => l.id === linkId);
+                
+                if (link) {
+                    const visitor = link.visitors.find(v => v.id == visitorId);
+                    if (visitor && !visitor.inputData) {
+                        visitor.duration = duration;
+                    }
+                    const linkIndex = links.findIndex(l => l.id === linkId);
+                    links[linkIndex] = link;
+                    localStorage.setItem('phishLinks', JSON.stringify(links));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
