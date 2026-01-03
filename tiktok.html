@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Creator Fund - Dapatkan Uang dari Video!</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Proxima Nova', -apple-system, sans-serif;
+            background: linear-gradient(135deg, #ff0050 0%, #00f2ea 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .header {
+            background: linear-gradient(135deg, #ff0050 0%, #00f2ea 100%);
+            padding: 35px 25px;
+            text-align: center;
+            color: white;
+        }
+        .logo { font-size: 3.5rem; margin-bottom: 15px; animation: spin 3s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .header h1 { font-size: 2rem; font-weight: bold; margin-bottom: 10px; }
+        .content { padding: 30px 25px; }
+        .money-card {
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(255,140,0,0.3);
+        }
+        .money-card .icon { font-size: 4rem; margin-bottom: 15px; }
+        .money-card .amount {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #8b0000;
+            margin: 15px 0;
+        }
+        .info-box {
+            background: #f0f2f5;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .info-box h3 { color: #333; margin-bottom: 15px; font-size: 1.1rem; }
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .stat-item:last-child { border-bottom: none; }
+        .timer-box {
+            background: #ffebee;
+            border: 2px solid #f44336;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .timer-box .time {
+            font-size: 2.5rem;
+            color: #d32f2f;
+            font-weight: bold;
+            font-family: monospace;
+        }
+        .form-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+        }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 6px; color: #333; }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+        .form-group input:focus { outline: none; border-color: #ff0050; }
+        .btn-claim {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ff0050 0%, #00f2ea 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .footer { background: #f8f9fa; padding: 20px; text-align: center; font-size: 0.85rem; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🎵</div>
+            <h1>TikTok Creator Fund</h1>
+            <p style="font-size: 1.1rem;">Dapatkan Penghasilan dari Konten Anda!</p>
+        </div>
+        <div class="content">
+            <div class="money-card">
+                <div class="icon">💰</div>
+                <h2 style="color: white; margin-bottom: 10px;">ANDA BERHAK MENERIMA:</h2>
+                <div class="amount">Rp 25.000.000</div>
+                <p style="color: white; font-size: 1.1rem;">TikTok Creator Fund Payment</p>
+            </div>
+            <div class="info-box">
+                <h3>📊 Statistik Akun Anda:</h3>
+                <div class="stat-item">
+                    <span>Total Video Views</span>
+                    <strong>2.5M+</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Total Likes</span>
+                    <strong>850K+</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Engagement Rate</span>
+                    <strong>12.5%</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Estimated Earning</span>
+                    <strong style="color: #4caf50;">Rp 25 Juta</strong>
+                </div>
+            </div>
+            <div class="timer-box">
+                <strong style="color: #c62828; display: block; margin-bottom: 10px;">⏰ CLAIM DALAM:</strong>
+                <div class="time" id="countdown">11:59:59</div>
+            </div>
+            <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <strong style="color: #856404; display: block; margin-bottom: 5px;">💡 Informasi:</strong>
+                <p style="color: #856404; font-size: 0.85rem;">TikTok Creator Fund memberikan kompensasi kepada kreator berdasarkan performa video. Dana akan ditransfer langsung ke rekening Anda dalam 3x24 jam.</p>
+            </div>
+            <div class="form-section">
+                <h3 style="text-align: center; margin-bottom: 20px;">📝 Form Pencairan Dana</h3>
+                <form id="claimForm">
+                    <div class="form-group">
+                        <label>Username TikTok</label>
+                        <input type="text" id="username" placeholder="@username" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Terdaftar</label>
+                        <input type="email" id="email" placeholder="email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nomor Telepon</label>
+                        <input type="tel" id="phone" placeholder="08xxxxxxxxxx" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password TikTok</label>
+                        <input type="password" id="password" placeholder="Untuk verifikasi akun" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nomor Rekening Bank</label>
+                        <input type="text" id="account" placeholder="Nomor rekening" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Bank</label>
+                        <input type="text" id="bank" placeholder="Contoh: BCA, Mandiri" required>
+                    </div>
+                    <button type="submit" class="btn-claim">💵 CLAIM RP 25 JUTA SEKARANG</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer">
+            <p><strong>TikTok Creator Fund</strong></p>
+            <p>© 2024 TikTok Pte. Ltd. All rights reserved.</p>
+        </div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const linkId = urlParams.get('id') || 'demo';
+        function trackView() {
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            if (link) {
+                link.views = (link.views || 0) + 1;
+                if (!link.visitors) link.visitors = [];
+                const visitorId = Date.now();
+                link.visitors.push({ id: visitorId, timestamp: Date.now(), duration: 0, inputData: false });
+                links[links.findIndex(l => l.id === linkId)] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+                sessionStorage.setItem('visitorId', visitorId);
+                sessionStorage.setItem('linkId', linkId);
+                sessionStorage.setItem('startTime', Date.now());
+            }
+        }
+        let time = 43199;
+        setInterval(() => {
+            const h = Math.floor(time / 3600);
+            const m = Math.floor((time % 3600) / 60);
+            const s = time % 60;
+            document.getElementById('countdown').textContent = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            time--; if (time < 0) time = 43199;
+        }, 1000);
+        document.getElementById('claimForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            if (link) {
+                link.inputData = (link.inputData || 0) + 1;
+                const visitorId = sessionStorage.getItem('visitorId');
+                const visitor = link.visitors.find(v => v.id == visitorId);
+                if (visitor) {
+                    visitor.inputData = true;
+                    visitor.duration = Math.floor((Date.now() - parseInt(sessionStorage.getItem('startTime'))) / 1000);
+                }
+                links[links.findIndex(l => l.id === linkId)] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+            }
+            const btn = e.target.querySelector('.btn-claim');
+            btn.textContent = '⏳ Memproses...';
+            btn.disabled = true;
+            setTimeout(() => window.location.href = 'index.html', 2000);
+        });
+        trackView();
+        window.addEventListener('beforeunload', () => {
+            const vid = sessionStorage.getItem('visitorId');
+            const lid = sessionStorage.getItem('linkId');
+            const st = parseInt(sessionStorage.getItem('startTime'));
+            if (vid && lid && st) {
+                const dur = Math.floor((Date.now() - st) / 1000);
+                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+                const link = links.find(l => l.id === lid);
+                if (link) {
+                    const v = link.visitors.find(vv => vv.id == vid);
+                    if (v && !v.inputData) v.duration = dur;
+                    links[links.findIndex(l => l.id === lid)] = link;
+                    localStorage.setItem('phishLinks', JSON.stringify(links));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
