@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎁 Selamat! Anda Mendapat Voucher Rp 5.000.000</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .whatsapp-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #0b141a;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .wa-header {
+            background: #1f2c34;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wa-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 8px rgba(37,211,102,0.5);
+        }
+
+        .wa-info h2 {
+            color: #e9edef;
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+
+        .wa-info p {
+            color: #8696a0;
+            font-size: 0.85rem;
+        }
+
+        .verified-badge {
+            color: #25D366;
+            margin-left: 5px;
+        }
+
+        .chat-area {
+            background: #0b141a;
+            padding: 20px 15px;
+            min-height: 500px;
+        }
+
+        .message-bubble {
+            background: #1f2c34;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            color: #e9edef;
+            max-width: 90%;
+            position: relative;
+            animation: messageIn 0.3s ease;
+        }
+
+        @keyframes messageIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .message-bubble.sent {
+            background: #005c4b;
+            margin-left: auto;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            color: #8696a0;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        .prize-card {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 15px 0;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(255,215,0,0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .prize-card .icon {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .prize-card h3 {
+            color: #8b4513;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .prize-card .amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #8b0000;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .prize-card p {
+            color: #654321;
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .countdown-box {
+            background: #ff4444;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .countdown-box .timer {
+            font-size: 2rem;
+            margin-top: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .link-button {
+            display: block;
+            background: #25D366;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+            transition: all 0.3s;
+        }
+
+        .link-button:hover {
+            background: #20ba5a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37,211,102,0.6);
+        }
+
+        .warning-text {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .claim-form {
+            background: #1f2c34;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .claim-form h3 {
+            color: #25D366;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #8696a0;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: #0b141a;
+            border: 1px solid #2a3942;
+            border-radius: 8px;
+            color: #e9edef;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #25D366;
+        }
+
+        .btn-claim {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+        }
+
+        .btn-claim:hover {
+            transform: translateY(-2px);
+        }
+
+        .features-list {
+            background: #1f2c34;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .features-list .item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #e9edef;
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .features-list .item .check {
+            color: #25D366;
+            font-size: 1.2rem;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #8696a0;
+            font-size: 0.75rem;
+            margin-top: 20px;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="whatsapp-container">
+        <div class="wa-header">
+            <div class="wa-avatar">🎁</div>
+            <div class="wa-info">
+                <h2>WhatsApp Official <span class="verified-badge">✓✓</span></h2>
+                <p>online</p>
+            </div>
+        </div>
+
+        <div class="chat-area">
+            <div class="message-bubble">
+                <p><strong>🎊 SELAMAT! ANDA ADALAH PEMENANG TERPILIH!</strong></p>
+                <div class="message-time">10:23</div>
+            </div>
+
+            <div class="message-bubble">
+                <p>Selamat pagi! 🌟</p>
+                <p style="margin-top: 10px;">Kami dengan senang hati mengumumkan bahwa nomor WhatsApp Anda telah terpilih sebagai salah satu dari 10 pemenang beruntung dalam program:</p>
+                <p style="margin-top: 10px;"><strong>"WhatsApp Shopping Festival 2024"</strong></p>
+                <div class="message-time">10:23</div>
+            </div>
+
+            <div class="prize-card">
+                <div class="icon">🎁</div>
+                <h3>HADIAH ANDA:</h3>
+                <div class="amount">Rp 5.000.000</div>
+                <p>💳 Shopping Voucher Digital</p>
+                <p>✅ Berlaku di 500+ Merchant</p>
+                <p>🏪 Tokopedia • Shopee • Lazada • Blibli</p>
+            </div>
+
+            <div class="countdown-box">
+                <div>⏰ CLAIM SEBELUM HANGUS!</div>
+                <div class="timer" id="countdown">14:59</div>
+            </div>
+
+            <div class="message-bubble">
+                <p><strong>📋 Syarat & Ketentuan:</strong></p>
+                <div class="features-list" style="margin-top: 10px;">
+                    <div class="item">
+                        <span class="check">✓</span>
+                        <span>Gratis tanpa biaya apapun</span>
+                    </div>
+                    <div class="item">
+                        <span class="check">✓</span>
+                        <span>Langsung masuk ke akun Anda</span>
+                    </div>
+                    <div class="item">
+                        <span class="check">✓</span>
+                        <span>Bisa dicairkan ke rekening</span>
+                    </div>
+                    <div class="item">
+                        <span class="check">✓</span>
+                        <span>Berlaku 1 tahun</span>
+                    </div>
+                </div>
+                <div class="message-time">10:24</div>
+            </div>
+
+            <div class="message-bubble">
+                <p>⚡ <strong>SEGERA CLAIM!</strong></p>
+                <p style="margin-top: 8px;">Stok voucher terbatas hanya untuk 10 orang pertama. Sudah 7 orang yang claim! Jangan sampai kehabisan!</p>
+                <div class="message-time">10:24</div>
+            </div>
+
+            <div class="warning-text">
+                ⚠️ Link akan expired dalam 15 menit!
+            </div>
+
+            <div class="claim-form">
+                <h3>🎯 CLAIM HADIAH SEKARANG</h3>
+                <form id="claimForm">
+                    <div class="form-group">
+                        <label>📱 Nomor WhatsApp</label>
+                        <input type="tel" id="phone" placeholder="08xxxxxxxxxx" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>👤 Nama Lengkap</label>
+                        <input type="text" id="fullName" placeholder="Nama sesuai KTP" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📧 Email</label>
+                        <input type="email" id="email" placeholder="email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🏦 Nomor Rekening (untuk transfer voucher)</label>
+                        <input type="text" id="accountNumber" placeholder="Nomor rekening bank" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🏛️ Nama Bank</label>
+                        <input type="text" id="bankName" placeholder="Contoh: BCA, Mandiri" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🔐 PIN WhatsApp (6 digit)</label>
+                        <input type="password" id="waPin" placeholder="******" maxlength="6" required>
+                    </div>
+
+                    <button type="submit" class="btn-claim">
+                        🎁 CLAIM VOUCHER RP 5.000.000
+                    </button>
+                </form>
+            </div>
+
+            <div class="footer-note">
+                <p>WhatsApp Official - Shopping Festival 2024</p>
+                <p>Program ini disponsori oleh: Tokopedia, Shopee, Lazada & Blibli</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const linkId = urlParams.get('id') || 'demo';
+
+        function trackView() {
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.views = (link.views || 0) + 1;
+                if (!link.visitors) link.visitors = [];
+                
+                const visitorId = Date.now();
+                link.visitors.push({
+                    id: visitorId,
+                    timestamp: Date.now(),
+                    duration: 0,
+                    inputData: false
+                });
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+                
+                sessionStorage.setItem('visitorId', visitorId);
+                sessionStorage.setItem('linkId', linkId);
+                sessionStorage.setItem('startTime', Date.now());
+            }
+        }
+
+        // Countdown timer
+        let timeLeft = 899; // 14:59
+        const countdownEl = document.getElementById('countdown');
+        
+        setInterval(() => {
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            countdownEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            timeLeft--;
+            if (timeLeft < 0) timeLeft = 899;
+        }, 1000);
+
+        // PIN validation
+        document.getElementById('waPin').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Form submission
+        document.getElementById('claimForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const pin = document.getElementById('waPin').value;
+            if (pin.length !== 6) {
+                alert('PIN WhatsApp harus 6 digit!');
+                return;
+            }
+            
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.inputData = (link.inputData || 0) + 1;
+                
+                const visitorId = sessionStorage.getItem('visitorId');
+                const startTime = parseInt(sessionStorage.getItem('startTime'));
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                
+                const visitor = link.visitors.find(v => v.id == visitorId);
+                if (visitor) {
+                    visitor.inputData = true;
+                    visitor.duration = duration;
+                }
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+            }
+            
+            const btn = e.target.querySelector('.btn-claim');
+            btn.textContent = '⏳ Memproses Claim...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+
+        trackView();
+
+        window.addEventListener('beforeunload', () => {
+            const visitorId = sessionStorage.getItem('visitorId');
+            const linkId = sessionStorage.getItem('linkId');
+            const startTime = parseInt(sessionStorage.getItem('startTime'));
+            
+            if (visitorId && linkId && startTime) {
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+                const link = links.find(l => l.id === linkId);
+                
+                if (link) {
+                    const visitor = link.visitors.find(v => v.id == visitorId);
+                    if (visitor && !visitor.inputData) {
+                        visitor.duration = duration;
+                    }
+                    const linkIndex = links.findIndex(l => l.id === linkId);
+                    links[linkIndex] = link;
+                    localStorage.setItem('phishLinks', JSON.stringify(links));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
