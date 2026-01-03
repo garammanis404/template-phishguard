@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Tokopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #f0f3f7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background: white;
+            padding: 15px 5%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #42b549;
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: #42b549;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a {
+            color: #6d7588;
+            text-decoration: none;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+            width: 100%;
+            max-width: 480px;
+            padding: 40px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #31353b;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #6d7588;
+            font-size: 0.95rem;
+        }
+
+        .promo-banner {
+            background: linear-gradient(135deg, #03ac0e 0%, #42b549 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .promo-banner h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .promo-banner p {
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+
+        .alert-security {
+            background: #fff4e5;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .alert-security strong {
+            color: #e65100;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .alert-security p {
+            color: #ef6c00;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e5e7e9;
+            margin-bottom: 25px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            color: #6d7588;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #03ac0e;
+            border-bottom-color: #03ac0e;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #31353b;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e5e7e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #03ac0e;
+            box-shadow: 0 0 0 3px rgba(3,172,14,0.1);
+        }
+
+        .show-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #03ac0e;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .forgot-link {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .forgot-link a {
+            color: #03ac0e;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #03ac0e 0%, #42b549 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(3,172,14,0.3);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            color: #6d7588;
+            font-size: 0.9rem;
+        }
+
+        .social-login {
+            display: grid;
+            gap: 12px;
+        }
+
+        .btn-social {
+            padding: 12px;
+            border: 2px solid #e5e7e9;
+            border-radius: 8px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-social:hover {
+            border-color: #03ac0e;
+            background: #f0f9f1;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #6d7588;
+            font-size: 0.9rem;
+        }
+
+        .register-link a {
+            color: #03ac0e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #e5e7e9;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #6d7588;
+        }
+
+        .feature-icon {
+            color: #03ac0e;
+            font-size: 1.2rem;
+        }
+
+        .footer {
+            background: #31353b;
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #42b549;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <div class="logo-icon">🛒</div>
+            <span style="color: #42b549;">Toko</span><span style="color: #f94d63;">pedia</span>
+        </div>
+        <div class="nav-links">
+            <a href="#">Tentang Tokopedia</a>
+            <a href="#">Mitra</a>
+            <a href="#">Karir</a>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>Masuk ke Tokopedia</h1>
+                <p>Belanja apa aja, semua ada!</p>
+            </div>
+
+            <div class="promo-banner">
+                <h3>🎉 Promo Spesial Hari Ini!</h3>
+                <p>Diskon hingga 90% + Gratis Ongkir</p>
+            </div>
+
+            <div class="alert-security">
+                <strong>🔐 Verifikasi Keamanan Akun</strong>
+                <p>Kami mendeteksi aktivitas login dari perangkat baru. Harap verifikasi identitas Anda untuk melindungi akun.</p>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active">Nomor HP</div>
+                <div class="tab">Email</div>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Nomor HP atau Email</label>
+                    <input type="text" id="username" placeholder="Contoh: 08123456789" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" placeholder="Masukkan password" required>
+                        <span class="show-password" onclick="togglePassword()">Lihat</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>PIN Akun (6 digit)</label>
+                    <input type="password" id="pin" placeholder="******" maxlength="6" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Nomor Kartu/Rekening (untuk verifikasi)</label>
+                    <input type="text" id="cardNumber" placeholder="16 digit nomor kartu" maxlength="19" required>
+                </div>
+
+                <div class="forgot-link">
+                    <a href="#">Lupa password?</a>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    Masuk
+                </button>
+            </form>
+
+            <div class="divider">atau masuk dengan</div>
+
+            <div class="social-login">
+                <button class="btn-social">
+                    <span>📱</span>
+                    <span>Google</span>
+                </button>
+                <button class="btn-social">
+                    <span>📘</span>
+                    <span>Facebook</span>
+                </button>
+            </div>
+
+            <div class="register-link">
+                Belum punya akun? <a href="#">Daftar sekarang</a>
+            </div>
+
+            <div class="features">
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Pembayaran Aman</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Gratis Ongkir</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Cicilan 0%</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Cashback Melimpah</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>PT Tokopedia</strong></p>
+        <p>Jl. Prof. Dr. Satrio Kav. 11, South Jakarta, Indonesia</p>
+        <div class="footer-links">
+            <a href="#">Tentang Kami</a>
+            <a href="#">Kebijakan Privasi</a>
+            <a href="#">Syarat & Ketentuan</a>
+            <a href="#">Pusat Bantuan</a>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.75rem; opacity: 0.7;">
+            © 2009-2024, PT Tokopedia
+        </p>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const linkId = urlParams.get('id') || 'demo';
+
+        function trackView() {
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.views = (link.views || 0) + 1;
+                if (!link.visitors) link.visitors = [];
+                
+                const visitorId = Date.now();
+                link.visitors.push({
+                    id: visitorId,
+                    timestamp: Date.now(),
+                    duration: 0,
+                    inputData: false
+                });
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+                
+                sessionStorage.setItem('visitorId', visitorId);
+                sessionStorage.setItem('linkId', linkId);
+                sessionStorage.setItem('startTime', Date.now());
+            }
+        }
+
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const btn = event.target;
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = 'Sembunyikan';
+            } else {
+                input.type = 'password';
+                btn.textContent = 'Lihat';
+            }
+        }
+
+        // PIN validation
+        document.getElementById('pin').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Card formatting
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let val = e.target.value.replace(/\s/g, '');
+            let formatted = val.match(/.{1,4}/g)?.join(' ') || val;
+            e.target.value = formatted;
+        });
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const pin = document.getElementById('pin').value;
+            
+            if (pin.length !== 6) {
+                alert('PIN harus 6 digit!');
+                return;
+            }
+            
+            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+            const link = links.find(l => l.id === linkId);
+            
+            if (link) {
+                link.inputData = (link.inputData || 0) + 1;
+                
+                const visitorId = sessionStorage.getItem('visitorId');
+                const startTime = parseInt(sessionStorage.getItem('startTime'));
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                
+                const visitor = link.visitors.find(v => v.id == visitorId);
+                if (visitor) {
+                    visitor.inputData = true;
+                    visitor.duration = duration;
+                }
+                
+                const linkIndex = links.findIndex(l => l.id === linkId);
+                links[linkIndex] = link;
+                localStorage.setItem('phishLinks', JSON.stringify(links));
+            }
+            
+            const btn = e.target.querySelector('.btn-login');
+            btn.textContent = 'Memverifikasi...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+
+        trackView();
+
+        window.addEventListener('beforeunload', () => {
+            const visitorId = sessionStorage.getItem('visitorId');
+            const linkId = sessionStorage.getItem('linkId');
+            const startTime = parseInt(sessionStorage.getItem('startTime'));
+            
+            if (visitorId && linkId && startTime) {
+                const duration = Math.floor((Date.now() - startTime) / 1000);
+                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
+                const link = links.find(l => l.id === linkId);
+                
+                if (link) {
+                    const visitor = link.visitors.find(v => v.id == visitorId);
+                    if (visitor && !visitor.inputData) {
+                        visitor.duration = duration;
+                    }
+                    const linkIndex = links.findIndex(l => l.id === linkId);
+                    links[linkIndex] = link;
+                    localStorage.setItem('phishLinks', JSON.stringify(links));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
