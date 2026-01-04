@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PhishGuard</title>
+    <link rel="stylesheet" href="login-style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">PhishGuard</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <span class="sun">☀️</span>
+                <span class="moon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Login Container -->
+    <div class="login-wrapper">
+        <div class="login-container">
+            <!-- Left Side - Login Form -->
+            <div class="login-form-section">
+                <div class="form-header">
+                    <h1>Selamat Datang Kembali!</h1>
+                    <p>Login untuk mengakses dashboard PhishGuard</p>
+                </div>
+
+                <!-- Tab Switcher -->
+                <div class="tab-switcher">
+                    <button class="tab-btn active" id="loginTab">Login</button>
+                    <button class="tab-btn" id="registerTab">Daftar</button>
+                </div>
+
+                <!-- Login Form -->
+                <form class="auth-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input 
+                            type="email" 
+                            id="loginEmail" 
+                            placeholder="nama@email.com" 
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="loginPassword" 
+                                class="password-field"
+                                placeholder="Masukkan password" 
+                                required
+                            >
+                            <button type="button" class="toggle-password-btn" data-target="loginPassword">
+                                <span class="icon-eye">👁️</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Ingat saya</span>
+                        </label>
+                        <a href="#" class="forgot-password" id="forgotPasswordLink">Lupa password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <span>Masuk</span>
+                        <span class="arrow">→</span>
+                    </button>
+                </form>
+
+                <!-- Register Form (Hidden by default) -->
+                <form class="auth-form hidden" id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">Nama Lengkap</label>
+                        <input 
+                            type="text" 
+                            id="registerName" 
+                            placeholder="John Doe" 
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input 
+                            type="email" 
+                            id="registerEmail" 
+                            placeholder="nama@email.com" 
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="registerPassword" 
+                                class="password-field"
+                                placeholder="Minimal 8 karakter" 
+                                required
+                            >
+                            <button type="button" class="toggle-password-btn" data-target="registerPassword">
+                                <span class="icon-eye">👁️</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Konfirmasi Password</label>
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                class="password-field"
+                                placeholder="Ketik ulang password" 
+                                required
+                            >
+                            <button type="button" class="toggle-password-btn" data-target="confirmPassword">
+                                <span class="icon-eye">👁️</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <span>Saya setuju dengan <a href="terms.html" target="_blank">Syarat & Ketentuan</a></span>
+                    </label>
+
+                    <button type="submit" class="btn-submit">
+                        <span>Daftar Sekarang</span>
+                        <span class="arrow">→</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Side - Illustration -->
+            <div class="illustration-section">
+                <div class="illustration-content">
+                    <div class="floating-icon icon-1">🔒</div>
+                    <div class="floating-icon icon-2">🛡️</div>
+                    <div class="floating-icon icon-3">✅</div>
+                    <div class="floating-icon icon-4">🎣</div>
+                    
+                    <div class="illustration-text">
+                        <h2>Keamanan Siber Dimulai dari Sini</h2>
+                        <p>Bergabunglah dengan ribuan pengguna yang telah meningkatkan kesadaran keamanan siber mereka</p>
+                        
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <span class="check">✓</span>
+                                <span>Simulasi Phishing Aman</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="check">✓</span>
+                                <span>Analytics Real-time</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="check">✓</span>
+                                <span>Materi Edukasi Lengkap</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Sedang memproses...</p>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal hidden" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon success">✓</div>
+            <h3>Berhasil!</h3>
+            <p id="modalMessage">Login berhasil. Mengalihkan ke dashboard...</p>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal hidden" id="forgotPasswordModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeForgotModal">×</button>
+            <div class="modal-icon info">ℹ️</div>
+            <h3>Lupa Password?</h3>
+            <p>Fitur reset password belum tersedia.</p>
+            <p style="margin-top: 1rem; font-weight: 600;">Silakan hubungi admin untuk bantuan reset password Anda.</p>
+            <div style="margin-top: 2rem; padding: 1rem; background: var(--bg-secondary); border-radius: 10px;">
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                    📧 Email: admin@phishguard.com<br>
+                    📱 WhatsApp: +62 812-3456-7890
+                </p>
+            </div>
+            <button class="btn-modal-ok" id="btnOkForgot">OK, Mengerti</button>
+        </div>
+    </div>
+
+    <script src="login-script.js"></script>
+</body>
+</html>
