@@ -2,8 +2,8 @@
 const themeToggle = document.getElementById('themeToggle');
 const html = document.documentElement;
 
-// Check for saved theme preference or default to light mode
-const currentTheme = localStorage.getItem('theme') || 'light';
+// Check current theme from data attribute or default to light
+const currentTheme = html.getAttribute('data-theme') || 'light';
 html.setAttribute('data-theme', currentTheme);
 
 themeToggle.addEventListener('click', () => {
@@ -11,7 +11,6 @@ themeToggle.addEventListener('click', () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     
     html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
     
     // Add animation effect
     themeToggle.style.transform = 'rotate(360deg)';
@@ -97,7 +96,9 @@ const statsObserver = new IntersectionObserver((entries) => {
             const statNumbers = entry.target.querySelectorAll('.stat-number');
             statNumbers.forEach(stat => {
                 const target = parseInt(stat.textContent);
-                animateCounter(stat, target);
+                if (!isNaN(target)) {
+                    animateCounter(stat, target);
+                }
             });
             statsObserver.unobserve(entry.target);
         }
@@ -145,7 +146,7 @@ buttons.forEach(button => {
 // Add ripple effect styles dynamically
 const style = document.createElement('style');
 style.textContent = `
-    button, .btn-primary, .btn-secondary {
+    button, .btn-primary, .btn-secondary, .btn-dashboard {
         position: relative;
         overflow: hidden;
     }
