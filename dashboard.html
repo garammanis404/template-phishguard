@@ -5,616 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - PhishGuard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --bg-card: #ffffff;
-            --text-primary: #1a1a1a;
-            --text-secondary: #6c757d;
-            --accent: #6366f1;
-            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            --border: #e5e7eb;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --info: #3b82f6;
-        }
-
-        [data-theme="dark"] {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --accent: #818cf8;
-            --border: #334155;
-        }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            display: flex;
-            min-height: 100vh;
-            overflow-x: hidden; /* Tambahkan ini */
-        }
-
-        .sidebar {
-            width: 280px;
-            background: var(--bg-card);
-            border-right: 1px solid var(--border);
-            position: fixed;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s;
-            z-index: 1000;
-        }
-
-        .logo {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        .logo-text {
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.9rem 1rem;
-            margin-bottom: 0.5rem;
-            border-radius: 10px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .nav-item:hover {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            transform: translateX(5px);
-        }
-
-        .nav-item.active {
-            background: var(--accent-gradient);
-            color: white;
-        }
-
-        .user-section {
-            padding: 1rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .user-profile {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--bg-secondary);
-            border-radius: 10px;
-            margin-bottom: 1rem;
-        }
-
-        .user-avatar {
-            width: 45px;
-            height: 45px;
-            background: var(--accent-gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .btn-logout {
-            width: 100%;
-            padding: 0.8rem;
-            background: transparent;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text-primary);
-            transition: all 0.3s;
-        }
-
-        .btn-logout:hover {
-            border-color: var(--danger);
-            color: var(--danger);
-        }
-
-        .main {
-            margin-left: 280px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            width: calc(100% - 280px); /* Tambahkan ini */
-        }
-
-        .topbar {
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            width: 100%;
-        }
-
-        .theme-toggle {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .content {
-            flex: 1;
-            padding: 2rem;
-            overflow-y: auto;
-            width: 100%; /* Tambahkan ini */
-        }
-
-        .page {
-            display: none;
-            animation: fadeIn 0.3s;
-            width: 100%; /* Tambahkan ini */
-        }
-
-        .page.active { 
-            display: block; 
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .welcome {
-            background: var(--accent-gradient);
-            padding: 2rem;
-            border-radius: 15px;
-            color: white;
-            margin-bottom: 2rem;
-            width: 100%;
-        }
-
-        .welcome h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            width: 100%;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 1.5rem;
-            display: flex;
-            gap: 1rem;
-            transition: transform 0.3s;
-            width: 100%;
-        }
-
-        .stat-card:hover { transform: translateY(-5px); }
-
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-        }
-
-        .stat-icon.blue { background: rgba(99, 102, 241, 0.1); }
-        .stat-icon.purple { background: rgba(139, 92, 246, 0.1); }
-        .stat-icon.orange { background: rgba(245, 158, 11, 0.1); }
-        .stat-icon.green { background: rgba(16, 185, 129, 0.1); }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 0.3rem 0;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            width: 100%;
-        }
-
-        .card h3 {
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .timeline {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .timeline-item {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .timeline-item:last-child { border: none; }
-
-        .timeline-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-top: 0.5rem;
-        }
-
-        .timeline-dot.blue { background: var(--info); }
-        .timeline-dot.green { background: var(--success); }
-        .timeline-dot.orange { background: var(--warning); }
-        .timeline-dot.red { background: var(--danger); }
-
-        .template-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-            width: 100%;
-        }
-
-        .template-card {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .template-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .template-url {
-            background: var(--bg-primary);
-            padding: 0.5rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            word-break: break-all;
-            margin: 1rem 0;
-        }
-
-        .btn {
-            background: var(--accent-gradient);
-            color: white;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: transform 0.3s;
-        }
-
-        .btn:hover { transform: translateY(-2px); }
-
-        .coming-soon {
-            text-align: center;
-            padding: 4rem 2rem;
-            width: 100%;
-        }
-
-        .coming-soon-icon {
-            font-size: 5rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.5;
-        }
-
-        @media (max-width: 968px) {
-            .sidebar {
-                transform: translateX(-100%);
-                width: 100%;
-            }
-            
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            
-            .main {
-                margin-left: 0;
-                width: 100%;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .template-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1rem 1.5rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-            z-index: 9999;
-            animation: slideIn 0.3s;
-            max-width: 300px;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(400px); }
-            to { transform: translateX(0); }
-        }
-
-        .monitoring-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s;
-            width: 100%;
-        }
-
-        .monitoring-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
-        }
-
-        .monitoring-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .monitoring-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-            padding: 1rem;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            width: 100%;
-        }
-
-        .monitoring-stat-item {
-            text-align: center;
-        }
-
-        .monitoring-stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent);
-        }
-
-        .monitoring-stat-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 0.3rem;
-        }
-
-        .status-badge {
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        .status-active {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-        }
-
-        .status-inactive {
-            background: rgba(107, 114, 128, 0.1);
-            color: var(--text-secondary);
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .btn-sm {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-
-        .btn-view {
-            background: var(--accent-gradient);
-            color: white;
-        }
-
-        .btn-delete {
-            background: transparent;
-            border: 1px solid var(--danger);
-            color: var(--danger);
-        }
-
-        .btn-delete:hover {
-            background: var(--danger);
-            color: white;
-        }
-
-        .activity-log {
-            margin-top: 1rem;
-            max-height: 300px;
-            overflow-y: auto;
-            width: 100%;
-        }
-
-        .activity-item {
-            display: flex;
-            gap: 1rem;
-            padding: 0.8rem;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.9rem;
-            width: 100%;
-        }
-
-        .activity-item:last-child {
-            border: none;
-        }
-
-        .activity-icon {
-            width: 35px;
-            height: 35px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .activity-icon.view {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--info);
-        }
-
-        .activity-icon.click {
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--warning);
-        }
-
-        .activity-icon.submit {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--bg-card);
-            border-radius: 15px;
-            padding: 2rem;
-            max-width: 800px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .btn-close {
-            background: transparent;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
-        .data-table th,
-        .data-table td {
-            padding: 0.8rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .data-table th {
-            background: var(--bg-secondary);
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-    </style>
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
     <aside class="sidebar" id="sidebar">
@@ -647,15 +38,8 @@
         </nav>
 
         <div class="user-section">
-            <div class="user-profile">
-                <div class="user-avatar">👤</div>
-                <div>
-                    <div id="userName" style="font-weight: 600;">User Demo</div>
-                    <div id="userEmail" style="font-size: 0.85rem; color: var(--text-secondary);">user@demo.com</div>
-                </div>
-            </div>
-            <button class="btn-logout" id="logoutBtn">
-                <span>🚪 Logout</span>
+            <button class="btn-logout" id="backBtn">
+                <span>🏠 Kembali ke Halaman</span>
             </button>
         </div>
     </aside>
@@ -673,7 +57,7 @@
             <!-- Dashboard -->
             <section class="page active" id="overviewPage">
                 <div class="welcome">
-                    <h2>Selamat Datang, <span id="welcomeName">User</span>! 👋</h2>
+                    <h2>Welcome Back! 👋</h2>
                     <p>Monitoring aktivitas phishing simulation realtime</p>
                 </div>
 
@@ -737,13 +121,26 @@
                     </div>
                 </div>
 
-                <div class="card">
-                    <h3>📧 Email Phishing Templates</h3>
-                    <div class="template-grid">
+                <!-- Category Buttons -->
+                <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                    <button class="category-btn active" data-category="all">📋 Semua Template</button>
+                    <button class="category-btn" data-category="email">📧 Email Phishing</button>
+                    <button class="category-btn" data-category="whatsapp">💬 WhatsApp</button>
+                    <button class="category-btn" data-category="website">🌐 Website Palsu</button>
+                    <button class="category-btn" data-category="social">📱 Social Media</button>
+                </div>
+
+                <!-- Email Templates -->
+                <div class="card template-section" data-category="email">
+                    <div class="card-header" onclick="toggleSection(this)">
+                        <h3>📧 Email Phishing Templates</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="template-grid" style="display: none;">
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/bank.html" data-name="Bank-Verifikasi Akun" data-category="email">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Bank - Verifikasi Akun</h4>
-                                <span style="background: rgba(99, 102, 241, 0.1); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">EMAIL</span>
+                                <span class="badge badge-email">EMAIL</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template email phishing yang menyerupai notifikasi dari bank</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/bank.html</div>
@@ -752,7 +149,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/ecommerce.html" data-name="E-commerce Promo Diskon" data-category="email">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">E-commerce - Promo Diskon</h4>
-                                <span style="background: rgba(99, 102, 241, 0.1); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">EMAIL</span>
+                                <span class="badge badge-email">EMAIL</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing dengan tawaran promo menarik</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/ecommerce.html</div>
@@ -761,7 +158,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/campus.html" data-name="Portal Akademik" data-category="email">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Portal Akademik</h4>
-                                <span style="background: rgba(99, 102, 241, 0.1); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">EMAIL</span>
+                                <span class="badge badge-email">EMAIL</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing untuk kampus/universitas</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/campus.html</div>
@@ -770,7 +167,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/government.html" data-name="Instansi Pemerintah - verifikasi" data-category="email">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Instansi Pemerintah - verifikasi</h4>
-                                <span style="background: rgba(99, 102, 241, 0.1); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">EMAIL</span>
+                                <span class="badge badge-email">EMAIL</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing validasi data</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/government.html</div>
@@ -779,7 +176,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/company.html" data-name="Email Perusahaan - Update Sistem" data-category="email">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Email Perusahaan - Update Sistem</h4>
-                                <span style="background: rgba(99, 102, 241, 0.1); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">EMAIL</span>
+                                <span class="badge badge-email">EMAIL</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing untuk email palsu perusahaan</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/company.html</div>
@@ -788,13 +185,17 @@
                     </div>
                 </div>
 
-                <div class="card">
-                    <h3>💬 WhatsApp Phishing Templates</h3>
-                    <div class="template-grid">
+                <!-- WhatsApp Templates -->
+                <div class="card template-section" data-category="whatsapp">
+                    <div class="card-header" onclick="toggleSection(this)">
+                        <h3>💬 WhatsApp Phishing Templates</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="template-grid" style="display: none;">
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/voucher.html" data-name="Hadiah Shopping Voucher" data-category="whatsapp">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Hadiah Shopping Voucher</h4>
-                                <span style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">WHATSAPP</span>
+                                <span class="badge badge-whatsapp">WHATSAPP</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template pesan WhatsApp dengan tawaran voucher palsu</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/voucher.html</div>
@@ -803,7 +204,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/verification.html" data-name="Verifikasi Akun WhatsApp" data-category="whatsapp">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Verifikasi Akun WhatsApp</h4>
-                                <span style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">WHATSAPP</span>
+                                <span class="badge badge-whatsapp">WHATSAPP</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing verifikasi akun</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/verification.html</div>
@@ -812,7 +213,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/lottery.html" data-name="Undian Berhadiah" data-category="whatsapp">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Undian Berhadiah</h4>
-                                <span style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">WHATSAPP</span>
+                                <span class="badge badge-whatsapp">WHATSAPP</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template undian berhadiah palsu</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/lottery.html</div>
@@ -821,7 +222,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/policy.html" data-name="Update Kebijakan WhatsApp" data-category="whatsapp">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Update Kebijakan WhatsApp</h4>
-                                <span style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">WHATSAPP</span>
+                                <span class="badge badge-whatsapp">WHATSAPP</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template pesan seolah whatsapp resmi mengajukan update segera</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/policy.html</div>
@@ -830,7 +231,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/flashsale.html" data-name="Promo Flash Sale" data-category="whatsapp">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Promo Flash Sale</h4>
-                                <span style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">WHATSAPP</span>
+                                <span class="badge badge-whatsapp">WHATSAPP</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template untuk promo flashsale dari sebuah toko online</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/flashsale.html</div>
@@ -839,13 +240,17 @@
                     </div>
                 </div>
 
-                <div class="card">
-                    <h3>🌐 Website Palsu Templates</h3>
-                    <div class="template-grid">
+                <!-- Website Templates -->
+                <div class="card template-section" data-category="website">
+                    <div class="card-header" onclick="toggleSection(this)">
+                        <h3>🌐 Website Palsu Templates</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="template-grid" style="display: none;">
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/bca.html" data-name="Login Bank BCA" data-category="website">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Login Bank BCA</h4>
-                                <span style="background: rgba(245, 158, 11, 0.1); color: var(--warning); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">WEBSITE</span>
+                                <span class="badge badge-website">WEBSITE</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Website palsu menyerupai BCA</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/bca.html</div>
@@ -854,7 +259,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/tokopedia.html" data-name="Login Tokopedia" data-category="website">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Login Tokopedia</h4>
-                                <span style="background: rgba(245, 158, 11, 0.1); color: var(--warning); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">WEBSITE</span>
+                                <span class="badge badge-website">WEBSITE</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Website palsu e-commerce</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/tokopedia.html</div>
@@ -863,25 +268,25 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/gmail.html" data-name="Login Email Gmail" data-category="website">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Login Email Gmail</h4>
-                                <span style="background: rgba(245, 158, 11, 0.1); color: var(--warning); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">WEBSITE</span>
+                                <span class="badge badge-website">WEBSITE</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Website palsu login Gmail</p>
                             <div class="template-url">garammanis404.github.io/gmail.html</div>
                             <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
                         </div>
-                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/facebook.html" data-name="Login Facebook" data-category="website">
+                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/facebook.html" data-name="Login Facebook" data-category="website">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Login Facebook</h4>
-                                <span style="background: rgba(245, 158, 11, 0.1); color: var(--warning); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">WEBSITE</span>
+                                <span class="badge badge-website">WEBSITE</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Website palsu login facebook</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/facebook.html</div>
                             <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
                         </div>
-                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/campus2.html" data-name="Login Portal Kampus" data-category="website">
+                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/campus2.html" data-name="Login Portal Kampus" data-category="website">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Login Portal Kampus</h4>
-                                <span style="background: rgba(245, 158, 11, 0.1); color: var(--warning); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">WEBSITE</span>
+                                <span class="badge badge-website">WEBSITE</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Website palsu login portal kampus</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/campus2.html</div>
@@ -890,13 +295,17 @@
                     </div>
                 </div>
 
-                <div class="card">
-                    <h3>📱 Social Media Templates</h3>
-                    <div class="template-grid">
+                <!-- Social Media Templates -->
+                <div class="card template-section" data-category="social">
+                    <div class="card-header" onclick="toggleSection(this)">
+                        <h3>📱 Social Media Templates</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="template-grid" style="display: none;">
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/instagram.html" data-name="Instagram Verification" data-category="social">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Instagram Verification</h4>
-                                <span style="background: rgba(239, 68, 68, 0.1); color: var(--danger); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">SOCIAL</span>
+                                <span class="badge badge-social">SOCIAL</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing verifikasi Instagram</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/instagram.html</div>
@@ -905,7 +314,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/twitter.html" data-name="Twitter Blue Verification" data-category="social">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Twitter Blue Verification</h4>
-                                <span style="background: rgba(239, 68, 68, 0.1); color: var(--danger); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">SOCIAL</span>
+                                <span class="badge badge-social">SOCIAL</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing Twitter/X</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/twitter.html</div>
@@ -914,7 +323,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/tiktok.html" data-name="TikTok Creator Fund" data-category="social">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">TikTok Creator Fund</h4>
-                                <span style="background: rgba(239, 68, 68, 0.1); color: var(--danger); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">SOCIAL</span>
+                                <span class="badge badge-social">SOCIAL</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing TikTok</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/tiktok.html</div>
@@ -923,7 +332,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/linkedin.html" data-name="Linkedin Premium Trial" data-category="social">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Linkedin Premium Trial</h4>
-                                <span style="background: rgba(239, 68, 68, 0.1); color: var(--danger); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">SOCIAL</span>
+                                <span class="badge badge-social">SOCIAL</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing Linkedin</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/linkedin.html</div>
@@ -932,7 +341,7 @@
                         <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/youtube.html" data-name="Youtube Patner Program" data-category="social">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">Youtube Patner Program</h4>
-                                <span style="background: rgba(239, 68, 68, 0.1); color: var(--danger); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">SOCIAL</span>
+                                <span class="badge badge-social">SOCIAL</span>
                             </div>
                             <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing youtube</p>
                             <div class="template-url">garammanis404.github.io/template-phishguard/youtube.html</div>
@@ -989,502 +398,6 @@
         </div>
     </main>
 
-    <!-- JavaScript tetap sama seperti yang Anda miliki -->
-    <script>
-        // ... (JavaScript code tetap sama seperti yang Anda miliki)
-        // Data user
-        const userData = JSON.parse(localStorage.getItem('userData') || '{"name":"User Demo","email":"user@demo.com"}');
-        document.getElementById('userName').textContent = userData.name;
-        document.getElementById('userEmail').textContent = userData.email;
-        document.getElementById('welcomeName').textContent = userData.name;
-
-        // Theme
-        const html = document.documentElement;
-        const theme = localStorage.getItem('theme') || 'light';
-        html.setAttribute('data-theme', theme);
-        document.querySelector('.sun').style.display = theme === 'light' ? 'block' : 'none';
-        document.querySelector('.moon').style.display = theme === 'dark' ? 'block' : 'none';
-
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            document.querySelector('.sun').style.display = newTheme === 'light' ? 'block' : 'none';
-            document.querySelector('.moon').style.display = newTheme === 'dark' ? 'block' : 'none';
-        });
-
-        // Navigation
-        const navItems = document.querySelectorAll('.nav-item');
-        const pages = document.querySelectorAll('.page');
-        
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const page = item.dataset.page;
-                
-                navItems.forEach(n => n.classList.remove('active'));
-                item.classList.add('active');
-                
-                pages.forEach(p => p.classList.remove('active'));
-                document.getElementById(page + 'Page').classList.add('active');
-                
-                const titles = {
-                    overview: 'Dashboard',
-                    templates: 'Cari Link Template',
-                    monitoring: 'Monitoring Realtime',
-                    education: 'Materi Edukasi',
-                    analytics: 'Analisis Aktivitas'
-                };
-                document.getElementById('pageTitle').textContent = titles[page];
-                
-                // Update monitoring page when navigating to it
-                if (page === 'monitoring') {
-                    updateMonitoringPage();
-                }
-            });
-        });
-
-        // Activate link (new function)
-        function activateLink(btn) {
-            const card = btn.closest('.template-card');
-            const url = card.dataset.url;
-            const name = card.dataset.name;
-            const category = card.dataset.category;
-            
-            const activeLinks = JSON.parse(localStorage.getItem('activeLinks') || '[]');
-            
-            // Check if already activated
-            const exists = activeLinks.find(link => link.url === url);
-            if (exists) {
-                navigator.clipboard.writeText(url);
-                showToast('✅ Link sudah aktif! Berhasil disalin.');
-                return;
-            }
-            
-            // Add to active links
-            const newLink = {
-                id: Date.now(),
-                url: url,
-                name: name,
-                category: category,
-                activatedAt: Date.now(),
-                status: 'active',
-                stats: {
-                    views: 0,
-                    clicks: 0,
-                    submits: 0
-                },
-                activities: []
-            };
-            
-            activeLinks.push(newLink);
-            localStorage.setItem('activeLinks', JSON.stringify(activeLinks));
-            
-            // Copy to clipboard
-            navigator.clipboard.writeText(url).then(() => {
-                showToast('✅ Link diaktifkan & disalin!');
-                updateMonitoringPage();
-                updateStats();
-            });
-        }
-
-        // Search templates
-        document.getElementById('searchTemplate')?.addEventListener('input', (e) => {
-            const search = e.target.value.toLowerCase();
-            const cards = document.querySelectorAll('.template-card');
-            
-            cards.forEach(card => {
-                const name = card.dataset.name.toLowerCase();
-                const category = card.dataset.category.toLowerCase();
-                
-                if (name.includes(search) || category.includes(search)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-
-        // Update monitoring page
-        function updateMonitoringPage() {
-            const activeLinks = JSON.parse(localStorage.getItem('activeLinks') || '[]');
-            const container = document.getElementById('monitoringLinks');
-            
-            if (activeLinks.length === 0) {
-                container.innerHTML = `
-                    <div style="text-align: center; padding: 4rem 2rem; color: var(--text-secondary);">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">📭</div>
-                        <h3>Belum Ada Link yang Diaktifkan</h3>
-                        <p style="margin-top: 0.5rem;">Klik "Aktifkan & Salin Link" di halaman Template untuk memulai monitoring</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            container.innerHTML = activeLinks.map(link => `
-                <div class="monitoring-card" data-link-id="${link.id}">
-                    <div class="monitoring-header">
-                        <div style="flex: 1;">
-                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                                <h3 style="margin: 0;">${link.name}</h3>
-                                <span class="status-badge ${link.status === 'active' ? 'status-active' : 'status-inactive'}">
-                                    ${link.status === 'active' ? '🟢 Aktif' : '🔴 Non-aktif'}
-                                </span>
-                                <span style="background: ${getCategoryColor(link.category)}; color: ${getCategoryTextColor(link.category)}; padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">
-                                    ${link.category.toUpperCase()}
-                                </span>
-                            </div>
-                            <div style="font-size: 0.85rem; color: var(--text-secondary); word-break: break-all;">
-                                ${link.url}
-                            </div>
-                            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">
-                                Diaktifkan: ${new Date(link.activatedAt).toLocaleString('id-ID')}
-                            </div>
-                        </div>
-                        <div class="btn-group">
-                            <button class="btn-sm btn-view" onclick="viewLinkDetails(${link.id})">👁️ Detail</button>
-                            <button class="btn-sm btn-delete" onclick="deleteLink(${link.id})">🗑️ Hapus</button>
-                        </div>
-                    </div>
-                    
-                    <div class="monitoring-stats">
-                        <div class="monitoring-stat-item">
-                            <div class="monitoring-stat-value">${link.stats.views}</div>
-                            <div class="monitoring-stat-label">👁️ Dilihat</div>
-                        </div>
-                        <div class="monitoring-stat-item">
-                            <div class="monitoring-stat-value">${link.stats.clicks}</div>
-                            <div class="monitoring-stat-label">👆 Diklik</div>
-                        </div>
-                        <div class="monitoring-stat-item">
-                            <div class="monitoring-stat-value">${link.stats.submits}</div>
-                            <div class="monitoring-stat-label">⚠️ Data Disubmit</div>
-                        </div>
-                        <div class="monitoring-stat-item">
-                            <div class="monitoring-stat-value">${link.stats.clicks > 0 ? Math.round((link.stats.submits / link.stats.clicks) * 100) : 0}%</div>
-                            <div class="monitoring-stat-label">📊 Conversion Rate</div>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 1rem;">
-                        <h4 style="font-size: 0.95rem; margin-bottom: 0.8rem;">Aktivitas Terbaru:</h4>
-                        <div class="activity-log">
-                            ${link.activities.length === 0 ? '<p style="text-align: center; color: var(--text-secondary); padding: 1rem;">Belum ada aktivitas</p>' : link.activities.slice(0, 5).map(activity => `
-                                <div class="activity-item">
-                                    <div class="activity-icon ${activity.type}">
-                                        ${activity.type === 'view' ? '👁️' : activity.type === 'click' ? '👆' : '⚠️'}
-                                    </div>
-                                    <div style="flex: 1;">
-                                        <div style="font-weight: 600;">${getActivityText(activity.type)}</div>
-                                        <div style="font-size: 0.85rem; color: var(--text-secondary);">
-                                            ${new Date(activity.timestamp).toLocaleString('id-ID')}
-                                            ${activity.data ? ` • ${activity.data}` : ''}
-                                        </div>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function getCategoryColor(category) {
-            const colors = {
-                'email': 'rgba(99, 102, 241, 0.1)',
-                'whatsapp': 'rgba(16, 185, 129, 0.1)',
-                'website': 'rgba(245, 158, 11, 0.1)',
-                'social': 'rgba(239, 68, 68, 0.1)'
-            };
-            return colors[category] || 'rgba(107, 114, 128, 0.1)';
-        }
-
-        function getCategoryTextColor(category) {
-            const colors = {
-                'email': '#6366f1',
-                'whatsapp': '#10b981',
-                'website': '#f59e0b',
-                'social': '#ef4444'
-            };
-            return colors[category] || '#6c757d';
-        }
-
-        function getActivityText(type) {
-            const texts = {
-                'view': 'Halaman dilihat',
-                'click': 'Tombol/Link diklik',
-                'submit': 'Data form disubmit'
-            };
-            return texts[type] || 'Aktivitas';
-        }
-
-        // View link details
-        function viewLinkDetails(linkId) {
-            const activeLinks = JSON.parse(localStorage.getItem('activeLinks') || '[]');
-            const link = activeLinks.find(l => l.id === linkId);
-            
-            if (!link) return;
-            
-            const modal = document.createElement('div');
-            modal.className = 'modal active';
-            modal.innerHTML = `
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2>Detail Monitoring: ${link.name}</h2>
-                        <button class="btn-close" onclick="this.closest('.modal').remove()">✕</button>
-                    </div>
-                    
-                    <div class="card" style="margin-bottom: 1rem;">
-                        <h3>Informasi Link</h3>
-                        <table class="data-table">
-                            <tr>
-                                <th>URL</th>
-                                <td>${link.url}</td>
-                            </tr>
-                            <tr>
-                                <th>Kategori</th>
-                                <td>${link.category.toUpperCase()}</td>
-                            </tr>
-                            <tr>
-                                <th>Status</th>
-                                <td><span class="status-badge ${link.status === 'active' ? 'status-active' : 'status-inactive'}">${link.status === 'active' ? '🟢 Aktif' : '🔴 Non-aktif'}</span></td>
-                            </tr>
-                            <tr>
-                                <th>Diaktifkan</th>
-                                <td>${new Date(link.activatedAt).toLocaleString('id-ID')}</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div class="card" style="margin-bottom: 1rem;">
-                        <h3>Statistik</h3>
-                        <div class="monitoring-stats">
-                            <div class="monitoring-stat-item">
-                                <div class="monitoring-stat-value">${link.stats.views}</div>
-                                <div class="monitoring-stat-label">👁️ Total Views</div>
-                            </div>
-                            <div class="monitoring-stat-item">
-                                <div class="monitoring-stat-value">${link.stats.clicks}</div>
-                                <div class="monitoring-stat-label">👆 Total Clicks</div>
-                            </div>
-                            <div class="monitoring-stat-item">
-                                <div class="monitoring-stat-value">${link.stats.submits}</div>
-                                <div class="monitoring-stat-label">⚠️ Data Submits</div>
-                            </div>
-                            <div class="monitoring-stat-item">
-                                <div class="monitoring-stat-value">${link.stats.clicks > 0 ? Math.round((link.stats.submits / link.stats.clicks) * 100) : 0}%</div>
-                                <div class="monitoring-stat-label">📊 Conversion Rate</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Riwayat Aktivitas Lengkap</h3>
-                        <div class="activity-log" style="max-height: 400px;">
-                            ${link.activities.length === 0 ? '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">Belum ada aktivitas</p>' : link.activities.map(activity => `
-                                <div class="activity-item">
-                                    <div class="activity-icon ${activity.type}">
-                                        ${activity.type === 'view' ? '👁️' : activity.type === 'click' ? '👆' : '⚠️'}
-                                    </div>
-                                    <div style="flex: 1;">
-                                        <div style="font-weight: 600;">${getActivityText(activity.type)}</div>
-                                        <div style="font-size: 0.85rem; color: var(--text-secondary);">
-                                            ${new Date(activity.timestamp).toLocaleString('id-ID', { 
-                                                dateStyle: 'full', 
-                                                timeStyle: 'medium' 
-                                            })}
-                                        </div>
-                                        ${activity.data ? `<div style="margin-top: 0.5rem; padding: 0.5rem; background: var(--bg-secondary); border-radius: 6px; font-size: 0.85rem;"><strong>Data:</strong> ${activity.data}</div>` : ''}
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-        }
-
-        // Delete link
-        function deleteLink(linkId) {
-            if (!confirm('Apakah Anda yakin ingin menghapus link monitoring ini? Data aktivitas akan hilang.')) {
-                return;
-            }
-            
-            const activeLinks = JSON.parse(localStorage.getItem('activeLinks') || '[]');
-            const filtered = activeLinks.filter(link => link.id !== linkId);
-            localStorage.setItem('activeLinks', JSON.stringify(filtered));
-            
-            showToast('✅ Link berhasil dihapus');
-            updateMonitoringPage();
-            updateStats();
-        }
-
-        // Simulate activity (for demo purposes)
-        function simulateActivity(linkId, type) {
-            const activeLinks = JSON.parse(localStorage.getItem('activeLinks') || '[]');
-            const link = activeLinks.find(l => l.id === linkId);
-            
-            if (!link) return;
-            
-            // Update stats
-            if (type === 'view') link.stats.views++;
-            if (type === 'click') link.stats.clicks++;
-            if (type === 'submit') link.stats.submits++;
-            
-            // Add activity
-            const activity = {
-                type: type,
-                timestamp: Date.now(),
-                data: type === 'submit' ? 'Email: user@example.com, Password: ****' : null
-            };
-            
-            link.activities.unshift(activity);
-            
-            localStorage.setItem('activeLinks', JSON.stringify(activeLinks));
-            updateMonitoringPage();
-            updateStats();
-        }
-
-        // Filter monitoring
-        document.getElementById('filterStatus')?.addEventListener('change', (e) => {
-            const filter = e.target.value;
-            const cards = document.querySelectorAll('.monitoring-card');
-            
-            cards.forEach(card => {
-                const linkId = parseInt(card.dataset.linkId);
-                const activeLinks = JSON.parse(localStorage.getItem('activeLinks') || '[]');
-                const link = activeLinks.find(l => l.id === linkId);
-                
-                if (filter === 'all' || link.status === filter) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-
-        // Toast notification
-        function showToast(message) {
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.style.animation = 'slideIn 0.3s reverse';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        // Log activity
-        function logActivity(type, url) {
-            const activities = JSON.parse(localStorage.getItem('activities') || '[]');
-            const templateName = url.split('/').pop().replace('.html', '').replace(/_/g, ' ');
-            
-            activities.unshift({
-                type,
-                template: templateName,
-                timestamp: Date.now()
-            });
-            
-            if (activities.length > 50) activities.pop();
-            localStorage.setItem('activities', JSON.stringify(activities));
-            
-            updateActivityTimeline();
-            updateStats();
-        }
-
-        // Update activity timeline
-        function updateActivityTimeline() {
-            const activities = JSON.parse(localStorage.getItem('activities') || '[]');
-            const timeline = document.getElementById('activityTimeline');
-            
-            if (activities.length === 0) {
-                timeline.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--text-secondary);"><p>Menunggu aktivitas...</p></div>';
-                return;
-            }
-            
-            timeline.innerHTML = activities.slice(0, 10).map(a => {
-                const time = getTimeAgo(a.timestamp);
-                return `
-                    <div class="timeline-item">
-                        <div class="timeline-dot blue"></div>
-                        <div>
-                            <div style="font-weight: 600;">Link disalin: ${a.template}</div>
-                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.3rem;">
-                                <span>🔗 Template copied</span>
-                                <span style="margin-left: 1rem;">⏱️ ${time}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function getTimeAgo(timestamp) {
-            const diff = Math.floor((Date.now() - timestamp) / 1000);
-            if (diff < 60) return `${diff} detik lalu`;
-            if (diff < 3600) return `${Math.floor(diff / 60)} menit lalu`;
-            if (diff < 86400) return `${Math.floor(diff / 3600)} jam lalu`;
-            return `${Math.floor(diff / 86400)} hari lalu`;
-        }
-
-        // Update stats
-        function updateStats() {
-            const activities = JSON.parse(localStorage.getItem('activities') || '[]');
-            const activeLinks = JSON.parse(localStorage.getItem('activeLinks') || '[]');
-            const today = activities.filter(a => Date.now() - a.timestamp < 86400000).length;
-            
-            // Calculate total stats from active links
-            let totalViews = 0;
-            let totalSubmits = 0;
-            
-            activeLinks.forEach(link => {
-                totalViews += link.stats.views;
-                totalSubmits += link.stats.submits;
-            });
-            
-            document.getElementById('totalLinks').textContent = activeLinks.length;
-            document.getElementById('totalVisitors').textContent = totalViews;
-            document.getElementById('visitorsChange').textContent = `+${today} hari ini`;
-            document.getElementById('totalVictims').textContent = totalSubmits;
-            document.getElementById('victimsRate').textContent = totalViews > 0 ? `${Math.round((totalSubmits / totalViews) * 100)}% dari total` : '0% dari total';
-            document.getElementById('awarenessRate').textContent = totalViews > 0 ? `${100 - Math.round((totalSubmits / totalViews) * 100)}%` : '100%';
-        }
-
-        // Logout
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            if (confirm('Apakah Anda yakin ingin logout?')) {
-                localStorage.removeItem('userData');
-                window.location.href = 'login.html';
-            }
-        });
-
-        // Initialize
-        updateActivityTimeline();
-        updateStats();
-        updateMonitoringPage();
-
-        // Simulate realtime updates (for demo)
-        setInterval(() => {
-            updateActivityTimeline();
-            
-            // Randomly simulate activity on active links
-            const activeLinks = JSON.parse(localStorage.getItem('activeLinks') || '[]');
-            if (activeLinks.length > 0 && Math.random() > 0.7) {
-                const randomLink = activeLinks[Math.floor(Math.random() * activeLinks.length)];
-                const activityTypes = ['view', 'click', 'submit'];
-                const randomType = activityTypes[Math.floor(Math.random() * activityTypes.length)];
-                
-                // Only simulate submit if there were clicks
-                if (randomType === 'submit' && randomLink.stats.clicks === 0) {
-                    return;
-                }
-                
-                simulateActivity(randomLink.id, randomType);
-            }
-        }, 10000);
-    </script>
+    <script src="dashboard.js"></script>
 </body>
 </html>
