@@ -23,17 +23,13 @@
                 <span>🔍</span>
                 <span>Cari Link Template</span>
             </div>
-            <div class="nav-item" data-page="monitoring">
-                <span>👁️</span>
-                <span>Monitoring Realtime</span>
-            </div>
             <div class="nav-item" data-page="education">
                 <span>📚</span>
                 <span>Materi Edukasi</span>
             </div>
             <div class="nav-item" data-page="analytics">
                 <span>📈</span>
-                <span>Analisis Aktivitas</span>
+                <span>Aktivitas Saya</span>
             </div>
         </nav>
 
@@ -58,40 +54,40 @@
             <section class="page active" id="overviewPage">
                 <div class="welcome">
                     <h2>Welcome Back! 👋</h2>
-                    <p>Monitoring aktivitas phishing simulation realtime</p>
+                    <p>Platform edukasi dan simulasi phishing untuk meningkatkan kesadaran keamanan</p>
                 </div>
 
                 <div class="stats">
                     <div class="stat-card">
-                        <div class="stat-icon blue">🔗</div>
+                        <div class="stat-icon blue">📚</div>
                         <div>
-                            <div class="stat-label">Total Link Aktif</div>
-                            <div class="stat-value" id="totalLinks">0</div>
-                            <div class="stat-label">Siap digunakan</div>
+                            <div class="stat-label">Materi Tersedia</div>
+                            <div class="stat-value" id="totalMaterials">16</div>
+                            <div class="stat-label">Jenis phishing</div>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon purple">👥</div>
+                        <div class="stat-icon purple">🔗</div>
                         <div>
-                            <div class="stat-label">Total Pengunjung</div>
-                            <div class="stat-value" id="totalVisitors">0</div>
-                            <div class="stat-label" id="visitorsChange">+0 hari ini</div>
+                            <div class="stat-label">Template Tersedia</div>
+                            <div class="stat-value" id="totalTemplates">25</div>
+                            <div class="stat-label">Simulasi phishing</div>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon orange">⚠️</div>
+                        <div class="stat-icon orange">📎</div>
                         <div>
-                            <div class="stat-label">Terkena Phishing</div>
-                            <div class="stat-value" id="totalVictims">0</div>
-                            <div class="stat-label" id="victimsRate">0% dari total</div>
+                            <div class="stat-label">Link Disalin</div>
+                            <div class="stat-value" id="totalCopied">0</div>
+                            <div class="stat-label">Total aktivitas</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon green">✅</div>
                         <div>
-                            <div class="stat-label">Tingkat Kesadaran</div>
-                            <div class="stat-value" id="awarenessRate">100%</div>
-                            <div class="stat-label">Meningkat</div>
+                            <div class="stat-label">Materi Dipelajari</div>
+                            <div class="stat-value" id="materialsLearned">0</div>
+                            <div class="stat-label">Tingkatkan pengetahuan</div>
                         </div>
                     </div>
                 </div>
@@ -99,11 +95,11 @@
                 <div class="card">
                     <h3>
                         <span class="live-dot"></span>
-                        Aktivitas Realtime
+                        Aktivitas Terbaru Anda
                     </h3>
                     <div class="timeline" id="activityTimeline">
                         <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
-                            <p>Menunggu aktivitas...</p>
+                            <p>Belum ada aktivitas...</p>
                         </div>
                     </div>
                 </div>
@@ -137,50 +133,40 @@
                         <span class="toggle-icon">▼</span>
                     </div>
                     <div class="template-grid" style="display: none;">
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/bank.html" data-name="Bank-Verifikasi Akun" data-category="email">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Bank - Verifikasi Akun</h4>
-                                <span class="badge badge-email">EMAIL</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template email phishing yang menyerupai notifikasi dari bank</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/bank.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Bank Verification" data-category="email" data-url="https://garammanis404.github.io/template-phishguard/bank.html">
+                            <h4>Bank Verification</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Email verifikasi akun bank palsu</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/bank.html</div>
+                            <span class="badge badge-email">Email</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/ecommerce.html" data-name="E-commerce Promo Diskon" data-category="email">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">E-commerce - Promo Diskon</h4>
-                                <span class="badge badge-email">EMAIL</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing dengan tawaran promo menarik</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/ecommerce.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                          <div class="template-card" data-name="Promo Diskon" data-category="email" data-url="https://garammanis404.github.io/template-phishguard/ecommerce.html">
+                            <h4>Promo Diskon</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Email Promo Diskon Belanja</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/ecommerce.html</div>
+                            <span class="badge badge-email">Email</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/campus.html" data-name="Portal Akademik" data-category="email">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Portal Akademik</h4>
-                                <span class="badge badge-email">EMAIL</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing untuk kampus/universitas</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/campus.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                          <div class="template-card" data-name="Portal Akademik" data-category="email" data-url="https://garammanis404.github.io/template-phishguard/campus.html">
+                            <h4>Portal Akademik</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Portal Akademik - Reset Password</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/bank.html</div>
+                            <span class="badge badge-email">Email</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/government.html" data-name="Instansi Pemerintah - verifikasi" data-category="email">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Instansi Pemerintah - verifikasi</h4>
-                                <span class="badge badge-email">EMAIL</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing validasi data</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/government.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                          <div class="template-card" data-name="Instansi Pemerintah - verifikasi data" data-category="email" data-url="https://garammanis404.github.io/template-phishguard/government.html">
+                            <h4>Instansi Pemerintah - verifikasi data</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Instansi Pemerintah - verifikasi data</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/government.html</div>
+                            <span class="badge badge-email">Email</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/company.html" data-name="Email Perusahaan - Update Sistem" data-category="email">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Email Perusahaan - Update Sistem</h4>
-                                <span class="badge badge-email">EMAIL</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing untuk email palsu perusahaan</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/company.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Email Perusahaan - Update Sistem" data-category="email" data-url="https://garammanis404.github.io/template-phishguard/company.html">
+                            <h4>Email Perusahaan - Update Sistem</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Email Perusahaan - Update Sistem</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/company.html</div>
+                            <span class="badge badge-email">Email</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
                     </div>
                 </div>
@@ -192,50 +178,40 @@
                         <span class="toggle-icon">▼</span>
                     </div>
                     <div class="template-grid" style="display: none;">
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/voucher.html" data-name="Hadiah Shopping Voucher" data-category="whatsapp">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Hadiah Shopping Voucher</h4>
-                                <span class="badge badge-whatsapp">WHATSAPP</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template pesan WhatsApp dengan tawaran voucher palsu</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/voucher.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Promo flashsale" data-category="whatsapp" data-url="https://garammanis404.github.io/template-phishguard/flashsale.html">
+                            <h4>Promo flashsale</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Promo flashsale</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/flashsale.html</div>
+                            <span class="badge badge-whatsapp">WhatsApp</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/verification.html" data-name="Verifikasi Akun WhatsApp" data-category="whatsapp">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Verifikasi Akun WhatsApp</h4>
-                                <span class="badge badge-whatsapp">WHATSAPP</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing verifikasi akun</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/verification.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Undian Berhadiah" data-category="whatsapp" data-url="https://garammanis404.github.io/template-phishguard/lottery.html">
+                            <h4>Undian Berhadiah</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Undian Berhadiah</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/lottery.html</div>
+                            <span class="badge badge-whatsapp">WhatsApp</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/lottery.html" data-name="Undian Berhadiah" data-category="whatsapp">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Undian Berhadiah</h4>
-                                <span class="badge badge-whatsapp">WHATSAPP</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template undian berhadiah palsu</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/lottery.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Update kebijakan whatsapp" data-category="whatsapp" data-url="https://garammanis404.github.io/template-phishguard/policy.html">
+                            <h4>Update kebijakan WhatsApp</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Update kebijakan WhatsApp</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/policy.html</div>
+                            <span class="badge badge-whatsapp">WhatsApp</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/policy.html" data-name="Update Kebijakan WhatsApp" data-category="whatsapp">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Update Kebijakan WhatsApp</h4>
-                                <span class="badge badge-whatsapp">WHATSAPP</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template pesan seolah whatsapp resmi mengajukan update segera</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/policy.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Verification Akun WhatsApp" data-category="whatsapp" data-url="https://garammanis404.github.io/template-phishguard/verification.html">
+                            <h4>Verification Akun WhatsApp</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Verification Akun WhatsApp</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/verification.html</div>
+                            <span class="badge badge-whatsapp">WhatsApp</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/flashsale.html" data-name="Promo Flash Sale" data-category="whatsapp">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Promo Flash Sale</h4>
-                                <span class="badge badge-whatsapp">WHATSAPP</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template untuk promo flashsale dari sebuah toko online</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/flashsale.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                         <div class="template-card" data-name="Hadiah Shopping Voucher" data-category="whatsapp" data-url="https://garammanis404.github.io/template-phishguard/voucher.html">
+                            <h4>Hadiah Shopping Voucher</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Hadiah Shopping Voucher</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/voucher.html</div>
+                            <span class="badge badge-whatsapp">WhatsApp</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
                     </div>
                 </div>
@@ -247,50 +223,40 @@
                         <span class="toggle-icon">▼</span>
                     </div>
                     <div class="template-grid" style="display: none;">
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/bca.html" data-name="Login Bank BCA" data-category="website">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Login Bank BCA</h4>
-                                <span class="badge badge-website">WEBSITE</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Website palsu menyerupai BCA</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/bca.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Login Bank" data-category="website" data-url="https://garammanis404.github.io/template-phishguard/bca.html">
+                            <h4>Login Bank Palsu</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Halaman login bank palsu</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/bca.html</div>
+                            <span class="badge badge-website">Website</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/tokopedia.html" data-name="Login Tokopedia" data-category="website">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Login Tokopedia</h4>
-                                <span class="badge badge-website">WEBSITE</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Website palsu e-commerce</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/tokopedia.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Login tokopedia" data-category="website" data-url="https://garammanis404.github.io/template-phishguard/tokopedia.html">
+                            <h4>Login tokopedia Palsu</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Halaman login tokopedia palsu</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/tokopedia.html</div>
+                            <span class="badge badge-website">Website</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/gmail.html" data-name="Login Email Gmail" data-category="website">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Login Email Gmail</h4>
-                                <span class="badge badge-website">WEBSITE</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Website palsu login Gmail</p>
-                            <div class="template-url">garammanis404.github.io/gmail.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Login portal campus" data-category="website" data-url="https://garammanis404.github.io/template-phishguard/campus2.html">
+                            <h4>Login portal campus</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Halaman login portal kampus palsu</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/campus2.html</div>
+                            <span class="badge badge-website">Website</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/facebook.html" data-name="Login Facebook" data-category="website">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Login Facebook</h4>
-                                <span class="badge badge-website">WEBSITE</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Website palsu login facebook</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/facebook.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Login facebook palsu" data-category="website" data-url="https://garammanis404.github.io/template-phishguard/facebook.html">
+                            <h4>Login facebook palsu</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Halaman login facebook palsu</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/facebook.html</div>
+                            <span class="badge badge-website">Website</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/campus2.html" data-name="Login Portal Kampus" data-category="website">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Login Portal Kampus</h4>
-                                <span class="badge badge-website">WEBSITE</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Website palsu login portal kampus</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/campus2.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Login email palsu" data-category="website" data-url="https://garammanis404.github.io/template-phishguard/gmail.html">
+                            <h4>Login email palsu</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Halaman login email palsu</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/gmail.html</div>
+                            <span class="badge badge-website">Website</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
                     </div>
                 </div>
@@ -302,101 +268,127 @@
                         <span class="toggle-icon">▼</span>
                     </div>
                     <div class="template-grid" style="display: none;">
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/instagram.html" data-name="Instagram Verification" data-category="social">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Instagram Verification</h4>
-                                <span class="badge badge-social">SOCIAL</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing verifikasi Instagram</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/instagram.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Instagram Verify" data-category="social" data-url="https://garammanis404.github.io/template-phishguard/instagram.html">
+                            <h4>Instagram Verify</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Verifikasi akun Instagram</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/instagram.html</div>
+                            <span class="badge badge-social">Social Media</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/twitter.html" data-name="Twitter Blue Verification" data-category="social">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Twitter Blue Verification</h4>
-                                <span class="badge badge-social">SOCIAL</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing Twitter/X</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/twitter.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Youtube palsu" data-category="social" data-url="https://garammanis404.github.io/template-phishguard/youtube.html">
+                            <h4>Youtube Palsu</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Youtube Palsu</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/youtube.html</div>
+                            <span class="badge badge-social">Social Media</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/tiktok.html" data-name="TikTok Creator Fund" data-category="social">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">TikTok Creator Fund</h4>
-                                <span class="badge badge-social">SOCIAL</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing TikTok</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/tiktok.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="twitter palsu" data-category="social" data-url="https://garammanis404.github.io/template-phishguard/twitter.html">
+                            <h4>twitter Palsu</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Twitter Palsu</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/twitter.html</div>
+                            <span class="badge badge-social">Social Media</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/linkedin.html" data-name="Linkedin Premium Trial" data-category="social">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Linkedin Premium Trial</h4>
-                                <span class="badge badge-social">SOCIAL</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing Linkedin</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/linkedin.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Tiktok palsu" data-category="social" data-url="https://garammanis404.github.io/template-phishguard/tiktok.html">
+                            <h4>Tiktok Palsu</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Tiktok Palsu</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/Tiktok.html</div>
+                            <span class="badge badge-social">Social Media</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                        <div class="template-card" data-url="https://garammanis404.github.io/template-phishguard/youtube.html" data-name="Youtube Patner Program" data-category="social">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">Youtube Patner Program</h4>
-                                <span class="badge badge-social">SOCIAL</span>
-                            </div>
-                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Template phishing youtube</p>
-                            <div class="template-url">garammanis404.github.io/template-phishguard/youtube.html</div>
-                            <button class="btn" onclick="activateLink(this)">🚀 Aktifkan & Salin Link</button>
+                        <div class="template-card" data-name="Linkedin palsu" data-category="social" data-url="https://garammanis404.github.io/template-phishguard/linkedin.html">
+                            <h4>Linkedin Palsu</h4>
+                            <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">Linkedin Palsu</p>
+                            <div class="template-url">https://garammanis404.github.io/template-phishguard/linkedin.html</div>
+                            <span class="badge badge-social">Social Media</span>
+                            <button class="btn" onclick="activateLink(this)" style="margin-top: 1rem;">📎 Salin Link</button>
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Monitoring -->
-            <section class="page" id="monitoringPage">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
-                    <div>
-                        <h2>Monitoring Link Aktif</h2>
-                        <p style="color: var(--text-secondary); margin-top: 0.5rem;">Pantau semua link yang telah diaktifkan</p>
-                    </div>
-                    <div style="display: flex; gap: 1rem;">
-                        <select id="filterStatus" style="padding: 0.8rem 1rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text-primary);">
-                            <option value="all">Semua Status</option>
-                            <option value="active">Aktif</option>
-                            <option value="inactive">Non-aktif</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div id="monitoringLinks">
-                    <div style="text-align: center; padding: 4rem 2rem; color: var(--text-secondary);">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">📭</div>
-                        <h3>Belum Ada Link yang Diaktifkan</h3>
-                        <p style="margin-top: 0.5rem;">Klik "Aktifkan & Salin Link" di halaman Template untuk memulai monitoring</p>
                     </div>
                 </div>
             </section>
 
             <!-- Education -->
             <section class="page" id="educationPage">
-                <div class="coming-soon">
-                    <div class="coming-soon-icon">📚</div>
-                    <h2>Materi Edukasi</h2>
-                    <p>Fitur pembelajaran tentang phishing akan segera hadir</p>
-                    <p style="margin-top: 0.5rem;">Coming Soon!</p>
+                <div style="margin-bottom: 2rem;">
+                    <h2>Materi Edukasi Phishing</h2>
+                    <p style="color: var(--text-secondary); margin-top: 0.5rem;">Pelajari berbagai jenis phishing dan cara melindungi diri Anda</p>
+                </div>
+
+                <!-- Materi Edukasi Grid -->
+                <div class="education-grid" id="educationGrid">
+                    <!-- Konten akan diisi oleh JavaScript -->
                 </div>
             </section>
 
             <!-- Analytics -->
             <section class="page" id="analyticsPage">
-                <div class="coming-soon">
-                    <div class="coming-soon-icon">📊</div>
-                    <h2>Analisis Aktivitas</h2>
-                    <p>Fitur analisis mendalam sedang dalam pengembangan</p>
-                    <p style="margin-top: 0.5rem;">Coming Soon!</p>
+                <div style="margin-bottom: 2rem;">
+                    <h2>Aktivitas Saya</h2>
+                    <p style="color: var(--text-secondary); margin-top: 0.5rem;">Riwayat salin dan hapus link template</p>
+                </div>
+
+                <div class="stats" style="margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">📎</div>
+                        <div>
+                            <div class="stat-label">Link Disalin</div>
+                            <div class="stat-value" id="analyticsCopied">0</div>
+                            <div class="stat-label">Total salinan</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">🗑️</div>
+                        <div>
+                            <div class="stat-label">Link Dihapus</div>
+                            <div class="stat-value" id="analyticsDeleted">0</div>
+                            <div class="stat-label">Dari riwayat</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">🎯</div>
+                        <div>
+                            <div class="stat-label">Template Favorit</div>
+                            <div class="stat-value" id="analyticsFavorite">-</div>
+                            <div class="stat-label">Paling sering</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3>Riwayat Aktivitas Link</h3>
+                        <button class="btn-delete" onclick="clearAllActivities()" style="padding: 0.6rem 1.2rem;">
+                            🗑️ Hapus Semua
+                        </button>
+                    </div>
+                    <div class="activity-list" id="activityList">
+                        <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                            <p>Belum ada aktivitas</p>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
     </main>
+
+    <!-- Modal Detail Materi -->
+    <div class="modal" id="educationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Detail Materi Phishing</h2>
+                <button class="btn-close" onclick="closeEducationModal()">✕</button>
+            </div>
+            <div class="modal-body" id="modalContent">
+                <!-- Konten akan diisi oleh JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeEducationModal()">Tutup</button>
+                <button class="btn" onclick="markAsLearned()" style="background: var(--success);">
+                    ✅ Tandai Sudah Dipelajari
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script src="dashboard.js"></script>
 </body>
