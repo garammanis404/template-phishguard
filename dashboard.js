@@ -1,5 +1,251 @@
-// API Configuration
-const API_URL = 'http://localhost:5000/api';
+// Data Materi Edukasi - Total 16 Materi (12 asli + 4 baru)
+const educationMaterials = [
+    {
+        id: 1,
+        title: "Email Phishing",
+        icon: "📧",
+        category: "email",
+        description: "Teknik phishing melalui email yang menyerupai organisasi resmi",
+        tags: ["Email", "Umum", "Bisnis"],
+        level: "Pemula",
+        content: {
+            pengertian: "Email phishing adalah teknik penipuan dimana penyerang mengirim email yang tampak sah dari organisasi terpercaya untuk mencuri informasi sensitif seperti kata sandi, nomor kartu kredit, atau data pribadi lainnya.",
+            caraKerja: "1. Penyerang membuat email yang menyerupai organisasi terpercaya<br>2. Email berisi link atau lampiran berbahaya<br>3. Korban diminta mengklik link atau membuka lampiran<br>4. Korban diarahkan ke website palsu untuk memasukkan data sensitif",
+            contoh: "• Email dari 'bank' yang meminta verifikasi akun<br>• Notifikasi 'paket tertahan' dari layanan kurir<br>• Email 'hadiah undian' yang mengharuskan mengisi data",
+            antisipasi: "• Periksa alamat pengirim dengan teliti<br>• Jangan klik link dalam email yang mencurigakan<br>• Verifikasi melalui saluran resmi perusahaan<br>• Gunakan autentikasi dua faktor"
+        }
+    },
+    {
+        id: 2,
+        title: "Spear Phishing",
+        icon: "🎯",
+        category: "spear",
+        description: "Phishing yang ditargetkan ke individu atau organisasi tertentu",
+        tags: ["Targeted", "Advanced", "Bisnis"],
+        level: "Menengah",
+        content: {
+            pengertian: "Spear phishing adalah serangan phishing yang sangat ditargetkan terhadap individu, organisasi, atau bisnis tertentu. Penyerang melakukan riset mendalam tentang target sebelum melakukan serangan.",
+            caraKerja: "1. Penyerang mengumpulkan informasi tentang target<br>2. Membuat email yang sangat personal dan relevan<br>3. Menggunakan nama dan informasi yang akrab<br>4. Meminta tindakan segera dengan ancaman atau iming-iming",
+            contoh: "• Email ke karyawan HR dengan lampiran 'CV pelamar'<br>• Pesan ke manajer keuangan tentang 'invoice mendesak'<br>• Email ke IT tentang 'perbaikan sistem segera'",
+            antisipasi: "• Pelatihan kesadaran keamanan karyawan<br>• Verifikasi permintaan tak biasa melalui telepon<br>• Implementasi email filtering tingkat lanjut<br>• Monitor aktivitas email mencurigakan"
+        }
+    },
+    {
+        id: 3,
+        title: "Whale Phishing",
+        icon: "🐋",
+        category: "whale",
+        description: "Serangan phishing yang menargetkan eksekutif tingkat tinggi",
+        tags: ["Eksekutif", "High-Value", "Korporat"],
+        level: "Lanjutan",
+        content: {
+            pengertian: "Whale phishing (whaling) adalah serangan phishing yang secara khusus menargetkan eksekutif tingkat tinggi, CEO, atau individu dengan akses ke informasi sensitif dan sistem penting.",
+            caraKerja: "1. Identifikasi target bernilai tinggi<br>2. Riset mendalam tentang target dan organisasi<br>3. Pembuatan komunikasi yang sangat persuasif<br>4. Permintaan transfer dana atau akses sistem",
+            contoh: "• Email dari 'CEO' ke keuangan minta transfer mendesak<br>• Panggilan 'auditor internal' minta akses data<br>• Notifikasi 'pengambilalihan bisnis' palsu",
+            antisipasi: "• Prosedur verifikasi untuk transfer besar<br>• Pelatihan khusus untuk eksekutif<br>• Monitoring komunikasi eksternal<br>• Sistem approval multi-level"
+        }
+    },
+    {
+        id: 4,
+        title: "Smishing",
+        icon: "📱",
+        category: "smishing",
+        description: "Phishing melalui SMS atau pesan instan",
+        tags: ["SMS", "Mobile", "WhatsApp"],
+        level: "Pemula",
+        content: {
+            pengertian: "Smishing (SMS phishing) adalah teknik phishing yang menggunakan pesan teks SMS atau aplikasi pesan instan untuk menipu korban memberikan informasi sensitif atau mengklik link berbahaya.",
+            caraKerja: "1. Pengiriman SMS dengan link atau nomor telepon<br>2. Pesan berisi urgensi atau iming-iming hadiah<br>3. Korban diminta mengklik link atau menelepon<br>4. Data dicuri melalui website atau percakapan telepon",
+            contoh: "• SMS 'paket Anda tertahan, klik link untuk lacak'<br>• Pesan 'akun bank terblokir, hubungi nomor ini'<br>• Notifikasi 'menang undian, isi data untuk klaim'",
+            antisipasi: "• Jangan balas SMS dari nomor tak dikenal<br>• Verifikasi melalui aplikasi resmi perusahaan<br>• Aktifkan filter spam di ponsel<br>• Laporkan SMS mencurigakan ke operator"
+        }
+    },
+    {
+        id: 5,
+        title: "Vishing",
+        icon: "📞",
+        category: "vishing",
+        description: "Phishing melalui panggilan telepon atau voice message",
+        tags: ["Telepon", "Voice", "Call Center"],
+        level: "Menengah",
+        content: {
+            pengertian: "Vishing (voice phishing) adalah teknik phishing yang menggunakan panggilan telepon atau pesan suara untuk menipu korban memberikan informasi sensitif atau melakukan tindakan tertentu.",
+            caraKerja: "1. Penyerang menelepon korban berpura-pura sebagai pihak resmi<br>2. Menggunakan teknik sosial engineering<br>3. Membuat urgensi atau ancaman<br>4. Meminta informasi atau tindakan segera",
+            contoh: "• Panggilan dari 'bank' tentang transaksi mencurigakan<br>• Panggilan 'dukungan teknis' Microsoft palsu<br>• Pesan suara tentang 'hutang kartu kredit'",
+            antisipasi: "• Jangan berikan informasi via telepon<br>• Tanyakan detail dan verifikasi kembali<br>• Catat nomor dan laporkan ke pihak berwenang<br>• Gunakan layanan call screening"
+        }
+    },
+    {
+        id: 6,
+        title: "Clone Phishing",
+        icon: "🧬",
+        category: "clone",
+        description: "Duplikasi email atau website sah yang dimodifikasi",
+        tags: ["Duplikasi", "Advanced", "Website"],
+        level: "Lanjutan",
+        content: {
+            pengertian: "Clone phishing adalah teknik dimana penyerang membuat replika sempurna dari email atau website sah, kemudian memodifikasinya dengan konten berbahaya dan mengirimkannya ke korban.",
+            caraKerja: "1. Penyerang mendapatkan email atau website sah<br>2. Menduplikasi seluruh konten<br>3. Memodifikasi dengan link atau lampiran berbahaya<br>4. Mengirim ke korban seolah dari sumber asli",
+            contoh: "• Duplikasi email newsletter dengan link palsu<br>• Website login bank yang identik dengan asli<br>• Replika portal pembayaran online",
+            antisipasi: "• Periksa URL dengan teliti (HTTPS, domain)<br>• Verifikasi melalui saluran lain<br>• Gunakan bookmark untuk website penting<br>• Perbarui browser secara rutin"
+        }
+    },
+    {
+        id: 7,
+        title: "Watering Hole Attack",
+        icon: "💧",
+        category: "watering",
+        description: "Menginfeksi website yang sering dikunjungi target",
+        tags: ["Website", "Advanced", "Targeted"],
+        level: "Lanjutan",
+        content: {
+            pengertian: "Watering hole attack adalah teknik dimana penyerang mengidentifikasi website yang sering dikunjungi oleh target, kemudian menginfeksi website tersebut dengan malware.",
+            caraKerja: "1. Identifikasi website favorit target<br>2. Eksploitasi kerentanan website<br>3. Menyisipkan kode berbahaya<br>4. Menunggu target mengunjungi website",
+            contoh: "• Forum komunitas profesional yang terinfeksi<br>• Website asosiasi industri<br>• Portal berita khusus sektor",
+            antisipasi: "• Gunakan browser dengan proteksi realtime<br>• Perbarui software dan plugin<br>• Gunakan ad-blocker dan script blocker<br>• Monitor aktivitas jaringan"
+        }
+    },
+    {
+        id: 8,
+        title: "Search Engine Phishing",
+        icon: "🔍",
+        category: "search",
+        description: "Membuat website palsu yang muncul di hasil pencarian",
+        tags: ["SEO", "Google", "Website"],
+        level: "Menengah",
+        content: {
+            pengertian: "Search engine phishing adalah teknik dimana penyerang membuat website palsu yang dioptimasi untuk muncul di hasil pencarian ketika korban mencari layanan tertentu.",
+            caraKerja: "1. Membuat website palsu mirip asli<br>2. Melakukan SEO untuk peringkat tinggi<br>3. Menunggu korban mencari dan mengklik<br>4. Mencuri data saat korban berinteraksi",
+            contoh: "• Website 'customer service' bank palsu<br>• Situs 'pembelian tiket' gadungan<br>• Halaman 'download software' berisi malware",
+            antisipasi: "• Periksa URL di address bar<br>• Cari website resmi melalui bookmark<br>• Waspada website dengan iklan berlebihan<br>• Gunakan mesin pencari terpercaya"
+        }
+    },
+    {
+        id: 9,
+        title: "Angler Phishing",
+        icon: "🎣",
+        category: "angler",
+        description: "Memanfaatkan media sosial untuk phishing",
+        tags: ["Social Media", "Twitter", "Facebook"],
+        level: "Menengah",
+        content: {
+            pengertian: "Angler phishing adalah teknik phishing yang memanfaatkan media sosial, dimana penyerang membuat akun palsu yang menyerupai perusahaan atau layanan resmi.",
+            caraKerja: "1. Membuat akun media sosial palsu<br>2. Menanggapi keluhan atau pertanyaan pengguna<br>3. Menawarkan bantuan dengan link berbahaya<br>4. Mencuri data melalui form atau chat",
+            contoh: "• Akun Twitter 'dukungan pelanggan' palsu<br>• Halaman Facebook 'promo resmi' gadungan<br>• Komentar di postingan dengan link berbahaya",
+            antisipasi: "• Verifikasi akun melalui website resmi<br>• Periksa badge verifikasi<br>• Jangan klik link dari akun mencurigakan<br>• Laporkan akun palsu ke platform"
+        }
+    },
+    {
+        id: 10,
+        title: "CEO Fraud",
+        icon: "👔",
+        category: "ceo",
+        description: "Penipuan dengan menyamar sebagai pimpinan perusahaan",
+        tags: ["BEC", "Business", "Executive"],
+        level: "Lanjutan",
+        content: {
+            pengertian: "CEO fraud atau Business Email Compromise (BEC) adalah penipuan dimana penyerang menyamar sebagai CEO atau eksekutif untuk meminta transfer dana atau data sensitif.",
+            caraKerja: "1. Spoofing email CEO atau eksekutif<br>2. Mengirim email ke departemen keuangan<br>3. Meminta transfer dana mendesak<br>4. Menggunakan alasan sensitif (akuisisi, masalah hukum)",
+            contoh: "• Email dari 'CEO' minta transfer ke vendor baru<br>• Instruksi 'CFO' untuk pembayaran darurat<br>• Permintaan 'direktur' untuk data karyawan",
+            antisipasi: "• Prosedur verifikasi multi-level untuk transfer<br>• Pelatihan spesifik untuk staff keuangan<br>• Implementasi DMARC, SPF, DKIM<br>• Monitoring transaksi tak biasa"
+        }
+    },
+    {
+        id: 11,
+        title: "Ransomware Phishing",
+        icon: "🔐",
+        category: "ransomware",
+        description: "Phishing yang menginstal ransomware pada sistem",
+        tags: ["Ransomware", "Malware", "Kripto"],
+        level: "Lanjutan",
+        content: {
+            pengertian: "Ransomware phishing adalah teknik dimana korban dikirim email berisi lampiran atau link yang menginstal ransomware, yang mengenkripsi data dan meminta tebusan.",
+            caraKerja: "1. Email dengan lampiran berbahaya<br>2. Korban membuka lampiran<br>3. Ransomware terinstal dan mengenkripsi data<br>4. Penyerang meminta tebusan untuk dekripsi",
+            contoh: "• Email dengan invoice yang terinfeksi<br>• Pesan dengan 'foto' berisi ransomware<br>• Link ke 'dokumen penting' yang berbahaya",
+            antisipasi: "• Backup data secara rutin<br>• Jangan buka lampiran tak dikenal<br>• Gunakan antivirus updated<br>• Patch sistem secara berkala"
+        }
+    },
+    {
+        id: 12,
+        title: "Pencegahan & Proteksi",
+        icon: "🛡️",
+        category: "prevention",
+        description: "Strategi lengkap untuk mencegah serangan phishing",
+        tags: ["Prevention", "Security", "Best Practices"],
+        level: "Semua Level",
+        content: {
+            pengertian: "Pencegahan phishing memerlukan pendekatan multi-layered yang mencakup teknologi, proses, dan pelatihan manusia untuk melindungi organisasi dan individu.",
+            caraKerja: "1. Implementasi teknologi keamanan<br>2. Pelatihan kesadaran keamanan<br>3. Prosedur verifikasi dan approval<br>4. Monitoring dan response cepat",
+            contoh: "• Email filtering dengan AI<br>• Simulasi phishing untuk karyawan<br>• Prosedur verifikasi transfer<br>• Incident response plan",
+            antisipasi: "• Gunakan autentikasi multi-faktor<br>• Implementasi email security gateway<br>• Backup data secara rutin<br>• Update software dan sistem<br>• Pelatihan berkelanjutan"
+        }
+    },
+    // 4 Materi Baru
+    {
+        id: 13,
+        title: "QR Code Phishing",
+        icon: "📲",
+        category: "qrcode",
+        description: "Penipuan menggunakan QR code berbahaya",
+        tags: ["QR Code", "Mobile", "Modern"],
+        level: "Pemula",
+        content: {
+            pengertian: "QR Code phishing (Quishing) adalah teknik phishing yang menggunakan QR code berbahaya untuk mengarahkan korban ke website palsu atau mengunduh malware ke perangkat mereka.",
+            caraKerja: "1. Penyerang membuat QR code yang mengarah ke link berbahaya<br>2. QR code disebarkan melalui email, poster, atau media sosial<br>3. Korban memindai QR code dengan smartphone<br>4. Korban diarahkan ke website phishing atau mengunduh malware",
+            contoh: "• QR code di email untuk 'verifikasi pembayaran'<br>• Stiker QR code palsu di tempat parkir<br>• QR code di media sosial untuk 'promo menarik'<br>• QR code di menu restoran menuju situs berbahaya",
+            antisipasi: "• Periksa URL preview sebelum membuka<br>• Gunakan aplikasi QR scanner dengan keamanan built-in<br>• Waspada QR code di tempat umum atau email tak dikenal<br>• Verifikasi keaslian sumber QR code"
+        }
+    },
+    {
+        id: 14,
+        title: "Deepfake Phishing",
+        icon: "🎭",
+        category: "deepfake",
+        description: "Penipuan menggunakan teknologi deepfake AI",
+        tags: ["AI", "Video", "Advanced"],
+        level: "Lanjutan",
+        content: {
+            pengertian: "Deepfake phishing adalah teknik canggih yang menggunakan kecerdasan buatan (AI) untuk membuat video atau audio palsu yang sangat realistis dari orang yang dipercaya, seperti CEO atau rekan kerja.",
+            caraKerja: "1. Penyerang mengumpulkan video/audio target dari media sosial<br>2. Menggunakan AI deepfake untuk membuat konten palsu<br>3. Mengirim video/audio palsu melalui email atau panggilan video<br>4. Meminta transfer dana atau informasi sensitif",
+            contoh: "• Video call palsu dari CEO meminta transfer mendesak<br>• Pesan suara palsu dari manajer dengan instruksi urgent<br>• Video palsu direktur mengumumkan kebijakan baru<br>• Audio call deepfake dari bank meminta verifikasi",
+            antisipasi: "• Verifikasi melalui saluran komunikasi alternatif<br>• Waspadai permintaan mendesak yang tidak biasa<br>• Implementasi prosedur verifikasi multi-step<br>• Edukasi tim tentang teknologi deepfake<br>• Gunakan kata sandi atau kode rahasia untuk verifikasi"
+        }
+    },
+    {
+        id: 15,
+        title: "Pharming Attack",
+        icon: "🌐",
+        category: "pharming",
+        description: "Manipulasi DNS untuk mengarahkan ke website palsu",
+        tags: ["DNS", "Network", "Technical"],
+        level: "Lanjutan",
+        content: {
+            pengertian: "Pharming adalah teknik phishing yang lebih canggih dimana penyerang memanipulasi DNS (Domain Name System) atau file hosts komputer untuk mengarahkan korban ke website palsu, meskipun mereka mengetik URL yang benar.",
+            caraKerja: "1. Penyerang menginfeksi komputer atau memanipulasi DNS server<br>2. Mengubah resolusi domain ke alamat IP palsu<br>3. Korban mengetik URL yang benar tapi diarahkan ke website palsu<br>4. Data login dan informasi sensitif dicuri tanpa disadari korban",
+            contoh: "• Mengetik bank.com tapi masuk ke website palsu<br>• DNS poisoning pada router rumah<br>• Malware mengubah file hosts lokal<br>• Serangan man-in-the-middle pada jaringan WiFi publik",
+            antisipasi: "• Gunakan DNS resolver terpercaya (Google DNS, Cloudflare)<br>• Periksa sertifikat SSL website (ikon gembok)<br>• Gunakan VPN saat di jaringan publik<br>• Update antivirus dan firewall<br>• Monitor file hosts secara berkala<br>• Gunakan DNSSEC jika tersedia"
+        }
+    },
+    {
+        id: 16,
+        title: "Pop-up Phishing",
+        icon: "⚠️",
+        category: "popup",
+        description: "Phishing melalui pop-up dan notifikasi palsu",
+        tags: ["Browser", "Pop-up", "Warning"],
+        level: "Pemula",
+        content: {
+            pengertian: "Pop-up phishing adalah teknik yang menggunakan jendela pop-up atau notifikasi browser palsu yang meniru peringatan sistem, antivirus, atau update untuk menipu pengguna memberikan informasi atau mengunduh malware.",
+            caraKerja: "1. Korban mengunjungi website yang terinfeksi atau berbahaya<br>2. Pop-up muncul meniru peringatan sistem atau keamanan<br>3. Pesan mendesak korban untuk bertindak cepat<br>4. Korban diminta memasukkan data atau mengunduh 'update'",
+            contoh: "• Pop-up 'Virus terdeteksi! Klik di sini untuk membersihkan'<br>• Notifikasi palsu 'Windows perlu update segera'<br>• Peringatan 'Akun Anda akan ditutup dalam 24 jam'<br>• Pop-up 'Anda memenangkan hadiah, klaim sekarang!'<br>• Alert palsu 'Adobe Flash perlu diperbarui'",
+            antisipasi: "• Tutup pop-up dengan shortcut (Alt+F4 atau Cmd+W)<br>• Jangan klik apapun di dalam pop-up mencurigakan<br>• Gunakan ad-blocker dan pop-up blocker<br>• Update sistem dari sumber resmi saja<br>• Scan sistem dengan antivirus jika ragu<br>• Matikan notifikasi website yang tidak dipercaya"
+        }
+    }
+];
+
+// Data Aktivitas
+let userActivities = JSON.parse(localStorage.getItem('phishguard_activities')) || [];
+let learnedMaterials = JSON.parse(localStorage.getItem('phishguard_learned')) || [];
 
 // Theme Management
 const html = document.documentElement;
@@ -33,19 +279,20 @@ navItems.forEach(item => {
         const titles = {
             overview: 'Dashboard',
             templates: 'Cari Link Template',
-            monitoring: 'Monitoring Realtime',
             education: 'Materi Edukasi',
-            analytics: 'Analisis Aktivitas'
+            analytics: 'Aktivitas Saya'
         };
         document.getElementById('pageTitle').textContent = titles[page];
         
-        if (page === 'monitoring') {
-            updateMonitoringPage();
+        if (page === 'education') {
+            renderEducationMaterials();
+        } else if (page === 'analytics') {
+            renderAnalytics();
         }
     });
 });
 
-// Category Filter
+// Category Filter (Templates)
 const categoryBtns = document.querySelectorAll('.category-btn');
 categoryBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -96,7 +343,7 @@ document.getElementById('searchTemplate')?.addEventListener('input', (e) => {
     });
 });
 
-// Activate Link
+// Activate Link (Copy Link)
 async function activateLink(btn) {
     const card = btn.closest('.template-card');
     const url = card.dataset.url;
@@ -104,347 +351,367 @@ async function activateLink(btn) {
     const category = card.dataset.category;
     
     try {
-        // Send to backend
-        const response = await fetch(`${API_URL}/activate-link`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                url: url,
-                name: name,
-                category: category
-            })
+        // Copy to clipboard
+        await navigator.clipboard.writeText(url);
+        
+        // Record activity
+        recordActivity({
+            type: 'copy_link',
+            template: name,
+            category: category,
+            url: url,
+            timestamp: new Date().toISOString()
         });
         
-        const data = await response.json();
-        
-        if (data.success) {
-            // Copy to clipboard
-            await navigator.clipboard.writeText(url);
-            showToast('✅ Link diaktifkan & disalin!');
-            updateMonitoringPage();
-            updateStats();
-        } else {
-            showToast('⚠️ ' + data.message);
-        }
+        showToast('✅ Link disalin ke clipboard!');
+        updateActivityTimeline();
+        updateDashboardStats();
     } catch (error) {
-        console.error('Error activating link:', error);
-        showToast('❌ Gagal mengaktifkan link');
+        console.error('Error copying link:', error);
+        showToast('❌ Gagal menyalin link');
     }
 }
 
-// Update Monitoring Page
-async function updateMonitoringPage() {
-    try {
-        const response = await fetch(`${API_URL}/active-links`);
-        const data = await response.json();
-        
-        const container = document.getElementById('monitoringLinks');
-        
-        if (data.links.length === 0) {
-            container.innerHTML = `
-                <div style="text-align: center; padding: 4rem 2rem; color: var(--text-secondary);">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">📭</div>
-                    <h3>Belum Ada Link yang Diaktifkan</h3>
-                    <p style="margin-top: 0.5rem;">Klik "Aktifkan & Salin Link" di halaman Template untuk memulai monitoring</p>
-                </div>
-            `;
-            return;
-        }
-        
-        container.innerHTML = data.links.map(link => `
-            <div class="monitoring-card" data-link-id="${link.id}">
-                <div class="monitoring-header">
-                    <div style="flex: 1;">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                            <h3 style="margin: 0;">${link.name}</h3>
-                            <span class="status-badge ${link.status === 'active' ? 'status-active' : 'status-inactive'}">
-                                ${link.status === 'active' ? '🟢 Aktif' : '🔴 Non-aktif'}
-                            </span>
-                            <span class="badge badge-${link.category}">
-                                ${link.category.toUpperCase()}
-                            </span>
-                        </div>
-                        <div style="font-size: 0.85rem; color: var(--text-secondary); word-break: break-all;">
-                            ${link.url}
-                        </div>
-                        <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">
-                            Diaktifkan: ${new Date(link.activated_at).toLocaleString('id-ID')}
-                        </div>
-                    </div>
-                    <div class="btn-group">
-                        <button class="btn-sm btn-view" onclick="viewLinkDetails(${link.id})">👁️ Detail</button>
-                        <button class="btn-sm btn-delete" onclick="deleteLink(${link.id})">🗑️ Hapus</button>
-                    </div>
-                </div>
-                
-                <div class="monitoring-stats">
-                    <div class="monitoring-stat-item">
-                        <div class="monitoring-stat-value">${link.views}</div>
-                        <div class="monitoring-stat-label">👁️ Dilihat</div>
-                    </div>
-                    <div class="monitoring-stat-item">
-                        <div class="monitoring-stat-value">${link.clicks}</div>
-                        <div class="monitoring-stat-label">👆 Diklik</div>
-                    </div>
-                    <div class="monitoring-stat-item">
-                        <div class="monitoring-stat-value">${link.submits}</div>
-                        <div class="monitoring-stat-label">⚠️ Data Disubmit</div>
-                    </div>
-                    <div class="monitoring-stat-item">
-                        <div class="monitoring-stat-value">${link.clicks > 0 ? Math.round((link.submits / link.clicks) * 100) : 0}%</div>
-                        <div class="monitoring-stat-label">📊 Conversion Rate</div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 1rem;">
-                    <h4 style="font-size: 0.95rem; margin-bottom: 0.8rem;">Aktivitas Terbaru:</h4>
-                    <div class="activity-log">
-                        ${getRecentActivities(link.id)}
-                    </div>
-                </div>
-            </div>
-        `).join('');
-    } catch (error) {
-        console.error('Error updating monitoring:', error);
+// Record Activity
+function recordActivity(activity) {
+    userActivities.unshift(activity);
+    
+    // Keep only last 50 activities
+    if (userActivities.length > 50) {
+        userActivities = userActivities.slice(0, 50);
+    }
+    
+    localStorage.setItem('phishguard_activities', JSON.stringify(userActivities));
+    
+    // Update analytics if page is active
+    if (document.querySelector('#analyticsPage.active')) {
+        renderAnalytics();
     }
 }
 
-// Get Recent Activities
-async function getRecentActivities(linkId) {
-    try {
-        const response = await fetch(`${API_URL}/activities/${linkId}`);
-        const data = await response.json();
+// Render Education Materials
+function renderEducationMaterials() {
+    const grid = document.getElementById('educationGrid');
+    if (!grid) return;
+    
+    grid.innerHTML = educationMaterials.map(material => {
+        const isLearned = learnedMaterials.includes(material.id);
         
-        if (data.activities.length === 0) {
-            return '<p style="text-align: center; color: var(--text-secondary); padding: 1rem;">Belum ada aktivitas</p>';
-        }
-        
-        return data.activities.slice(0, 5).map(activity => `
-            <div class="activity-item">
-                <div class="activity-icon ${activity.activity_type}">
-                    ${activity.activity_type === 'view' ? '👁️' : activity.activity_type === 'click' ? '👆' : '⚠️'}
+        return `
+            <div class="education-card ${isLearned ? 'learned' : ''}" onclick="openEducationModal(${material.id})">
+                ${isLearned ? '<div class="learned-badge">✅ Dipelajari</div>' : ''}
+                <div class="education-icon ${material.category}">
+                    ${material.icon}
                 </div>
-                <div style="flex: 1;">
-                    <div style="font-weight: 600;">${getActivityText(activity.activity_type)}</div>
-                    <div style="font-size: 0.85rem; color: var(--text-secondary);">
-                        ${new Date(activity.timestamp).toLocaleString('id-ID')}
-                        ${activity.data ? ` • ${activity.data}` : ''}
-                    </div>
+                <h3>${material.title}</h3>
+                <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">
+                    ${material.description}
+                </p>
+                <div class="education-tags">
+                    <span class="education-tag">${material.level}</span>
+                    ${material.tags.map(tag => `<span class="education-tag">${tag}</span>`).join('')}
                 </div>
-            </div>
-        `).join('');
-    } catch (error) {
-        return '<p style="text-align: center; color: var(--text-secondary); padding: 1rem;">Gagal memuat aktivitas</p>';
-    }
-}
-
-function getActivityText(type) {
-    const texts = {
-        'view': 'Halaman dilihat',
-        'click': 'Tombol/Link diklik',
-        'submit': 'Data form disubmit'
-    };
-    return texts[type] || 'Aktivitas';
-}
-
-// View Link Details
-async function viewLinkDetails(linkId) {
-    try {
-        const response = await fetch(`${API_URL}/link-details/${linkId}`);
-        const data = await response.json();
-        const link = data.link;
-        
-        const modal = document.createElement('div');
-        modal.className = 'modal active';
-        modal.innerHTML = `
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Detail Monitoring: ${link.name}</h2>
-                    <button class="btn-close" onclick="this.closest('.modal').remove()">✕</button>
-                </div>
-                
-                <div class="card" style="margin-bottom: 1rem;">
-                    <h3>Informasi Link</h3>
-                    <table class="data-table">
-                        <tr>
-                            <th>URL</th>
-                            <td>${link.url}</td>
-                        </tr>
-                        <tr>
-                            <th>Kategori</th>
-                            <td>${link.category.toUpperCase()}</td>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td><span class="status-badge ${link.status === 'active' ? 'status-active' : 'status-inactive'}">${link.status === 'active' ? '🟢 Aktif' : '🔴 Non-aktif'}</span></td>
-                        </tr>
-                        <tr>
-                            <th>Diaktifkan</th>
-                            <td>${new Date(link.activated_at).toLocaleString('id-ID')}</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="card" style="margin-bottom: 1rem;">
-                    <h3>Statistik</h3>
-                    <div class="monitoring-stats">
-                        <div class="monitoring-stat-item">
-                            <div class="monitoring-stat-value">${link.views}</div>
-                            <div class="monitoring-stat-label">👁️ Total Views</div>
-                        </div>
-                        <div class="monitoring-stat-item">
-                            <div class="monitoring-stat-value">${link.clicks}</div>
-                            <div class="monitoring-stat-label">👆 Total Clicks</div>
-                        </div>
-                        <div class="monitoring-stat-item">
-                            <div class="monitoring-stat-value">${link.submits}</div>
-                            <div class="monitoring-stat-label">⚠️ Data Submits</div>
-                        </div>
-                        <div class="monitoring-stat-item">
-                            <div class="monitoring-stat-value">${link.clicks > 0 ? Math.round((link.submits / link.clicks) * 100) : 0}%</div>
-                            <div class="monitoring-stat-label">📊 Conversion Rate</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>Riwayat Aktivitas Lengkap</h3>
-                    <div class="activity-log" style="max-height: 400px;">
-                        ${await getAllActivities(linkId)}
-                    </div>
+                <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">
+                        Klik untuk detail
+                    </span>
+                    <span style="font-size: 1.2rem;">→</span>
                 </div>
             </div>
         `;
-        
-        document.body.appendChild(modal);
-    } catch (error) {
-        console.error('Error viewing details:', error);
-        showToast('❌ Gagal memuat detail');
-    }
+    }).join('');
 }
 
-async function getAllActivities(linkId) {
-    try {
-        const response = await fetch(`${API_URL}/activities/${linkId}`);
-        const data = await response.json();
+// Open Education Modal
+function openEducationModal(materialId) {
+    const material = educationMaterials.find(m => m.id === materialId);
+    if (!material) return;
+    
+    document.getElementById('modalTitle').textContent = material.title;
+    
+    const modalContent = document.getElementById('modalContent');
+    modalContent.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+            <div class="education-icon ${material.category}" style="width: 50px; height: 50px; font-size: 1.5rem;">
+                ${material.icon}
+            </div>
+            <div>
+                <h3 style="margin: 0;">${material.title}</h3>
+                <p style="color: var(--text-secondary); margin: 0.3rem 0 0 0;">${material.description}</p>
+            </div>
+        </div>
         
-        if (data.activities.length === 0) {
-            return '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">Belum ada aktivitas</p>';
-        }
+        <div class="modal-section">
+            <h4>📖 <span>Pengertian</span></h4>
+            <p>${material.content.pengertian}</p>
+        </div>
         
-        return data.activities.map(activity => `
-            <div class="activity-item">
-                <div class="activity-icon ${activity.activity_type}">
-                    ${activity.activity_type === 'view' ? '👁️' : activity.activity_type === 'click' ? '👆' : '⚠️'}
+        <div class="modal-section">
+            <h4>⚙️ <span>Cara Kerja</span></h4>
+            <p>${material.content.caraKerja}</p>
+        </div>
+        
+        <div class="modal-section">
+            <h4>⚠️ <span>Contoh Kasus</span></h4>
+            <p>${material.content.contoh}</p>
+        </div>
+        
+        <div class="modal-section">
+            <h4>🛡️ <span>Cara Antisipasi</span></h4>
+            <p>${material.content.antisipasi}</p>
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1rem; background: var(--bg-secondary); border-radius: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong>Tingkat Kesulitan:</strong> ${material.level}
                 </div>
-                <div style="flex: 1;">
-                    <div style="font-weight: 600;">${getActivityText(activity.activity_type)}</div>
-                    <div style="font-size: 0.85rem; color: var(--text-secondary);">
-                        ${new Date(activity.timestamp).toLocaleString('id-ID', { 
-                            dateStyle: 'full', 
-                            timeStyle: 'medium' 
-                        })}
-                    </div>
-                    ${activity.data ? `<div style="margin-top: 0.5rem; padding: 0.5rem; background: var(--bg-secondary); border-radius: 6px; font-size: 0.85rem;"><strong>Data:</strong> ${activity.data}</div>` : ''}
+                <div>
+                    <strong>Status:</strong> ${learnedMaterials.includes(material.id) ? '✅ Sudah dipelajari' : '📚 Belum dipelajari'}
                 </div>
             </div>
-        `).join('');
-    } catch (error) {
-        return '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">Gagal memuat aktivitas</p>';
+        </div>
+    `;
+    
+    // Store current material ID
+    document.getElementById('educationModal').dataset.materialId = materialId;
+    document.getElementById('educationModal').classList.add('active');
+}
+
+// Close Education Modal
+function closeEducationModal() {
+    document.getElementById('educationModal').classList.remove('active');
+}
+
+// Mark as Learned
+function markAsLearned() {
+    const materialId = parseInt(document.getElementById('educationModal').dataset.materialId);
+    const material = educationMaterials.find(m => m.id === materialId);
+    
+    if (material && !learnedMaterials.includes(material.id)) {
+        learnedMaterials.push(material.id);
+        localStorage.setItem('phishguard_learned', JSON.stringify(learnedMaterials));
+        
+        showToast('✅ Materi ditandai sebagai sudah dipelajari!');
+        renderEducationMaterials();
+        updateDashboardStats();
+        closeEducationModal();
+    } else if (material && learnedMaterials.includes(material.id)) {
+        showToast('ℹ️ Materi ini sudah ditandai dipelajari sebelumnya');
     }
 }
 
-// Delete Link
-async function deleteLink(linkId) {
-    if (!confirm('Apakah Anda yakin ingin menghapus link monitoring ini? Data aktivitas akan hilang.')) {
+// Render Analytics
+function renderAnalytics() {
+    // Calculate statistics
+    const copyActivities = userActivities.filter(a => a.type === 'copy_link');
+    const deleteActivities = userActivities.filter(a => a.type === 'delete_link');
+    
+    // Find most copied template
+    const templateCopies = {};
+    copyActivities.forEach(activity => {
+        if (activity.template) {
+            templateCopies[activity.template] = (templateCopies[activity.template] || 0) + 1;
+        }
+    });
+    
+    let favoriteTemplate = '-';
+    let maxCopies = 0;
+    Object.entries(templateCopies).forEach(([template, copies]) => {
+        if (copies > maxCopies) {
+            maxCopies = copies;
+            favoriteTemplate = template;
+        }
+    });
+    
+    // Update stats
+    document.getElementById('analyticsCopied').textContent = copyActivities.length;
+    document.getElementById('analyticsDeleted').textContent = deleteActivities.length;
+    document.getElementById('analyticsFavorite').textContent = favoriteTemplate.substring(0, 15) + (favoriteTemplate.length > 15 ? '...' : '');
+    
+    // Render activity list
+    const activityList = document.getElementById('activityList');
+    if (!activityList) return;
+    
+    if (userActivities.length === 0) {
+        activityList.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                <p>Belum ada aktivitas</p>
+            </div>
+        `;
         return;
     }
     
-    try {
-        const response = await fetch(`${API_URL}/delete-link/${linkId}`, {
-            method: 'DELETE'
+    activityList.innerHTML = userActivities.map((activity, index) => {
+        const time = new Date(activity.timestamp).toLocaleString('id-ID', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
         });
         
-        const data = await response.json();
-        
-        if (data.success) {
-            showToast('✅ Link berhasil dihapus');
-            updateMonitoringPage();
-            updateStats();
-        } else {
-            showToast('❌ Gagal menghapus link');
+        if (activity.type === 'copy_link') {
+            return `
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <h4>📎 ${activity.template}</h4>
+                        <div class="activity-meta">
+                            <span>⏱️ ${time}</span>
+                            <span>📂 ${activity.category}</span>
+                            <span class="activity-badge badge-copied">Link Disalin</span>
+                        </div>
+                        <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-secondary); word-break: break-all;">
+                            ${activity.url}
+                        </div>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="btn-sm btn-copy-again" onclick="copyAgain('${activity.url}')">
+                            📋 Salin Lagi
+                        </button>
+                        <button class="btn-sm btn-remove" onclick="removeActivity(${index})">
+                            🗑️ Hapus
+                        </button>
+                    </div>
+                </div>
+            `;
+        } else if (activity.type === 'delete_link') {
+            return `
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <h4>🗑️ ${activity.template}</h4>
+                        <div class="activity-meta">
+                            <span>⏱️ ${time}</span>
+                            <span>📂 ${activity.category}</span>
+                            <span class="activity-badge badge-deleted">Link Dihapus</span>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
+    }).join('');
+}
+
+// Copy Again
+async function copyAgain(url) {
+    try {
+        await navigator.clipboard.writeText(url);
+        showToast('✅ Link disalin kembali ke clipboard!');
     } catch (error) {
-        console.error('Error deleting link:', error);
-        showToast('❌ Gagal menghapus link');
+        console.error('Error copying link:', error);
+        showToast('❌ Gagal menyalin link');
     }
 }
 
-// Update Stats
-async function updateStats() {
-    try {
-        const response = await fetch(`${API_URL}/stats`);
-        const data = await response.json();
+// Remove Single Activity
+function removeActivity(index) {
+    if (confirm('Hapus aktivitas ini dari riwayat?')) {
+        const activity = userActivities[index];
         
-        document.getElementById('totalLinks').textContent = data.total_links;
-        document.getElementById('totalVisitors').textContent = data.total_views;
-        document.getElementById('visitorsChange').textContent = `+${data.today_views} hari ini`;
-        document.getElementById('totalVictims').textContent = data.total_submits;
-        document.getElementById('victimsRate').textContent = data.total_views > 0 
-            ? `${Math.round((data.total_submits / data.total_views) * 100)}% dari total` 
-            : '0% dari total';
-        document.getElementById('awarenessRate').textContent = data.total_views > 0 
-            ? `${100 - Math.round((data.total_submits / data.total_views) * 100)}%` 
-            : '100%';
-    } catch (error) {
-        console.error('Error updating stats:', error);
+        // Record delete action
+        recordActivity({
+            type: 'delete_link',
+            template: activity.template,
+            category: activity.category,
+            timestamp: new Date().toISOString()
+        });
+        
+        // Remove the copy activity
+        userActivities.splice(index, 1);
+        localStorage.setItem('phishguard_activities', JSON.stringify(userActivities));
+        
+        showToast('🗑️ Aktivitas berhasil dihapus');
+        renderAnalytics();
+        updateActivityTimeline();
+        updateDashboardStats();
+    }
+}
+
+// Clear All Activities
+function clearAllActivities() {
+    if (confirm('Apakah Anda yakin ingin menghapus semua riwayat aktivitas? Tindakan ini tidak dapat dibatalkan.')) {
+        userActivities = [];
+        localStorage.removeItem('phishguard_activities');
+        
+        showToast('🗑️ Semua riwayat aktivitas berhasil dihapus!');
+        renderAnalytics();
+        updateActivityTimeline();
+        updateDashboardStats();
     }
 }
 
 // Update Activity Timeline
-async function updateActivityTimeline() {
-    try {
-        const response = await fetch(`${API_URL}/recent-activities`);
-        const data = await response.json();
+function updateActivityTimeline() {
+    const timeline = document.getElementById('activityTimeline');
+    if (!timeline) return;
+    
+    const recentActivities = userActivities.slice(0, 5);
+    
+    if (recentActivities.length === 0) {
+        timeline.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                <p>Belum ada aktivitas...</p>
+            </div>
+        `;
+        return;
+    }
+    
+    timeline.innerHTML = recentActivities.map(activity => {
+        const time = getTimeAgo(new Date(activity.timestamp).getTime());
+        let icon = '📋';
+        let text = '';
+        let dotClass = 'blue';
         
-        const timeline = document.getElementById('activityTimeline');
-        
-        if (data.activities.length === 0) {
-            timeline.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--text-secondary);"><p>Menunggu aktivitas...</p></div>';
-            return;
+        switch (activity.type) {
+            case 'copy_link':
+                icon = '📎';
+                text = `Menyalin link: ${activity.template}`;
+                dotClass = 'blue';
+                break;
+            case 'delete_link':
+                icon = '🗑️';
+                text = `Menghapus link: ${activity.template}`;
+                dotClass = 'red';
+                break;
+            default:
+                text = activity.type;
         }
         
-        timeline.innerHTML = data.activities.slice(0, 10).map(a => {
-            const time = getTimeAgo(new Date(a.timestamp).getTime());
-            return `
-                <div class="timeline-item">
-                    <div class="timeline-dot blue"></div>
-                    <div>
-                        <div style="font-weight: 600;">${getActivityText(a.activity_type)}: ${a.link_name}</div>
-                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.3rem;">
-                            <span>🔗 ${a.activity_type}</span>
-                            <span style="margin-left: 1rem;">⏱️ ${time}</span>
-                        </div>
+        return `
+            <div class="timeline-item">
+                <div class="timeline-dot ${dotClass}"></div>
+                <div>
+                    <div style="font-weight: 600;">${icon} ${text}</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.3rem;">
+                        <span>⏱️ ${time}</span>
                     </div>
                 </div>
-            `;
-        }).join('');
-    } catch (error) {
-        console.error('Error updating timeline:', error);
-    }
+            </div>
+        `;
+    }).join('');
 }
 
+// Update Dashboard Stats
+function updateDashboardStats() {
+    document.getElementById('totalMaterials').textContent = educationMaterials.length;
+    document.getElementById('totalTemplates').textContent = document.querySelectorAll('.template-card').length;
+    document.getElementById('totalCopied').textContent = userActivities.filter(a => a.type === 'copy_link').length;
+    document.getElementById('materialsLearned').textContent = learnedMaterials.length;
+    
+    // Update activity timeline
+    updateActivityTimeline();
+}
+
+// Helper Functions
 function getTimeAgo(timestamp) {
     const diff = Math.floor((Date.now() - timestamp) / 1000);
     if (diff < 60) return `${diff} detik lalu`;
     if (diff < 3600) return `${Math.floor(diff / 60)} menit lalu`;
     if (diff < 86400) return `${Math.floor(diff / 3600)} jam lalu`;
-    return `${Math.floor(diff / 86400)} hari lalu`;
+    if (diff < 604800) return `${Math.floor(diff / 86400)} hari lalu`;
+    return `${Math.floor(diff / 604800)} minggu lalu`;
 }
 
-// Toast Notification
 function showToast(message) {
     const toast = document.createElement('div');
     toast.className = 'toast';
@@ -457,18 +724,6 @@ function showToast(message) {
     }, 3000);
 }
 
-// Filter Monitoring
-document.getElementById('filterStatus')?.addEventListener('change', async (e) => {
-    const filter = e.target.value;
-    await updateMonitoringPage();
-    
-    const cards = document.querySelectorAll('.monitoring-card');
-    cards.forEach(card => {
-        const linkId = parseInt(card.dataset.linkId);
-        // Filter will be applied based on status from backend
-    });
-});
-
 // Back Button
 document.getElementById('backBtn').addEventListener('click', () => {
     if (confirm('Apakah Anda yakin ingin kembali?')) {
@@ -477,15 +732,27 @@ document.getElementById('backBtn').addEventListener('click', () => {
 });
 
 // Initialize
-updateActivityTimeline();
-updateStats();
-updateMonitoringPage();
-
-// Auto-refresh every 10 seconds
-setInterval(() => {
+document.addEventListener('DOMContentLoaded', () => {
+    renderEducationMaterials();
+    updateDashboardStats();
     updateActivityTimeline();
-    updateStats();
-    if (document.querySelector('#monitoringPage.active')) {
-        updateMonitoringPage();
+    
+    // Check if analytics page is loaded
+    if (document.querySelector('#analyticsPage.active')) {
+        renderAnalytics();
     }
-}, 10000);
+});
+
+// Close modal on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeEducationModal();
+    }
+});
+
+// Close modal when clicking outside
+document.getElementById('educationModal')?.addEventListener('click', (e) => {
+    if (e.target === document.getElementById('educationModal')) {
+        closeEducationModal();
+    }
+});
